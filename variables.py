@@ -47,8 +47,6 @@ input_variables = get_global_variables()
 max_current_per_winding = UnitFloat(0., "Ampere") #A
 length_of_winding = UnitFloat(0., "meter") #m
 length_of_coil = UnitFloat(0., "meter") #m
-length_of_coil = 5*10
-print(length_of_coil, length_of_coil.value)
 length_of_circuit = UnitFloat(0., "meter") #m
 current_within = UnitFloat(0., "kilo Ampere") #kA, within labels the stuff which is at positions < major radius
 radius_within = UnitFloat(0., "milli meter") #mm
