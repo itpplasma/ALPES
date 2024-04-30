@@ -1,6 +1,5 @@
 import math
 import sys
-import per_lib
 
 from variables import * 
 from functions import *
