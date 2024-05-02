@@ -45,15 +45,9 @@ def give_system_status():
     print("input values:")
     for name in input_variables:
         value = globals()[name]  # Get the variable value 
-        try:
-            print(name, " = ", value, value.unit)
-        except AttributeError:
-            print(name, " = ", value)
+        print(name, " = ", value)
     print("")
     print("output values:")
     for name in output_variables:
         value = globals()[name]  # Get the variable value 
-        try:
-            print(name, " = ", value, value.unit)
-        except AttributeError:
-            print(name, " = ", value)
+        print(name, " = ", value)
