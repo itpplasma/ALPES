@@ -3,6 +3,7 @@ import sys
 
 from variables import * 
 from functions import *
+from setters import *
 
 
 ''' is everything integer, what needs to be integer?
@@ -17,14 +18,16 @@ def is_integer(value):
     except ValueError:
         return False
 
-def input_validation():
-    '''controll of the input variables'''
-
-def check_input_variables():
-    return True 
-
-def check_precalculations():
-    return True
+def do_calculations_1():
+    set_max_current_per_winding()
+    set_length_of_winding()
+    length_of_coil = get_length_of_coil()
+    length_of_circuit = get_length_of_circuit()
+    current_within = get_current_within() #kA, within labels the stuff which is at positions < major radius
+    radius_within = get_radius_within() #mm
+    total_coil_radius_within = get_total_coil_radius_within() #mm
+    total_coil_volume_within = get_total_coil_volume_within() #mm²
+    number_of_coils = get_number_of_coils()
 
 def check_all():
     '''controlls, if integer values are integers, and none of the specifications is infringed'''
@@ -34,7 +37,7 @@ def check_all():
         print("ERROR: number of windings is not an integer")
     return True
 
-def give_system_status():
+def give_system_status(input_variables, output_variables):
     '''prints all variables into the command line'''
     print("#################################################################")
     print("")

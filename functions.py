@@ -9,13 +9,15 @@ def get_max_current_per_winding():
     '''Ampere'''
     return max_current_per_mm_2/(math.pi*winding_radius**2)
 
+def get_length_of_winding():
+    return 2*math.pi*major_winding_radius
+
+def get_length_of_coil():
+    return number_of_windings_x*number_of_windings_y*2*math.pi*major_winding_radius
+
 def get_number_of_coils():
     '''gives number of coils'''
     return number_of_circuits*number_of_coils_per_circuit
-
-def get_volume_of_coils_within():
-    '''gives the volume of the inner circuit in mm²'''
-    return number_of_coils*number_of_windings_x*number_of_windings_y*(coil_width + cooling_coil_width)
 
 def get_circumference_within():
     '''gives the radius within, based on outer dimensions in mm'''
@@ -33,7 +35,32 @@ def get_aspect_ratio():
         sys.exit()
     return major_radius_plasma/minor_radius_plasma
 
+def get_radius_within():
+    '''the available space on the inside of the torus'''
+    return 2*math.pi*(major_radius_plasma - minor_radius_plasma - cooling_radius*2*number_of_windings_y)
+
+def get_total_coil_volume_within():
+    '''gives'''
+    return number_of_windings_y*number_of_windings_x*2*cooling_radius
+
+
+
 #from here, precalculations are needed, direct use of functions before to prevent errors, checkpoint !!!not implemented yet!!!
+
+def get_length_of_circuit():
+    return number_of_windings_x*number_of_windings_y*2*math.pi*major_winding_radius*get_number_of_coils()
+
+def get_volume_of_coils_within():
+    '''gives the volume of the inner circuit in mm²'''
+    return get_number_of_coils()*number_of_windings_x*number_of_windings_y*(coil_width + cooling_coil_width)
+
+def get_total_coil_radius_within():
+    '''gives the radius of the inner circuit in mm, integrated controll with the dimensions'''
+    total_circumference = get_number_of_coils()*number_of_windings_x*cooling_radius
+    if (total_circumference > get_radius_within()):
+        print(f'ERROR: circumference of inner circuit exceeds dimensions; max circumference = ', get_radius_within(), ', actual circumference = ', total_circumference)
+        sys.exit()
+    return total_circumference
 
 def get_current_per_coil():
     '''kA'''
@@ -51,12 +78,5 @@ def get_resistance_per_circuit():
     '''ohm, calculated as rho*l/A'''
     return specific_restistance*length_of_circuit/(math.pi*winding_radius**2)
 
-def get_total_circumference_of_coils_within():
-    '''gives the radius of the inner circuit in mm, integrated controll with the dimensions'''
-    total_circumference = number_of_coils*number_of_windings_x*(coil_width + cooling_coil_width)
-    if (total_circumference > circumference_within):
-        print(f'ERROR: circumference of inner circuit exceeds dimensions; max circumference = ', get_circumference_within(), ', actual circumference = ', total_circumference)
-        sys.exit()
-    return total_circumference
 
 
