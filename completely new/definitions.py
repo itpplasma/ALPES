@@ -1,6 +1,18 @@
 import math
 import sys
 
+def isNr(val):
+	if isinstance(val, int) or isinstance(val, float):
+		return True
+	return False
+
+
+def notNr(val):
+	if isinstance(val, int) or isinstance(val, float):
+		return False
+	return True
+
+
 class StellaratorDesign:
     '''a wonderfull class to descibe the whole system'''
     def __init__(self, material, diam_max=None, max_height=None,
@@ -36,10 +48,12 @@ class StellaratorDesign:
 
         # fields and stuff
         self.frequency_rotation = frequency_rotation if frequency_rotation is not None else float(2.45e9)#Hz
-        self.number_of_coils_per_circuit = number_of_coils_per_circuit if number_of_coils_per_circuit is not None else int(10)
-        self.number_of_circuits = number_of_circuits if number_of_circuits is not None else int(4)
+        self.number_of_coils_per_circuit = number_of_coils_per_circuit if number_of_coils_per_circuit is not None else int(4)
+        self.number_of_circuits = number_of_circuits if number_of_circuits is not None else int(3)
+
         self.number_of_windings_x = number_of_windings_x if number_of_windings_x is not None else int(3)
         self.number_of_windings_y = number_of_windings_y if number_of_windings_y is not None else int(4)
+
         self.max_current_per_m_2 = max_current_per_m_2 if max_current_per_m_2 is not None else float(50000000.) # A/m² 
         self.specific_resistance = specific_resistance if specific_resistance is not None else float(0.)
         self.major_winding_radius = major_winding_radius if major_winding_radius is not None else float(0.16) # m
@@ -47,14 +61,15 @@ class StellaratorDesign:
         self.cooling_radius = cooling_radius if cooling_radius is not None else float(0.02) # cooling coil + winding coil
         
         # fields and stuff to calculate
+        self.B_toroidal = float(0.) #Tesla #B_toroidal if B_toroidal is not None else float(87.3/1000) # T
+        self.angular_frequency_rotation = float(0.) # s^(-1)
         self.max_I_winding = float(0.) # A
         self.I_linking = float(0.) # kA, within labels the stuff which is at positions < major radius
         self.I_coil = float(0.) # kA
         self.I_winding = float(0.) # kA
         self.resistance_per_circuit = float(0.) # ohm
         self.voltage_per_circuit = float(0.) # Volt
-        self.B_toroidal = float(0.) #Tesla #B_toroidal if B_toroidal is not None else float(87.3/1000) # T
-        self.angular_frequency_rotation = float(0.) # s^(-1)
+        
 
         self.material = material
         if self.material == 'copper':
@@ -146,6 +161,37 @@ class StellaratorDesign:
     def get_resistance_per_circuit(self):
         '''ohm, calculated as rho*l/A'''
         return self.specific_resistance * self.length_of_circuit / (math.pi * self.winding_radius**2)
+
+    def get_number_of_coils(self):
+        '''tries to assign a reasonable number of windings per coil, asks for permission'''
+        number_of_windings = self.get_I_linking() / self.max_I_winding
+        number_of_windings_x_test = int(math.sqrt(number_of_windings))
+        number_of_windings_y_test = number_of_windings_x + 1
+        try:
+            print("It will be calculated with number_of_windings_x: ", number_of_windings_x, "and number_of_windings_y: ", number_of_windings_y)
+            user_input = input("Do you want to continue with those values?[Y/N]: ")
+            if user_input.lower().startswith('y'):
+                self.number_of_windings_x = number_of_windings_x_test
+                self.number_of_windings_y = number_of_windings_y_test
+            elif user_input.lower().startswith('n'):
+                user_input = input("Please give a value for the number_of_windings_x: ")
+                if isinstance(user_input, float) or isinstance(user_input, int):
+                    self.number_of_windings_x = user_input
+                else:
+                    print("Asshole, put in a valid value")
+                    return(get_number_of_coils)
+                user_input = input("Please give a value for the number_of_windings_y: ")
+                if isinstance(user_input, float) or isinstance(user_input, int):
+                    self.number_of_windings_y = user_input
+                else:
+                    print("Asshole, put in a valid value")
+                    return(get_number_of_coils)
+            else:
+                print("Please enter 'yes' or 'no'.")
+                return get_number_of_coils() 
+
+        except ValueError:
+            print("Please enter a valid integer.")
 
     ##############################################################################################
 

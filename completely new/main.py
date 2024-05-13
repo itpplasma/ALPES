@@ -31,6 +31,7 @@ def main():
                  max_current_per_m_2=None, specific_resistance=None, major_winding_radius=None,
                  winding_radius=None, cooling_radius=None)
     calculations(stellarator)
+    stellarator.get_number_of_coils()
     stellarator.print_parameters()
 
 main()
