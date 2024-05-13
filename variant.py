@@ -9,6 +9,7 @@ mm = 0.001
 kA = 1000
 kW = 1000
 GHz = 1e9
+bar = 1e5
 
 electron_mass = 9.1093837015e-31  # kg
 electron_charge = 1.602176634e-19  # C
@@ -30,6 +31,20 @@ def notNr(val):
 		return False
 	return True
 
+def calcGeometry(
+		material,
+		isoThickness,
+		casingThickness,
+		radial_dim = None,
+		poloidal_dim = None,
+		windings = None,
+		windings_x = None,
+		windings_y = None,
+
+
+):
+
+	return(windingsPerCoil, resPerMetre, hydrResPerMetre)
 
 def calcEverything(
 		max_current_per_mm_2=float(50.),

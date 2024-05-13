@@ -9,19 +9,19 @@ T=90        # [ºC]      Water temperature
 L=66        # [m]       Pipe length
 
 ## Main Function that returns the pressure loss
-import PressureLoss as PL
+import pressure_loss_calculator.PressureLoss as PL
 
 print("Pressure Loss [bar] = ", PL.PressureLoss_DW(L,D,mFlow,T,aRou))
 
 ## Other Functions
 
 # Function that returns Reynolds number
-import SubFunctions as SF
+import pressure_loss_calculator.SubFunctions as SF
 Re=SF.Reynolds(mFlow,D,T)
 print("Reynolds = ", Re)
 
 # Functions that return Darcy Friction Factor, f
-import DarcyFrictionFactor as DF
+import pressure_loss_calculator.DarcyFrictionFactor as DF
 
 print("Darcy Friction Factor via ColebrookWhite = ", DF.f_ColebrookWhite(D,Re,aRou))
 print("Darcy Friction Factor via SwameeJain = ", DF.f_SwameeJain(D,Re,aRou))
