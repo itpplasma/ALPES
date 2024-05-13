@@ -1,6 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
-
+import pressure_loss_calculator.PressureLossMod as pl
 
 def crosssection_cPipes(
         diam_cond,
@@ -34,7 +34,10 @@ def crosssection_cPipes(
     else:
         raise Exception("system is under defined, you need to give either windings (pol, tor) or dimensions (pol, tor)")
     diam_water = diam_cond - 2 * cond_thickness
-    p_loss_pm =
+    p_loss_pm = pl.PressureLoss_DW(L,D,mFlow,T,aRou)
     if draw:
+        fig = plt.subplots()
 
+        plt.tight_layout()
+        plt.make_grid()
     return dim_pol, dim_tor, windings_pol, windings_tor, p_loss_pm
