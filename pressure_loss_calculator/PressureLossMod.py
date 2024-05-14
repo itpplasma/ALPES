@@ -1,6 +1,7 @@
 # Pipe pressure loss calculator for a circular pipe, full flow water (SI Units) - Darcy-Weisbach
 #   prepared by Hakan İbrahim Tol, PhD
 #modified 05/2024 by D. Hipp to work fom a single file
+import math
 def f_Clamond(R, K=0):
 		# DWc = COLEBROOK(R,K) fast, accurate and robust computation of the
 		#     Darcy-Weisbach friction factor F according to the Colebrook equation:

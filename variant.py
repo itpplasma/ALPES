@@ -138,5 +138,5 @@ def calcEverything(
 	print('Total Power: ', power_total / kW, ' kW')
 
 
-calcEverything(radius_major=0.5, radius_minor=16 * cm, number_coils=20, U_coil=6, I_winding=500, material='copper',
+calcEverything(radius_major=0.5, radius_minor=16 * cm, number_coils=12, crossection, I_winding=500, material='copper',
 			    frequency_rotation=2.45 * GHz)
