@@ -1,6 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
-#import pressure_loss_calculator.PressureLossMod as pl
+import pressure_loss_calculator.PressureLossMod as PL
 
 def crosssection_cPipes(
         diam_cond,
@@ -37,7 +37,9 @@ def crosssection_cPipes(
     else:
         raise Exception("system is under defined, you need to give either windings (pol, tor) or dimensions (pol, tor)")
     diam_water = diam_cond - 2 * cond_thickness
-    #p_drop_pm = pl.PressureLoss_DW(1, diam_water, mass_flow, temperature, roughness)
+    p_drop_pm = PL.PressureLoss_DW(1, diam_water, mass_flow, temperature, roughness)
+    area_water = (diam_water/2)**2 * np.pi
+    area_cond = (diam_cond/2)**2 * np.pi - area_water
     if draw:
         print("dim_pol = {}\ndim_tor = {}".format(dim_pol, dim_tor))
         print("diam_cond = {}, diam_thickness = {}, iso_thickness = {}\ndiam_tot = {}".format(diam_cond, cond_thickness,
@@ -72,9 +74,9 @@ def crosssection_cPipes(
         plt.grid()
         plt.axis('equal')
         plt.show()
-    return dim_pol, dim_tor, windings_pol, windings_tor#, p_drop_pm
+    return dim_pol, dim_tor, windings_pol, windings_tor, area_cond, area_water#, p_drop_pm
 
-# dim_pol, dim_tor, windings_pol, windings_tor = crosssection_cPipes(4, 1, "copper", 0.5, 1, 10, windings_pol=3, windings_tor=5)
+dim_pol, dim_tor, windings_pol, windings_tor = crosssection_cPipes(4, 1, "copper", 0.5, 1, 10, windings_pol=3, windings_tor=5)
 
 def crosssection_rPipes(
         diam_cond_pol,
@@ -115,12 +117,14 @@ def crosssection_rPipes(
         raise Exception("system is under defined, you need to give either windings (pol, tor) or dimensions (pol, tor)")
     diam_water_pol = diam_cond_pol - 2 * cond_thickness_pol
     diam_water_tor = diam_cond_tor - 2 * cond_thickness_tor
+    area_water = diam_water_tor * diam_water_pol
+    area_cond = diam_cond_tor * diam_cond_pol - area_water
     if draw:
-        print("dim_pol = {}\ndim_tor = {}".format(dim_pol, dim_tor))
-        print("diam_cond_pol = {}, diam_cond_tor = {}, cond_thickness_pol = {}, cond_thickness_tor = {},"
-              " iso_thickness = {}\ndiam_tot_pol = {}, diam_tot_toz = {}".format(diam_cond_pol, diam_cond_tor, cond_thickness_pol,
-                                                                                 cond_thickness_tor, iso_thickness, diam_tot_pol,
-                                                                                 diam_tot_tor))
+        # print("dim_pol = {}\ndim_tor = {}".format(dim_pol, dim_tor))
+        # print("diam_cond_pol = {}, diam_cond_tor = {}, cond_thickness_pol = {}, cond_thickness_tor = {},"
+        #       " iso_thickness = {}\ndiam_tot_pol = {}, diam_tot_toz = {}".format(diam_cond_pol, diam_cond_tor, cond_thickness_pol,
+        #                                                                          cond_thickness_tor, iso_thickness, diam_tot_pol,
+        #                                                                          diam_tot_tor))
         offset_pol = diam_tot_pol
         offset_tor = diam_tot_tor
         fig, ax = plt.subplots()
@@ -153,8 +157,8 @@ def crosssection_rPipes(
         plt.grid()
         plt.axis('equal')
         plt.show()
-    return dim_pol, dim_tor, windings_pol, windings_tor#, p_drop_pm
+    return dim_pol, dim_tor, windings_pol, windings_tor, area_water, area_cond
 
-dim_pol, dim_tor, windings_pol, windings_tor = crosssection_rPipes(2, 4, 0.5, 0.5, "copper", 0.5, 0.5, 10,
+dim_pol, dim_tor, windings_pol, windings_tor, area_water, area_cond = crosssection_rPipes(2, 4, 0.5, 0.5, "copper", 0.5, 0.5, 10,
                                                                               windings_pol=5, windings_tor=5)
 
