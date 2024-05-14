@@ -61,7 +61,8 @@ def calcEverything(
 		conductor_crosssection=None,
 		U_coil=None,
 		I_winding=None,
-		deltaT = None
+		deltaT = None,
+		pipeInnerDiam = None
 ):
 	'''This function will output all parameters of the stellarator coil design based on a set of keyword arguments that are passed to it.
 	This set has to be complete in a sense that all other parameters can be determined from it.
@@ -134,6 +135,9 @@ def calcEverything(
 		print('total mass flow: ', massFlow, ' kg/s')
 		print('mass flow per coil: ', massFlowperCoil, ' kg/s')
 
+	if isNr(pipeInnerDiam) and isNr(deltaT):
+		print('pressure drop per whole coil: ', pressureDrop(pipeInnerDiam, massFlowperCoil, len_coil), ' bar')
+
 	print('B_toroidal: ', B_toroidal, ' T')
 	print('I_linking: ', I_linking / kA, ' kA')
 	print('number of coils: ', number_coils)
@@ -147,6 +151,14 @@ def calcEverything(
 	print('Coil Power: ', power_coil / kW, ' kW')
 	print('Total Power: ', power_total / kW, ' kW')
 
+def pipeCondCrossection(outer, thickness):
+	if thickness >= outer/2:
+		raise Exception('Wall to thick, no hole in pipe :(')
+	return((outer/2)**2-(outer/2 - thickness)**2)*np.pi
 
-calcEverything(radius_major=0.5, radius_minor=16 * cm, number_coils=12, conductor_crosssection=16*mm2, I_winding=200, material='copper',
-			    frequency_rotation=2.45 * GHz, deltaT=25)
+def pressureDrop(pipeInnerDiam, massFlow, length): #m , kg/s , m
+	import pressure_loss_calculator.PressureLossMod as PL
+	return(PL.PressureLoss_DW(length, pipeInnerDiam/mm, massFlow, 20, 0.005)) #fixed at 20°C and roughness of 5um
+
+calcEverything(radius_major=0.5, radius_minor=16 * cm, number_coils=12, conductor_crosssection=pipeCondCrossection(8*mm, 1*mm), I_winding=500, material='copper',
+			    frequency_rotation=2.45 * GHz, deltaT=25, pipeInnerDiam=6*mm)

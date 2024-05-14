@@ -2,11 +2,11 @@
 # based on Darcy-Weisbach, using Clamond algorithm for friction factor
 
 # Inputs
-D=6-(2*1)      # [mm]      Pipe diameter
+D=8-(2*1)      # [mm]      Pipe diameter
 aRou=0.001    # [mm]      Absolute roughness
-mFlow=0.036  # [kg/s]    Mass flow rate
+mFlow=0.06597728580539887  # [kg/s]    Mass flow rate
 T=20        # [ºC]      Water temperature
-L=92        # [m]       Pipe length
+L=37.2        # [m]       Pipe length
 
 ## Main Function that returns the pressure loss
 import pressure_loss_calculator.PressureLossMod as PL
