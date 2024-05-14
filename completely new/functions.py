@@ -6,6 +6,8 @@ import inspect
 from definitions import *
 
 def calculations(stellarator):
+    stellarator.major_winding_radius = stellarator.get_major_winding_radius()
+    stellarator.len_of_winding = stellarator.get_len_of_winding()
     stellarator.B_toroidal = stellarator.get_B_toroidal()
     stellarator.max_I_winding = stellarator.get_max_I_winding()
     stellarator.len_coil = stellarator.get_len_coil()
@@ -21,6 +23,11 @@ def calculations(stellarator):
     stellarator.I_coil = stellarator.get_I_coil()
     stellarator.I_winding = stellarator.get_I_winding()
     stellarator.resistance_per_circuit = stellarator.get_resistance_per_circuit()
+    stellarator.resistance_per_winding = stellarator.get_resistance_per_winding()
+    stellarator.voltage_per_circuit = stellarator.get_voltage_per_circuit()
+    stellarator.voltage_per_winding = stellarator.get_voltage_per_winding()
+    stellarator.power_per_winding = stellarator.get_power_per_winding()
+    stellarator.power_per_circuit = stellarator.get_power_per_circuit()
 
 def test_major_radius(R_min, R_max, numer_of_testings):
     radii = np.linspace(R_min, R_max, numer_of_testings)
