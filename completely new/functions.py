@@ -43,6 +43,19 @@ def test_major_radius(R_min, R_max, numer_of_testings):
         #stellarator.get_number_of_windings()
         stellarator.print_parameters()
 
+def test_number_of_coils_y(num_min, num_max):
+    for i in range(num_min, num_max):
+        print("###################################### Testing of major_radius = ", i, " #################################")
+        stellarator = StellaratorDesign(material="aluminium", diam_max=None, max_height=None,
+                 max_aspect_ratio=None, min_aspect_ratio=None, radius_major=None,
+                 radius_minor=None, number_of_coils_per_circuit=None,
+                 number_of_circuits=None, number_of_windings_x=None, number_of_windings_y= i,
+                 max_current_per_m_2=None, specific_resistance=None, major_winding_radius=None,
+                 winding_radius=None, cooling_radius=None)
+        calculations(stellarator)
+        #stellarator.get_number_of_windings()
+        stellarator.print_parameters()
+
 def default_run():
     stellarator = StellaratorDesign(material="aluminium", diam_max=None, max_height=None,
                  max_aspect_ratio=None, min_aspect_ratio=None, radius_major=None,
@@ -74,6 +87,15 @@ def interface():
                 print("Please put in valid values")
                 return interface()
             test_major_radius(R_min, R_max, number_of_tests)
+        if set_test_input == "number_of_windings_y":
+            print("in what range would you like to test?")
+            try:
+                R_min = int(input("num_min: "))
+                R_max = int(input("num_max: "))
+            except ValueError:
+                print("Please put in valid values")
+                return interface()
+            test_number_of_coils_y(R_min, R_max)
         else:
             print("function not implemented yet")
     else:
