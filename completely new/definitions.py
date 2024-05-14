@@ -13,6 +13,7 @@ def notNr(val):
 	return True
 
 
+
 class StellaratorDesign:
     '''a wonderfull class to descibe the whole system'''
     def __init__(self, material, diam_max=None, max_height=None,
@@ -37,6 +38,7 @@ class StellaratorDesign:
         self.radius_minor = radius_minor if radius_minor is not None else float(0.08) # meter
         
         #dimensions parameters
+        self.len_of_winding = float(0.) #m
         self.len_coil = float(0.) # m
         self.length_of_circuit = float(0.) # m
         self.radius_within = float(0.) # mm available space within torus
@@ -45,6 +47,7 @@ class StellaratorDesign:
         self.number_of_coils = int(0) 
         self.volume_within = float(0.) # mm²
         self.aspect_ratio = float(0.) # no dimension
+        self.major_winding_radius = float(0.) # m
 
         # fields and stuff
         self.frequency_rotation = frequency_rotation if frequency_rotation is not None else float(2.45e9)#Hz
@@ -56,20 +59,21 @@ class StellaratorDesign:
 
         self.max_current_per_m_2 = max_current_per_m_2 if max_current_per_m_2 is not None else float(500000.) # A/m² 
         self.specific_resistance = specific_resistance if specific_resistance is not None else float(0.)
-        self.major_winding_radius = major_winding_radius if major_winding_radius is not None else float(0.16) # m
         self.winding_radius = winding_radius if winding_radius is not None else float(0.00075) # m
         self.cooling_radius = cooling_radius if cooling_radius is not None else float(0.001) # cooling coil + winding coil
         
         # fields and stuff to calculate
         self.B_toroidal = float(0.) #Tesla #B_toroidal if B_toroidal is not None else float(87.3/1000) # T
-        self.angular_frequency_rotation = float(0.) # s^(-1)
         self.max_I_winding = float(0.) # A
         self.I_linking = float(0.) # kA, within labels the stuff which is at positions < major radius
         self.I_coil = float(0.) # kA
         self.I_winding = float(0.) # kA
         self.resistance_per_circuit = float(0.) # ohm
+        self.resistance_per_winding = float(0.) # ohm
         self.voltage_per_circuit = float(0.) # Volt
-        
+        self.voltage_per_winding = float(0.) # Volt
+        self.power_per_winding = float(0.)
+        self.power_per_circuit = float(0.)
 
         self.material = material
         if self.material == 'copper':
@@ -90,6 +94,12 @@ class StellaratorDesign:
     ###########################################################################################
 
     #dimension calculations
+    def get_major_winding_radius(self):
+        return self.radius_minor + 0.1 #elefant 0.1 is willkürlich
+    
+    def get_len_of_winding(self):
+        return 2 * math.pi * self.major_winding_radius
+
     def get_len_coil(self):
         return self.number_of_windings_x * self.number_of_windings_y * 2 * math.pi * self.major_winding_radius
 
@@ -161,6 +171,24 @@ class StellaratorDesign:
     def get_resistance_per_circuit(self):
         '''ohm, calculated as rho*l/A'''
         return self.specific_resistance * self.length_of_circuit / (math.pi * self.winding_radius**2)
+    
+    def get_resistance_per_winding(self):
+        '''ohm, calculated as rho*l/A'''
+        return self.specific_resistance * self.get_len_of_winding() / (math.pi * self.winding_radius**2)
+
+    def get_voltage_per_circuit(self):
+        '''Volt, claculated as U = I*R'''
+        return self.get_resistance_per_circuit()*self.get_I_winding()
+
+    def get_voltage_per_winding(self):
+        '''Volt, claculated as U = I*R'''
+        return self.get_resistance_per_winding()*self.get_I_winding()
+
+    def get_power_per_winding(self):
+        return self.get_voltage_per_winding() * self.get_I_winding()
+
+    def get_power_per_circuit(self):
+        return self.get_voltage_per_circuit() * self.get_I_winding()
 
     def get_number_of_windings(self):
         '''tries to assign a reasonable number of windings per coil, asks for permission'''
@@ -292,9 +320,6 @@ class StellaratorDesign:
 
     def set_frequency_rotation(self, value):
         self.frequency_rotation = value
-
-    def set_angular_frequency_rotation(self, value):
-        self.angular_frequency_rotation = value # s^(-1)
         
     def set_B_toroidal(self, value):
         self.B_toroidal = value #Tesla
