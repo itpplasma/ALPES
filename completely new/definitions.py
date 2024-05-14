@@ -54,11 +54,11 @@ class StellaratorDesign:
         self.number_of_windings_x = number_of_windings_x if number_of_windings_x is not None else int(3)
         self.number_of_windings_y = number_of_windings_y if number_of_windings_y is not None else int(4)
 
-        self.max_current_per_m_2 = max_current_per_m_2 if max_current_per_m_2 is not None else float(50000000.) # A/m² 
+        self.max_current_per_m_2 = max_current_per_m_2 if max_current_per_m_2 is not None else float(500000.) # A/m² 
         self.specific_resistance = specific_resistance if specific_resistance is not None else float(0.)
         self.major_winding_radius = major_winding_radius if major_winding_radius is not None else float(0.16) # m
-        self.winding_radius = winding_radius if winding_radius is not None else float(0.015) # m
-        self.cooling_radius = cooling_radius if cooling_radius is not None else float(0.02) # cooling coil + winding coil
+        self.winding_radius = winding_radius if winding_radius is not None else float(0.00075) # m
+        self.cooling_radius = cooling_radius if cooling_radius is not None else float(0.001) # cooling coil + winding coil
         
         # fields and stuff to calculate
         self.B_toroidal = float(0.) #Tesla #B_toroidal if B_toroidal is not None else float(87.3/1000) # T
@@ -162,36 +162,34 @@ class StellaratorDesign:
         '''ohm, calculated as rho*l/A'''
         return self.specific_resistance * self.length_of_circuit / (math.pi * self.winding_radius**2)
 
-    def get_number_of_coils(self):
+    def get_number_of_windings(self):
         '''tries to assign a reasonable number of windings per coil, asks for permission'''
-        number_of_windings = self.get_I_linking() / self.max_I_winding
+        number_of_windings = self.get_I_linking() / (self.max_I_winding * math.pi * self.winding_radius**2)
+        print(number_of_windings)
         number_of_windings_x_test = int(math.sqrt(number_of_windings))
-        number_of_windings_y_test = number_of_windings_x + 1
-        try:
-            print("It will be calculated with number_of_windings_x: ", number_of_windings_x, "and number_of_windings_y: ", number_of_windings_y)
-            user_input = input("Do you want to continue with those values?[Y/N]: ")
-            if user_input.lower().startswith('y'):
-                self.number_of_windings_x = number_of_windings_x_test
-                self.number_of_windings_y = number_of_windings_y_test
-            elif user_input.lower().startswith('n'):
-                user_input = input("Please give a value for the number_of_windings_x: ")
-                if isinstance(user_input, float) or isinstance(user_input, int):
-                    self.number_of_windings_x = user_input
-                else:
-                    print("Asshole, put in a valid value")
-                    return(get_number_of_coils)
-                user_input = input("Please give a value for the number_of_windings_y: ")
-                if isinstance(user_input, float) or isinstance(user_input, int):
-                    self.number_of_windings_y = user_input
-                else:
-                    print("Asshole, put in a valid value")
-                    return(get_number_of_coils)
-            else:
-                print("Please enter 'yes' or 'no'.")
-                return get_number_of_coils() 
-
-        except ValueError:
-            print("Please enter a valid integer.")
+        number_of_windings_y_test = number_of_windings_x_test + 1
+        print("It will be calculated with number_of_windings_x: ", number_of_windings_x_test, "and number_of_windings_y: ", number_of_windings_y_test)
+        user_input = input("Do you want to continue with those values?[Y/N]: ")
+        if user_input.lower().startswith('y'):
+            self.number_of_windings_x = number_of_windings_x_test
+            self.number_of_windings_y = number_of_windings_y_test
+            return self.number_of_windings_x * self.number_of_windings_y
+        elif user_input.lower().startswith('n'):#
+            try:
+                inp = input("Please give a value for the number_of_windings_x: ")
+                self.number_of_windings_x = int(inp)
+            except ValueError:
+                print("Asshole, put in a valid value")
+                return self.get_number_of_windings()
+            try:
+                inp = input("Please give a value for the number_of_windings_y: ")
+                self.number_of_windings_y = int(inp)
+            except ValueError:
+                print("Asshole, put in a valid value")
+                return self.get_number_of_windings()
+        else:
+            print("Please enter 'yes' or 'no'.")
+            return self.get_number_of_windings() 
 
     ##############################################################################################
 
