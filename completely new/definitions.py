@@ -1,5 +1,6 @@
 import math
 import sys
+from geometric_object import *
 
 def isNr(val):
 	if isinstance(val, int) or isinstance(val, float):
@@ -59,8 +60,8 @@ class StellaratorDesign:
 
         self.max_current_per_m_2 = max_current_per_m_2 if max_current_per_m_2 is not None else float(500000.) # A/m² 
         self.specific_resistance = specific_resistance if specific_resistance is not None else float(0.)
-        self.winding_radius = winding_radius if winding_radius is not None else float(0.00075) # m
-        self.cooling_radius = cooling_radius if cooling_radius is not None else float(0.001) # cooling coil + winding coil
+        self.winding_radius = winding_radius if winding_radius is not None else float(0.0075) # m
+        self.cooling_radius = cooling_radius if cooling_radius is not None else float(0.01) # cooling coil + winding coil
         
         # fields and stuff to calculate
         self.B_toroidal = float(0.) #Tesla #B_toroidal if B_toroidal is not None else float(87.3/1000) # T
@@ -74,6 +75,8 @@ class StellaratorDesign:
         self.voltage_per_winding = float(0.) # Volt
         self.power_per_winding = float(0.)
         self.power_per_circuit = float(0.)
+
+        self.geometry = rund("rund", self.winding_radius, self.cooling_radius, self.number_of_windings_x, self.number_of_windings_y, spacing_between_windings = 0.002)
 
         self.material = material
         if self.material == 'copper':
@@ -150,7 +153,7 @@ class StellaratorDesign:
 
     def get_max_I_winding(self):
         '''Ampere'''
-        return self.max_current_per_m_2 / (math.pi * self.winding_radius**2)
+        return self.max_current_per_m_2 / self.geometry.area_winding
     
     def get_I_linking(self):
         '''gives the current on the inside of the plasma loop in kA, with Formula mu_0 I = int B * dl'''
@@ -170,11 +173,11 @@ class StellaratorDesign:
 
     def get_resistance_per_circuit(self):
         '''ohm, calculated as rho*l/A'''
-        return self.specific_resistance * self.length_of_circuit / (math.pi * self.winding_radius**2)
+        return self.specific_resistance * self.length_of_circuit / self.geometry.area_winding
     
     def get_resistance_per_winding(self):
         '''ohm, calculated as rho*l/A'''
-        return self.specific_resistance * self.get_len_of_winding() / (math.pi * self.winding_radius**2)
+        return self.specific_resistance * self.get_len_of_winding() / self.geometry.area_winding
 
     def get_voltage_per_circuit(self):
         '''Volt, claculated as U = I*R'''
@@ -192,7 +195,7 @@ class StellaratorDesign:
 
     def get_number_of_windings(self):
         '''tries to assign a reasonable number of windings per coil, asks for permission'''
-        number_of_windings = self.get_I_linking() / (self.max_I_winding * math.pi * self.winding_radius**2)
+        number_of_windings = self.get_I_linking() / (self.max_I_winding * self.geometry.area_winding)
         print(number_of_windings)
         number_of_windings_x_test = int(math.sqrt(number_of_windings))
         number_of_windings_y_test = number_of_windings_x_test + 1
@@ -349,5 +352,6 @@ class StellaratorDesign:
         for key, value in self.__dict__.items():
             if not key.startswith("__"):
                 print(f"{key} = {value}")
+        self.geometry.draw_coil()
 
     

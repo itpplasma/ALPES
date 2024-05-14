@@ -17,7 +17,7 @@ def draw_coil(number_of_windings_x, number_of_windings_y):
     total_height = number_of_windings_y * 2 * outer_radius + (number_of_windings_y + 1) * spacing
     
     # Plot coil
-    for i in range(num_windings):
+    for i in range(number_of_windings_y*number_of_windings_x):
         # Calculate row and column index
         row = i // number_of_windings_x
         col = i % number_of_windings_x
@@ -64,9 +64,9 @@ def draw_coil(number_of_windings_x, number_of_windings_y):
     ax.set_ylim(-radius * 2, total_height + radius * 2)
     ax.set_xlabel('X')
     ax.set_ylabel('Y')
-    ax.set_title('Coil with {} Windings of Bremsleitungen'.format(num_windings))
+    ax.set_title('Coil with {} Windings of Bremsleitungen'.format(number_of_windings_y*number_of_windings_x))
     ax.axis('off')  # Turn off axes
     plt.show()
 
 # Example usage:
-draw_coil(number_of_windings_x, number_of_windings_y)
+draw_coil(3, 2)
