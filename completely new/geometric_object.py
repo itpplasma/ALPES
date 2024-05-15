@@ -24,6 +24,7 @@ class rund(coil_geometry):
         self.area_winding = math.pi * self.winding_radius ** 2
         self.len_x = (spacing_between_windings + 2 * cooling_radius) * self.number_of_windings_x + self.spacing_between_windings
         self.len_y = (spacing_between_windings + 2 * cooling_radius) * self.number_of_windings_y + self.spacing_between_windings
+        self.total_area = self.len_x * self.len_y
     
     def get_area_winding(self):
         return 3.14 * self.winding_radius ** 2
@@ -90,10 +91,16 @@ class rund(coil_geometry):
 
 
 class rect(coil_geometry):
-    def __init__(self, name, length, width):
+    def __init__(self, name, winding_width_x, winding_width_y, cooling_width_x, cooling_width_y, number_of_windings_x, number_of_windings_y, spacing_between_windings):
         super().__init__(name)
-        self.length = length
-        self.width = width
+        self.winding_radius = winding_radius
+        self.cooling_radius = cooling_radius
+        self.spacing_between_windings = spacing_between_windings
+        self.number_of_windings_x = number_of_windings_x
+        self.number_of_windings_y = number_of_windings_y
+        self.area_winding = math.pi * self.winding_radius ** 2
+        self.len_x = (spacing_between_windings + 2 * cooling_radius) * self.number_of_windings_x + self.spacing_between_windings
+        self.len_y = (spacing_between_windings + 2 * cooling_radius) * self.number_of_windings_y + self.spacing_between_windings
     
     def get_area_winding(self):
         return self.length * self.width
