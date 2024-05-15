@@ -56,7 +56,7 @@ class StellaratorDesign:
         self.number_of_circuits = number_of_circuits if number_of_circuits is not None else int(3)
 
         self.number_of_windings_x = number_of_windings_x if number_of_windings_x is not None else int(3)
-        self.number_of_windings_y = number_of_windings_y if number_of_windings_y is not None else int(4)
+        num_of_windings_y = number_of_windings_y if number_of_windings_y is not None else int(4)
 
         self.max_current_per_m_2 = max_current_per_m_2 if max_current_per_m_2 is not None else float(500000.) # A/m² 
         self.specific_resistance = specific_resistance if specific_resistance is not None else float(0.)
@@ -76,7 +76,7 @@ class StellaratorDesign:
         self.power_per_winding = float(0.)
         self.power_per_circuit = float(0.)
 
-        self.geometry = rund("rund", self.winding_radius, self.cooling_radius, self.number_of_windings_x, self.number_of_windings_y, spacing_between_windings = 0.002)
+        self.geometry = rund("rund", self.winding_radius, self.cooling_radius, self.number_of_windings_x, num_of_windings_y, 0.002)
 
         self.material = material
         if self.material == 'copper':
@@ -98,13 +98,13 @@ class StellaratorDesign:
 
     #dimension calculations
     def get_major_winding_radius(self):
-        return self.radius_minor + 0.1 #elefant 0.1 is willkürlich
+        return self.radius_minor + self.geometry.len_x 
     
     def get_len_of_winding(self):
         return 2 * math.pi * self.major_winding_radius
 
     def get_len_coil(self):
-        return self.number_of_windings_x * self.number_of_windings_y * 2 * math.pi * self.major_winding_radius
+        return self.number_of_windings_x * self.geometry.number_of_windings_y * 2 * math.pi * self.major_winding_radius
 
     def get_number_of_coils(self):
         '''gives number of coils'''
@@ -112,7 +112,7 @@ class StellaratorDesign:
 
     def get_circumference_within(self):
         '''gives the radius within, based on outer dimensions in mm'''
-        radius = self.radius_major - self.radius_minor - 2 * self.number_of_windings_y * self.winding_radius
+        radius = self.radius_major - self.radius_minor - 2 * self.geometry.number_of_windings_y * self.winding_radius
         return 2 * math.pi * radius
 
     def get_aspect_ratio(self):
@@ -125,18 +125,18 @@ class StellaratorDesign:
 
     def get_radius_within(self):
         '''the available space on the inside of the torus'''
-        return 2 * math.pi * (self.radius_major - self.radius_minor - self.cooling_radius * 2 * self.number_of_windings_y)
+        return 2 * math.pi * (self.radius_major - self.radius_minor - self.cooling_radius * 2 * self.geometry.number_of_windings_y)
 
     def get_total_coil_volume_within(self):
         '''gives'''
-        return self.number_of_windings_y * self.number_of_windings_x * 2 * self.cooling_radius
+        return self.geometry.number_of_windings_y * self.number_of_windings_x * 2 * self.cooling_radius
 
     def get_length_of_circuit(self):
-        return self.number_of_windings_x * self.number_of_windings_y * 2 * math.pi * self.major_winding_radius * self.get_number_of_coils()
+        return self.number_of_windings_x * self.geometry.number_of_windings_y * 2 * math.pi * self.major_winding_radius * self.get_number_of_coils()
 
     def get_volume_of_coils_within(self):
         '''gives the volume of the inner circuit in mm²'''
-        return self.get_number_of_coils() * self.number_of_windings_x * self.number_of_windings_y * 2* self.cooling_radius
+        return self.get_number_of_coils() * self.number_of_windings_x * self.geometry.number_of_windings_y * 2* self.cooling_radius
 
     def get_total_coil_radius_within(self):
         '''gives the radius of the inner circuit in mm, integrated control with the dimensions'''
@@ -165,7 +165,7 @@ class StellaratorDesign:
 
     def get_I_winding(self):
         '''kA, integrated control, does not exceed max_current'''
-        c_p_w = self.get_I_linking() / (self.get_number_of_coils() * self.number_of_windings_x * self.number_of_windings_y)
+        c_p_w = self.get_I_linking() / (self.get_number_of_coils() * self.number_of_windings_x * self.geometry.number_of_windings_y)
         if (c_p_w > self.max_I_winding):
             print(f'ERROR: too much current per winding; maximal current = ', self.max_I_winding, 'actual current = ', c_p_w)
             sys.exit()
@@ -203,8 +203,8 @@ class StellaratorDesign:
         user_input = input("Do you want to continue with those values?[Y/N]: ")
         if user_input.lower().startswith('y'):
             self.number_of_windings_x = number_of_windings_x_test
-            self.number_of_windings_y = number_of_windings_y_test
-            return self.number_of_windings_x * self.number_of_windings_y
+            self.geometry.number_of_windings_y = number_of_windings_y_test
+            return self.number_of_windings_x * self.geometry.number_of_windings_y
         elif user_input.lower().startswith('n'):#
             try:
                 inp = input("Please give a value for the number_of_windings_x: ")
@@ -214,13 +214,50 @@ class StellaratorDesign:
                 return self.get_number_of_windings()
             try:
                 inp = input("Please give a value for the number_of_windings_y: ")
-                self.number_of_windings_y = int(inp)
+                self.geometry.number_of_windings_y = int(inp)
             except ValueError:
                 print("Asshole, put in a valid value")
                 return self.get_number_of_windings()
         else:
             print("Please enter 'yes' or 'no'.")
             return self.get_number_of_windings() 
+
+    ##############################################################################################
+
+    #controll
+
+    ##############################################################################################
+
+    def controll_radius_major(self):
+        try:
+            float(self.radius_major)
+        except ValueError:
+            raise Exception("not a valid value for major radius")
+        
+    ##############################################################################################
+    
+    def controll_dimension(self):
+        if (self.radius_major + self.radius_minor + self.geometry.len_x)*2 > self.diam_max:
+            raise Exception(f"the construction diameter = {(self.radius_major + self.radius_minor + self.geometry.len_x + self.safety)*2} doesn't fit into the diam_max {self.diam_max}")
+        if (self.radius_minor + self.geometry)*2 > self.max_height:
+            raise Exception(f"the construction height = {(radius_minor + self.geometry)*2} doesn't fit into the max_height = {self.max_height}")
+        if self.aspect_ratio > self.max_aspect_ratio or self.aspect_ratio < self.min_aspect_ratio:
+            raise Exception(f"the aspect_ratio = {self.aspect_ratio} out of boundaries")
+
+    def controll_number_of_windings_y(self):
+        try:
+            int(self.geometry.number_of_windings_y)
+        except ValueError:
+            raise Exception("not a valid value for number_of_windings_y")
+        try:
+            int(self.geometry.number_of_windings_y/2)
+        except ValueError:
+            raise Exception("number_of_windings_y needs to be even")
+
+    def controll_radius_within(self):
+        if self.number_of_coils_per_circuit * self.number_of_circuits * self.geometry.len_y > self.radius_within:
+            raise Exception(f"inner coils radius = {self.number_of_coils_per_circuit * self.number_of_circuits * self.geometry.len_y} exceed radius = {self.radius_within}")
+        
 
     ##############################################################################################
 
@@ -260,9 +297,6 @@ class StellaratorDesign:
 
     def set_number_of_windings_x(self, value):
         self.number_of_windings_x = value
-
-    def set_number_of_windings_y(self, value):
-        self.number_of_windings_y = value
 
     def set_max_current_per_m_2(self, value):
         self.max_current_per_m_2 = value

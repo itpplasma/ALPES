@@ -29,6 +29,9 @@ def calculations(stellarator):
     stellarator.power_per_winding = stellarator.get_power_per_winding()
     stellarator.power_per_circuit = stellarator.get_power_per_circuit()
 
+def controll(stellerator):
+    return True
+
 def test_major_radius(R_min, R_max, numer_of_testings):
     radii = np.linspace(R_min, R_max, numer_of_testings)
     for i in radii:
@@ -45,7 +48,7 @@ def test_major_radius(R_min, R_max, numer_of_testings):
 
 def test_number_of_coils_y(num_min, num_max):
     for i in range(num_min, num_max):
-        print("###################################### Testing of major_radius = ", i, " #################################")
+        print("###################################### Testing of number_of_coils_y = ", i, " #################################")
         stellarator = StellaratorDesign(material="aluminium", diam_max=None, max_height=None,
                  max_aspect_ratio=None, min_aspect_ratio=None, radius_major=None,
                  radius_minor=None, number_of_coils_per_circuit=None,
