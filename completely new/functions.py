@@ -44,7 +44,6 @@ def test_major_radius(R_min, R_max, numer_of_testings):
                  max_current_per_m_2=None, specific_resistance=None, major_winding_radius=None,
                  winding_radius=None, cooling_radius=None)
         calculations(stellarator)
-        #stellarator.get_number_of_windings()
         stellarator.print_parameters()
 
 def test_number_of_coils_y(num_min, num_max):

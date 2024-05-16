@@ -55,7 +55,7 @@ class StellaratorDesign:
         self.max_current_per_m_2 = max_current_per_m_2 if max_current_per_m_2 is not None else float(500000.) # A/m² 
         self.specific_resistance = specific_resistance if specific_resistance is not None else float(0.)
         self.winding_radius = winding_radius if winding_radius is not None else float(0.0075) # m
-        self.cooling_radius = cooling_radius if cooling_radius is not None else float(0.008) # cooling coil + winding coil
+        self.cooling_radius = cooling_radius if cooling_radius is not None else float(0.005) # cooling coil + winding coil
         
         # fields and stuff to calculate
         self.B_toroidal = float(0.) #Tesla #B_toroidal if B_toroidal is not None else float(87.3/1000) # T
@@ -73,7 +73,8 @@ class StellaratorDesign:
 
         number_of_windings_x = number_of_windings_x if number_of_windings_x is not None else int(6)
         num_of_windings_y = number_of_windings_y if number_of_windings_y is not None else int(6)
-        self.geometry = rund("rund", self.winding_radius, self.cooling_radius, number_of_windings_x, num_of_windings_y, 0.002)
+        #self.geometry = rund("rund", self.winding_radius, self.cooling_radius, number_of_windings_x, num_of_windings_y, 0.002)
+        self.geometry = rechteckig("rechteckig", self.winding_radius, self.winding_radius, self.cooling_radius, self.cooling_radius, number_of_windings_x, num_of_windings_y, 0.002)
 
         self.material = material
         if self.material == 'copper':
@@ -101,7 +102,7 @@ class StellaratorDesign:
         return 2 * math.pi * self.major_winding_radius
 
     def get_len_coil(self):
-        return self.geometry.number_of_windings_x * self.geometry.number_of_windings_y * 2 * math.pi * self.major_winding_radius
+        return self.geometry.number_of_windings_total * 2 * math.pi * self.major_winding_radius
 
     def get_number_of_coils(self):
         '''gives number of coils'''
