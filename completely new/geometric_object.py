@@ -177,19 +177,3 @@ class rechteckig(coil_geometry):
         ax.set_title('Coil with {} Windings'.format(num_windings))
         ax.axis('off')  # Turn off axes
         plt.show()
-
-#name = "Test Coil"
-#winding_width = 5
-#winding_height = 10
-#cooling_width = 3
-#cooling_height = 7
-#number_of_windings_x = 4
-#number_of_windings_y = 3
-#spacing_between_windings = 2
-## Create instance of 'rechteckig'
-#coil = rechteckig(name, winding_width, winding_height, cooling_width, cooling_height, number_of_windings_x, number_of_windings_y, spacing_between_windings)
-## Print the area of winding
-#print("Area of winding:", coil.get_area_winding())
-## Draw the coil
-#coil.draw_coil()
-#

@@ -2,6 +2,7 @@ import math
 import sys
 import numpy as np
 import inspect
+import seaborn as sns
 
 from definitions import *
 
@@ -46,6 +47,43 @@ def test_major_radius(R_min, R_max, numer_of_testings):
         calculations(stellarator)
         stellarator.print_parameters()
 
+def test_out(R_min, R_max, number_of_testings, specific_variable_name, radius_major_name):
+    radii = np.linspace(R_min, R_max, number_of_testings)
+    specific_variable_values = []  # List to store values of the specific variable
+
+    for radius_major_value in radii:
+        # Dynamically create the stellarator with the radius_major set
+        stellarator = StellaratorDesign(material="aluminium", diam_max=None, max_height=None,
+                                        max_aspect_ratio=None, min_aspect_ratio=None, radius_major=None,
+                                        radius_minor=None, number_of_coils_per_circuit=None,
+                                        number_of_circuits=None, number_of_windings_x=None, number_of_windings_y=None,
+                                        max_current_per_m_2=None, specific_resistance=None, major_winding_radius=None,
+                                        winding_radius=None, cooling_radius=None)
+        
+        # Dynamically set the radius_major attribute
+        setattr(stellarator, radius_major_name, radius_major_value)
+        
+        print("###################################### Testing of", radius_major_name, "=", radius_major_value, "#################################")
+        
+        # Perform calculations to update the stellarator's attributes
+        calculations(stellarator)
+
+        # Access the specific variable dynamically
+        specific_variable_value = getattr(stellarator, specific_variable_name)
+        specific_variable_values.append(specific_variable_value)
+        
+        stellarator.print_parameters()
+    
+    # Plotting the specific variable against radius_major
+    plt.figure(figsize=(10, 6))
+    plt.plot(radii, specific_variable_values, marker='o')
+    plt.title(f'{specific_variable_name.replace("_", " ").title()} vs {radius_major_name.replace("_", " ").title()}')
+    plt.xlabel(radius_major_name.replace("_", " ").title())
+    plt.ylabel(specific_variable_name.replace("_", " ").title())
+    plt.grid(True)
+    plt.show()
+
+
 def test_number_of_coils_y(num_min, num_max):
     for i in range(num_min, num_max):
         print("###################################### Testing of number_of_coils_y = ", i, " #################################")
@@ -77,31 +115,68 @@ def interface():
     elif test_input.lower().startswith('y'):
         print("variables, which can be tested")
         signature = inspect.signature(StellaratorDesign)
-        args_list = [param.name for param in signature.parameters.values()]
-        for i in args_list:
-            print(i)
-        set_test_input = input("Which value do you want to test?")
-        if set_test_input == "radius_major":
-            print("in what range would you like to test?")
-            try:
+        args_list = ["radius_major", "radius_minor", "frequency_rotation", "number_of_coils_per_circuit", "number_of_circuits", "number_of_windings_x", "number_of_windings_y", "major_winding_radius", "winding_radius", "cooling_radius"]
+        for no, arg in enumerate(args_list, start=1):
+            print(f"[{no}] {arg}")
+        try:
+            set_test_input = int(input("Which value do you want to test? (put in number)"))
+            if set_test_input < len(args_list):
+                if args_list[set_test_input-1].startswith("number"):
+                    min_value = int(input("min_value: "))
+                    max_value = int(input("max_value: "))
+                    test_out(min_value, max_value, max_value-min_value, "I_linking", args_list[set_test_input-1])
                 R_min = float(input("R_min (in m): "))
                 R_max = float(input("R_max (in m): "))
                 number_of_tests = int(input("Number of tests: "))
-            except ValueError:
-                print("Please put in valid values")
+                test_out(R_min, R_max, number_of_tests, "I_linking", args_list[set_test_input-1])
+            else:
+                print("out of bound")
                 return interface()
-            test_major_radius(R_min, R_max, number_of_tests)
-        if set_test_input == "number_of_windings_y":
-            print("in what range would you like to test?")
-            try:
-                R_min = int(input("num_min: "))
-                R_max = int(input("num_max: "))
-            except ValueError:
-                print("Please put in valid values")
-                return interface()
-            test_number_of_coils_y(R_min, R_max)
-        else:
-            print("function not implemented yet")
+        except ValueError:
+            print("Please put in valid values")
+            return interface()
     else:
         print("Please put in a valid answer [y/n]")
         return interface()
+
+
+def test_two_parameters(R_min, R_max, number_of_tests_R, W_min, W_max, number_of_tests_W, param1_name, param2_name, output_var_name):
+    # Create a grid of values for the two parameters
+    param1_values = np.linspace(R_min, R_max, number_of_tests_R)
+    param2_values = np.linspace(W_min, W_max, number_of_tests_W)
+    
+    # Initialize a matrix to store the output variable values
+    output_values = np.zeros((number_of_tests_R, number_of_tests_W))
+    
+    for i, param1_value in enumerate(param1_values):
+        for j, param2_value in enumerate(param2_values):
+            # Create an instance of the StellaratorDesign class with the current parameter values
+            stellarator = StellaratorDesign(material="aluminium", diam_max=None, max_height=None,
+                                            max_aspect_ratio=None, min_aspect_ratio=None,
+                                            radius_major=None, radius_minor=None,
+                                            number_of_coils_per_circuit=None, number_of_circuits=None,
+                                            number_of_windings_x=None, number_of_windings_y=None,
+                                            max_current_per_m_2=None, specific_resistance=None,
+                                            major_winding_radius=None, winding_radius=None, cooling_radius=None)
+            
+            # Set the parameters dynamically
+            setattr(stellarator, param1_name, param1_value)
+            setattr(stellarator, param2_name, param2_value)
+            
+            # Perform calculations to update the stellarator's attributes
+            calculations(stellarator)
+            
+            # Access the output variable dynamically
+            output_var_value = getattr(stellarator, output_var_name)
+            output_values[i, j] = output_var_value
+    
+    # Create a heat map of the output variable
+    plt.figure(figsize=(10, 8))
+    sns.heatmap(output_values, xticklabels=np.round(param2_values, 2), yticklabels=np.round(param1_values, 2), cmap='viridis')
+    plt.title(f'Heatmap of {output_var_name.replace("_", " ").title()}')
+    plt.xlabel(param2_name.replace("_", " ").title())
+    plt.ylabel(param1_name.replace("_", " ").title())
+    plt.show()
+
+# Example usage of the function
+test_two_parameters(0.5, 0.6, 10, 3, 7, 5, 'radius_major', 'number_of_windings_y', 'I_winding')
