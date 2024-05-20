@@ -179,4 +179,4 @@ def test_two_parameters(R_min, R_max, number_of_tests_R, W_min, W_max, number_of
     plt.show()
 
 # Example usage of the function
-test_two_parameters(0.5, 0.6, 10, 3, 7, 5, 'radius_major', 'number_of_windings_y', 'I_winding')
+test_two_parameters(0.5, 0.6, 10, 3, 7, 5, 'number_of_windings_y', 'number_of_windings_x', 'I_winding')

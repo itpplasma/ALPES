@@ -147,7 +147,7 @@ class StellaratorDesign:
 
     def get_I_winding(self):
         '''kA, integrated control, does not exceed max_current'''
-        c_p_w = self.get_I_linking() / (self.get_number_of_coils() * self.geometry.number_of_windings_x * self.geometry.number_of_windings_y)
+        c_p_w = self.get_I_linking() / (self.get_number_of_coils() * self.geometry.number_of_windings_total)
         if (c_p_w > self.max_I_winding):
             print(f'ERROR: too much current per winding; maximal current = ', self.max_I_winding, 'actual current = ', c_p_w)
             sys.exit()
