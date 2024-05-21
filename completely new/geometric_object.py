@@ -21,14 +21,35 @@ class rund(coil_geometry):
         self.spacing_between_windings = spacing_between_windings
         self.number_of_windings_x = number_of_windings_x
         self.number_of_windings_y = number_of_windings_y
-        self.number_of_windings_total = number_of_windings_x * number_of_windings_y
-        self.area_winding = math.pi * self.winding_radius ** 2
-        self.len_x = (spacing_between_windings + 2 * self.winding_radius) * self.number_of_windings_x + self.spacing_between_windings
-        self.len_y = (spacing_between_windings + 2 * self.winding_radius) * self.number_of_windings_y + self.spacing_between_windings
-        self.total_area = self.len_x * self.len_y
+        #self.number_of_windings_total = number_of_windings_x * number_of_windings_y
+        #self.area_winding = math.pi * self.winding_radius ** 2
+        #self.len_x = (spacing_between_windings + 2 * self.winding_radius) * self.number_of_windings_x + self.spacing_between_windings
+        #self.len_y = (spacing_between_windings + 2 * self.winding_radius) * self.number_of_windings_y + self.spacing_between_windings
+        #self.total_area = self.len_x * self.len_y
     
+    @property
+    def number_of_windings_total(self):
+        return self.number_of_windings_x * self.number_of_windings_y
+
+    @property
+    def area_winding(self):
+        return math.pi * self.winding_radius ** 2 - math.pi * self.cooling_radius ** 2
+
+    @property
+    def len_x(self):
+        return (self.spacing_between_windings + 2 * self.winding_radius) * self.number_of_windings_x + self.spacing_between_windings
+
+    @property
+    def len_y(self):
+        return (self.spacing_between_windings + 2 * self.winding_radius) * self.number_of_windings_y + self.spacing_between_windings
+
+    @property
+    def total_area(self):
+        return self.len_x * self.len_y
+
     def get_area_winding(self):
         return math.pi * self.winding_radius ** 2 - math.pi * self.cooling_radius ** 2
+
 
     def draw_coil(self):
         fig, ax = plt.subplots(figsize=(8, 6))

@@ -147,6 +147,31 @@ def test_two_parameters(R_min, R_max, number_of_tests_R, W_min, W_max, number_of
     
     # Initialize a matrix to store the output variable values
     output_values = np.zeros((number_of_tests_R, number_of_tests_W))
+
+    stellarator_temp = StellaratorDesign(material="aluminium", diam_max=None, max_height=None,
+                                         max_aspect_ratio=None, min_aspect_ratio=None,
+                                         radius_major=None, radius_minor=None,
+                                         number_of_coils_per_circuit=None, number_of_circuits=None,
+                                         number_of_windings_x=None, number_of_windings_y=None,
+                                         max_current_per_m_2=None, specific_resistance=None,
+                                         major_winding_radius=None, winding_radius=None, cooling_radius=None)
+
+    # Check if param1_name and param2_name need to be integers
+    param1_is_integer = isinstance(getattr(stellarator_temp.geometry if hasattr(stellarator_temp.geometry, param1_name) else stellarator_temp, param1_name), int)
+    param2_is_integer = isinstance(getattr(stellarator_temp.geometry if hasattr(stellarator_temp.geometry, param2_name) else stellarator_temp, param2_name), int)
+
+    # If the parameter needs to be an integer, convert the grid values to integers
+    if param1_is_integer:
+        if not isinstance(R_max, int) or not isinstance(R_min, int):
+            print(param1_name,"needs to be fed integer values and is not")
+            sys.exit()
+        param1_values = np.linspace(R_min, R_max, number_of_tests_R).astype(int)
+    if param2_is_integer:
+        if not isinstance(W_max, int) or not isinstance(W_min, int):
+            print(param1_name,"needs to be fed integer values and is not")
+            sys.exit()
+        param2_values = np.linspace(W_min, W_max, number_of_tests_W).astype(int)
+
     
     for i, param1_value in enumerate(param1_values):
         for j, param2_value in enumerate(param2_values):
@@ -179,4 +204,4 @@ def test_two_parameters(R_min, R_max, number_of_tests_R, W_min, W_max, number_of
     plt.show()
 
 # Example usage of the function
-test_two_parameters(0.5, 0.6, 10, 3, 7, 5, 'number_of_windings_y', 'number_of_windings_x', 'I_winding')
+test_two_parameters(0.5, 0.6, 5, 5, 7, 3, 'radius_major', 'number_of_windings_x', 'I_winding')

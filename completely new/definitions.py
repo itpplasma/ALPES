@@ -72,9 +72,9 @@ class StellaratorDesign:
 
 
         number_of_windings_x = number_of_windings_x if number_of_windings_x is not None else int(6)
-        num_of_windings_y = number_of_windings_y if number_of_windings_y is not None else int(6)
-        #self.geometry = rund("rund", self.winding_radius, self.cooling_radius, number_of_windings_x, num_of_windings_y, 0.002)
-        self.geometry = rechteckig("rechteckig", self.winding_radius, self.winding_radius, self.cooling_radius, self.cooling_radius, number_of_windings_x, num_of_windings_y, 0.002)
+        number_of_windings_y = number_of_windings_y if number_of_windings_y is not None else int(6)
+        self.geometry = rund("rund", self.winding_radius, self.cooling_radius, number_of_windings_x, number_of_windings_y, 0.002)
+        #self.geometry = rechteckig("rechteckig", self.winding_radius, self.winding_radius, self.cooling_radius, self.cooling_radius, number_of_windings_x, num_of_windings_y, 0.002)
 
         self.material = material
         if self.material == 'copper':
@@ -88,6 +88,17 @@ class StellaratorDesign:
 		    # heat conduction = 
         if self.specific_resistance == None:
             raise Exception('Missing conductor material properties')
+
+        
+        super().__setattr__('_number_of_windings_x', number_of_windings_x)
+
+    def __setattr__(self, name, value):
+        if name == 'number_of_windings_x':
+            self.geometry.number_of_windings_x = value
+        elif name == 'number_of_windings_y':
+            self.geometry.number_of_windings_y = value
+        else:
+            super().__setattr__(name, value)
     ###########################################################################################
     
     #getters
@@ -118,7 +129,7 @@ class StellaratorDesign:
         if (self.radius_major / self.radius_minor > self.max_aspect_ratio or
             self.radius_major / self.radius_minor < self.min_aspect_ratio):
             print(f'ERROR: aspect ratio out of boundary; aspect ratio = ', self.radius_major / self.radius_minor)
-            #sys.exit()
+            sys.exit()
         return self.radius_major / self.radius_minor
 
     def get_length_of_circuit(self):
@@ -148,6 +159,7 @@ class StellaratorDesign:
     def get_I_winding(self):
         '''kA, integrated control, does not exceed max_current'''
         c_p_w = self.get_I_linking() / (self.get_number_of_coils() * self.geometry.number_of_windings_total)
+        print(self.geometry.number_of_windings_total)
         if (c_p_w > self.max_I_winding):
             print(f'ERROR: too much current per winding; maximal current = ', self.max_I_winding, 'actual current = ', c_p_w)
             sys.exit()
