@@ -1,6 +1,8 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import pressure_loss_calculator.PressureLossMod as PL
+from variant import *
+
 
 def crosssection_cPipes(
         diam_cond,
@@ -9,14 +11,14 @@ def crosssection_cPipes(
         iso_thickness,
         casing_thickness,
         mass_flow,
-        dim_pol = None,
-        dim_tor = None,
-        windings_pol = None,
-        windings_tor = None,
-        optimize_dims = True,
-        draw = True,
-        temperature = 90,
-        roughness = 0.0015
+        dim_pol=None,
+        dim_tor=None,
+        windings_pol=None,
+        windings_tor=None,
+        optimize_dims=True,
+        draw=True,
+        temperature=90,
+        roughness=0.0015
 ):
     """
     creates the cross section for circular tubes
@@ -42,7 +44,7 @@ def crosssection_cPipes(
     area_cond = (diam_cond/2)**2 * np.pi - area_water
     if draw:
         print("dim_pol = {}\ndim_tor = {}".format(dim_pol, dim_tor))
-        print("diam_cond = {}, diam_thickness = {}, iso_thickness = {}\ndiam_tot = {}".format(diam_cond, cond_thickness,
+        print("diam_cond = {}, cond_thickness = {}, iso_thickness = {}\ndiam_tot = {}".format(diam_cond, cond_thickness,
                                                                                               iso_thickness, diam_tot))
         offset = diam_tot
         fig, ax = plt.subplots()
@@ -74,9 +76,16 @@ def crosssection_cPipes(
         plt.grid()
         plt.axis('equal')
         plt.show()
-    return dim_pol, dim_tor, windings_pol, windings_tor, area_cond, area_water#, p_drop_pm
+    return dim_pol, dim_tor, windings_pol, windings_tor, area_cond, area_water, p_drop_pm
 
-dim_pol, dim_tor, windings_pol, windings_tor = crosssection_cPipes(4, 1, "copper", 0.5, 1, 10, windings_pol=3, windings_tor=5)
+dim_pol, dim_tor, windings_pol, windings_tor, area_cond, area_water, p_drop_pm = crosssection_cPipes(diam_cond=4*mm,
+        cond_thickness=1*mm, material="copper", iso_thickness=0.5*mm, casing_thickness=1*mm, mass_flow=10, windings_pol=3, windings_tor=5)
+
+len_coil = calcEverything(radius_major=0.5, radius_minor=16 * cm, number_coils=12, conductor_crosssection=area_cond,
+               number_windings=windings_pol*windings_tor, material='copper', frequency_rotation=2.45 * GHz)
+
+print("pressure drop: {}".format(p_drop_pm * len_coil))
+
 
 def crosssection_rPipes(
         diam_cond_pol,
@@ -159,6 +168,6 @@ def crosssection_rPipes(
         plt.show()
     return dim_pol, dim_tor, windings_pol, windings_tor, area_water, area_cond
 
-dim_pol, dim_tor, windings_pol, windings_tor, area_water, area_cond = crosssection_rPipes(2, 4, 0.5, 0.5, "copper", 0.5, 0.5, 10,
-                                                                              windings_pol=5, windings_tor=5)
+#dim_pol, dim_tor, windings_pol, windings_tor, area_water, area_cond = crosssection_rPipes(2, 4, 0.5, 0.5, "copper", 0.5, 0.5, 10,
+                                                                              # windings_pol=5, windings_tor=5)
 
