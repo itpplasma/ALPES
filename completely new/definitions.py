@@ -23,7 +23,7 @@ class StellaratorDesign:
                   number_of_coils_per_circuit=None,
                  number_of_circuits=None, number_of_windings_x=None, number_of_windings_y=None,
                  max_current_per_m_2=None, specific_resistance=None, major_winding_radius=None,
-                 winding_radius=None, cooling_radius=None):
+                 winding_radius=None, inner_radius=None, isolation_width=None):
         
         #constants
         self.mu_0 = float(1.25663706212e-6) # magnetic permeability, N/A²
@@ -55,7 +55,7 @@ class StellaratorDesign:
         self.max_current_per_m_2 = max_current_per_m_2 if max_current_per_m_2 is not None else float(500000.) # A/m² 
         self.specific_resistance = specific_resistance if specific_resistance is not None else float(0.)
         self.winding_radius = winding_radius if winding_radius is not None else float(0.0075) # m
-        self.cooling_radius = cooling_radius if cooling_radius is not None else float(0.005) # cooling coil + winding coil
+        self.inner_radius = inner_radius if inner_radius is not None else float(0.005) # cooling coil + winding coil
         
         # fields and stuff to calculate
         self.B_toroidal = float(0.) #Tesla #B_toroidal if B_toroidal is not None else float(87.3/1000) # T
@@ -71,10 +71,11 @@ class StellaratorDesign:
         self.power_per_circuit = float(0.)
 
 
+        isolation_width = isolation_width if isolation_width is not None else float(0.001)
         number_of_windings_x = number_of_windings_x if number_of_windings_x is not None else int(6)
         number_of_windings_y = number_of_windings_y if number_of_windings_y is not None else int(6)
-        self.geometry = rund("rund", self.winding_radius, self.cooling_radius, number_of_windings_x, number_of_windings_y, 0.002)
-        #self.geometry = rechteckig("rechteckig", self.winding_radius, self.winding_radius, self.cooling_radius, self.cooling_radius, number_of_windings_x, num_of_windings_y, 0.002)
+        self.geometry = rund("rund", self.winding_radius, self.inner_radius, number_of_windings_x, number_of_windings_y, isolation_width)
+        #self.geometry = rechteckig("rechteckig", self.winding_radius, self.winding_radius, self.inner_radius, self.inner_radius, number_of_windings_x, num_of_windings_y, 0.002)
 
         self.material = material
         if self.material == 'copper':
@@ -88,15 +89,21 @@ class StellaratorDesign:
 		    # heat conduction = 
         if self.specific_resistance == None:
             raise Exception('Missing conductor material properties')
-
         
         super().__setattr__('_number_of_windings_x', number_of_windings_x)
+        super().__setattr__('_number_of_windings_y', number_of_windings_y)
+        super().__setattr__('_winding_radius', winding_radius)
+        super().__setattr__('_inner_radius', inner_radius)
 
     def __setattr__(self, name, value):
         if name == 'number_of_windings_x':
             self.geometry.number_of_windings_x = value
         elif name == 'number_of_windings_y':
             self.geometry.number_of_windings_y = value
+        #elif name == 'outer_radius':
+        #    self.geometry.winding_radius = value
+        #elif name == 'inner_radius':
+        #    self.geometry.inner_radius = value
         else:
             super().__setattr__(name, value)
     ###########################################################################################
@@ -301,8 +308,8 @@ class StellaratorDesign:
     def set_winding_radius(self, value):
         self.winding_radius = value
 
-    def set_cooling_radius(self, value):
-        self.cooling_radius = value
+    def set_inner_radius(self, value):
+        self.inner_radius = value
 
     def set_max_I_winding(self, value):
         self.max_I_winding = value

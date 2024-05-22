@@ -21,7 +21,7 @@ def test_two_parameters(R_min, R_max, number_of_tests_R, W_min, W_max, number_of
                                             number_of_coils_per_circuit=None, number_of_circuits=None,
                                             number_of_windings_x=None, number_of_windings_y=None,
                                             max_current_per_m_2=None, specific_resistance=None,
-                                            major_winding_radius=None, winding_radius=None, cooling_radius=None)
+                                            major_winding_radius=None, winding_radius=None, cooling_radius=None, isolation_width = None)
             
             # Set the parameters dynamically
             setattr(stellarator, param1_name, param1_value)
