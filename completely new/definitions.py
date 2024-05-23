@@ -23,7 +23,7 @@ class StellaratorDesign:
                   number_of_coils_per_circuit=None,
                  number_of_circuits=None, number_of_windings_x=None, number_of_windings_y=None,
                  max_current_per_m_2=None, specific_resistance=None, major_winding_radius=None,
-                 winding_radius=None, inner_radius=None, isolation_width=None):
+                 winding_radius=None, inner_radius=None, isolation_width=None, geometry = None):
         
         #constants
         self.mu_0 = float(1.25663706212e-6) # magnetic permeability, N/A²
