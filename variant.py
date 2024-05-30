@@ -160,5 +160,5 @@ def pressureDrop(pipeInnerDiam, massFlow, length): #m , kg/s , m
 	import pressure_loss_calculator.PressureLossMod as PL
 	return(PL.PressureLoss_DW(length, pipeInnerDiam/mm, massFlow, 20, 0.005)) #fixed at 20°C and roughness of 5um
 
-calcEverything(radius_major=0.5, radius_minor=16 * cm, number_coils=12, conductor_crosssection=pipeCondCrossection(8*mm, 1*mm), I_winding=500, material='copper',
-			    frequency_rotation=2.45 * GHz, deltaT=25, pipeInnerDiam=6*mm)
+calcEverything(radius_major=0.5, radius_minor=16 * cm, number_coils=12, conductor_crosssection=pipeCondCrossection(8*mm, 2*mm), I_winding=500, material='copper',
+			    frequency_rotation=2.45 * GHz, deltaT=25, pipeInnerDiam=4*mm)
