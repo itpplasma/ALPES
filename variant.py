@@ -62,7 +62,8 @@ def calcEverything(
 		U_coil=None,
 		I_winding=None,
 		deltaT = None,
-		pipeInnerDiam = None
+		pipeInnerDiam = None,
+		dPancake_factor = None #number of double pancakes in the coil crossection, same as winding nr in plasma direction div by 2
 ):
 	'''This function will output all parameters of the stellarator coil design based on a set of keyword arguments that are passed to it.
 	This set has to be complete in a sense that all other parameters can be determined from it.
@@ -136,7 +137,12 @@ def calcEverything(
 		print('mass flow per coil: ', massFlowperCoil, ' kg/s')
 
 	if isNr(pipeInnerDiam) and isNr(deltaT):
-		print('pressure drop per whole coil: ', pressureDrop(pipeInnerDiam, massFlowperCoil, len_coil), ' bar')
+		p_drop_per_coil = pressureDrop(pipeInnerDiam, massFlowperCoil, len_coil)
+		print('pressure drop per whole coil: ', p_drop_per_coil , ' bar')
+	p_drop_per_dPancake = None
+	if isNr(p_drop_per_coil) and isNr(dPancake_factor):
+		p_drop_per_dPancake = pressureDrop(pipeInnerDiam, massFlowperCoil/dPancake_factor, len_coil/dPancake_factor)
+		print('pressure drop per double Pancake: ', p_drop_per_dPancake, ' bar')
 
 	print('B_toroidal: ', B_toroidal, ' T')
 	print('I_linking: ', I_linking / kA, ' kA')
@@ -151,6 +157,9 @@ def calcEverything(
 	print('Coil Power: ', power_coil / kW, ' kW')
 	print('Total Power: ', power_total / kW, ' kW')
 
+	return p_drop_per_coil, p_drop_per_dPancake, power_coil, I_winding
+
+
 def pipeCondCrossection(outer, thickness):
 	if thickness >= outer/2:
 		raise Exception('Wall to thick, no hole in pipe :(')
@@ -160,5 +169,7 @@ def pressureDrop(pipeInnerDiam, massFlow, length): #m , kg/s , m
 	import pressure_loss_calculator.PressureLossMod as PL
 	return(PL.PressureLoss_DW(length, pipeInnerDiam/mm, massFlow, 20, 0.005)) #fixed at 20°C and roughness of 5um
 
-calcEverything(radius_major=0.5, radius_minor=16 * cm, number_coils=12, conductor_crosssection=pipeCondCrossection(8*mm, 1*mm), I_winding=500, material='copper',
-			    frequency_rotation=2.45 * GHz, deltaT=25, pipeInnerDiam=6*mm)
+
+if __name__ == "__main__":
+	calcEverything(radius_major=0.5, radius_minor=16 * cm, number_coils=12, conductor_crosssection=20*mm2,
+				   I_winding=500, material='copper', frequency_rotation=2.45 * GHz, deltaT=25, pipeInnerDiam=4*mm)
