@@ -32,6 +32,7 @@ def controll(stellarator):
     stellarator.controll_outer_dimension()
     stellarator.controll_number_of_windings_y()
     stellarator.controll_radius_major()
+    stellarator.controll_geometry()
     return True
 
 def test_major_radius(R_min, R_max, numer_of_testings):
@@ -43,7 +44,7 @@ def test_major_radius(R_min, R_max, numer_of_testings):
                  radius_minor=None, number_of_coils_per_circuit=None,
                  number_of_circuits=None, number_of_windings_x=None, number_of_windings_y=None,
                  max_current_per_m_2=None, specific_resistance=None, major_winding_radius=None,
-                 winding_radius=None, inner_radius=None, isolation_width = None)
+                 winding_radius=None, inner_radius=None, isolation_width = None, geometry = None)
         calculations(stellarator)
         stellarator.print_parameters()
 
@@ -58,7 +59,7 @@ def test_out(R_min, R_max, number_of_testings, specific_variable_name, radius_ma
                                         radius_minor=None, number_of_coils_per_circuit=None,
                                         number_of_circuits=None, number_of_windings_x=None, number_of_windings_y=None,
                                         max_current_per_m_2=None, specific_resistance=None, major_winding_radius=None,
-                                        winding_radius=None, inner_radius=None, isolation_width = None)
+                                        winding_radius=None, inner_radius=None, isolation_width = None, geometry = None)
         
         # Dynamically set the radius_major attribute
         setattr(stellarator, radius_major_name, radius_major_value)
@@ -92,7 +93,7 @@ def test_number_of_coils_y(num_min, num_max):
                  radius_minor=None, number_of_coils_per_circuit=None,
                  number_of_circuits=None, number_of_windings_x=None, number_of_windings_y= i,
                  max_current_per_m_2=None, specific_resistance=None, major_winding_radius=None,
-                 winding_radius=None, inner_radius=None, isolation_width = None)
+                 winding_radius=None, inner_radius=None, isolation_width = None, geometry = None)
         calculations(stellarator)
         #stellarator.get_number_of_windings()
         stellarator.print_parameters()
@@ -103,7 +104,7 @@ def default_run():
                  radius_minor=None, number_of_coils_per_circuit=None,
                  number_of_circuits=None, number_of_windings_x=None, number_of_windings_y=None,
                  max_current_per_m_2=None, specific_resistance=None, major_winding_radius=None,
-                 winding_radius=None, inner_radius=None, isolation_width = None)
+                 winding_radius=None, inner_radius=None, isolation_width = None, geometry = None)
     calculations(stellarator)
     controll(stellarator)
     stellarator.print_parameters()
@@ -155,7 +156,8 @@ def test_parameters_for_different_winding(R_min, R_max, number_of_tests_R, param
                                          number_of_coils_per_circuit=None, number_of_circuits=None,
                                          number_of_windings_x=None, number_of_windings_y=None,
                                          max_current_per_m_2=None, specific_resistance=None,
-                                         major_winding_radius=None, winding_radius=None, inner_radius=None, isolation_width = None)
+                                         major_winding_radius=None, winding_radius=None, inner_radius=None, 
+                                         isolation_width = None, geometry = None)
 
     # Check if param1_name need to be integers
     param1_is_integer = isinstance(getattr(stellarator_temp.geometry if hasattr(stellarator_temp.geometry, param1_name) else stellarator_temp, param1_name), int)
@@ -167,27 +169,31 @@ def test_parameters_for_different_winding(R_min, R_max, number_of_tests_R, param
             sys.exit()
         param1_values = np.linspace(R_min, R_max, number_of_tests_R).astype(int)
     
-    for i, param1_value in enumerate(param1_values):
-        for j, outer_radius_value in enumerate(outer_radius_values):
-            # Create an instance of the StellaratorDesign class with the current parameter values
-            stellarator = StellaratorDesign(material="aluminium", diam_max=None, max_height=None,
-                                            max_aspect_ratio=None, min_aspect_ratio=None,
-                                            radius_major=None, radius_minor=None,
-                                            number_of_coils_per_circuit=None, number_of_circuits=None,
-                                            number_of_windings_x=None, number_of_windings_y=None,
-                                            max_current_per_m_2=None, specific_resistance=None,
-                                            major_winding_radius=None, winding_radius=None, inner_radius=None, isolation_width = None)
-            
-            # Set the parameters dynamically
+    for j, outer_radius_value in enumerate(outer_radius_values):
+        # Create an instance of the StellaratorDesign class with the current parameter values
+        stellarator = StellaratorDesign(material="aluminium", diam_max=None, max_height=None,
+                                        max_aspect_ratio=None, min_aspect_ratio=None,
+                                        radius_major=None, radius_minor=None,
+                                        number_of_coils_per_circuit=None, number_of_circuits=None,
+                                        number_of_windings_x=None, number_of_windings_y=None,
+                                        max_current_per_m_2=None, specific_resistance=None,
+                                        major_winding_radius=None, winding_radius=None, inner_radius=None, 
+                                        isolation_width = None, geometry = None)
+        
+        # Set the parameters dynamically
+        setattr(stellarator, "outer_radius", outer_radius_value)
+        setattr(stellarator, 'inner_radius', inner_radius_values[j])
+        stellarator.print_parameters()
+
+
+        for i, param1_value in enumerate(param1_values):
             setattr(stellarator, param1_name, param1_value)
-            #setattr(stellarator, outer_radius, outer_radius_value)
-            #setattr(stellarator, inner_radius, inner_radius_values[j])
 
             # Perform calculations to update the stellarator's attributes
             calculations(stellarator)
             
             # Access the output variable dynamically
-            output_var_value = getattr(stellarator, output_var_name)
+            output_var_value = getattr(stellarator, output_var_name)/stellarator.max_I_winding
             output_values[i, j] = output_var_value
     
     # Create a heat map of the output variable
@@ -213,7 +219,7 @@ def test_two_parameters(R_min, R_max, number_of_tests_R, W_min, W_max, number_of
                                          number_of_coils_per_circuit=None, number_of_circuits=None,
                                          number_of_windings_x=None, number_of_windings_y=None,
                                          max_current_per_m_2=None, specific_resistance=None,
-                                         major_winding_radius=None, winding_radius=None, inner_radius=None, isolation_width = None)
+                                         major_winding_radius=None, winding_radius=None, inner_radius=None, isolation_width = None, geometry = None)
 
     # Check if param1_name and param2_name need to be integers
     param1_is_integer = isinstance(getattr(stellarator_temp.geometry if hasattr(stellarator_temp.geometry, param1_name) else stellarator_temp, param1_name), int)
@@ -241,7 +247,7 @@ def test_two_parameters(R_min, R_max, number_of_tests_R, W_min, W_max, number_of
                                             number_of_coils_per_circuit=None, number_of_circuits=None,
                                             number_of_windings_x=None, number_of_windings_y=None,
                                             max_current_per_m_2=None, specific_resistance=None,
-                                            major_winding_radius=None, winding_radius=None, inner_radius=None, isolation_width = None)
+                                            major_winding_radius=None, winding_radius=None, inner_radius=None, isolation_width = None, geometry = None)
             
             # Set the parameters dynamically
             setattr(stellarator, param1_name, param1_value)

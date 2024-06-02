@@ -23,7 +23,7 @@ class StellaratorDesign:
                   number_of_coils_per_circuit=None,
                  number_of_circuits=None, number_of_windings_x=None, number_of_windings_y=None,
                  max_current_per_m_2=None, specific_resistance=None, major_winding_radius=None,
-                 winding_radius=None, inner_radius=None, isolation_width=None):
+                 winding_radius=None, inner_radius=None, isolation_width=None, geometry = None):
         
         #constants
         self.mu_0 = float(1.25663706212e-6) # magnetic permeability, N/A²
@@ -54,8 +54,8 @@ class StellaratorDesign:
         self.number_of_circuits = number_of_circuits if number_of_circuits is not None else int(3)
         self.max_current_per_m_2 = max_current_per_m_2 if max_current_per_m_2 is not None else float(500000.) # A/m² 
         self.specific_resistance = specific_resistance if specific_resistance is not None else float(0.)
-        self.winding_radius = winding_radius if winding_radius is not None else float(0.0075) # m
-        self.inner_radius = inner_radius if inner_radius is not None else float(0.005) # cooling coil + winding coil
+        #self.winding_radius = winding_radius if winding_radius is not None else float(0.0075) # m
+        #self.inner_radius = inner_radius if inner_radius is not None else float(0.005) # cooling coil + winding coil
         
         # fields and stuff to calculate
         self.B_toroidal = float(0.) #Tesla #B_toroidal if B_toroidal is not None else float(87.3/1000) # T
@@ -74,7 +74,9 @@ class StellaratorDesign:
         isolation_width = isolation_width if isolation_width is not None else float(0.001)
         number_of_windings_x = number_of_windings_x if number_of_windings_x is not None else int(6)
         number_of_windings_y = number_of_windings_y if number_of_windings_y is not None else int(6)
-        self.geometry = rund("rund", self.winding_radius, self.inner_radius, number_of_windings_x, number_of_windings_y, isolation_width)
+        winding_radius = winding_radius if winding_radius is not None else float(0.005)
+        inner_radius = inner_radius if inner_radius is not None else float(0.004)
+        self.geometry = rund("rund", winding_radius, inner_radius, number_of_windings_x, number_of_windings_y, isolation_width)
         #self.geometry = rechteckig("rechteckig", self.winding_radius, self.winding_radius, self.inner_radius, self.inner_radius, number_of_windings_x, num_of_windings_y, 0.002)
 
         self.material = material
@@ -98,8 +100,12 @@ class StellaratorDesign:
     def __setattr__(self, name, value):
         if name == 'number_of_windings_x':
             self.geometry.number_of_windings_x = value
+        elif name == 'outer_radius':
+            self.geometry.winding_radius = value
         elif name == 'number_of_windings_y':
             self.geometry.number_of_windings_y = value
+        elif name == 'inner_radius':
+            self.geometry.inner_radius = value
         #elif name == 'outer_radius':
         #    self.geometry.winding_radius = value
         #elif name == 'inner_radius':
@@ -166,7 +172,6 @@ class StellaratorDesign:
     def get_I_winding(self):
         '''kA, integrated control, does not exceed max_current'''
         c_p_w = self.get_I_linking() / (self.get_number_of_coils() * self.geometry.number_of_windings_total)
-        print(self.geometry.number_of_windings_total)
         if (c_p_w > self.max_I_winding):
             print(f'ERROR: too much current per winding; maximal current = ', self.max_I_winding, 'actual current = ', c_p_w)
             sys.exit()
@@ -259,7 +264,9 @@ class StellaratorDesign:
         if self.number_of_coils_per_circuit * self.number_of_circuits * self.geometry.len_y > self.get_circumference_within():
             raise Exception(f"inner coils radius = {self.number_of_coils_per_circuit * self.number_of_circuits * self.geometry.len_y} exceed radius = {self.get_circumference_within()}")
         
-
+    def controll_geometry(self):
+        if self.geometry.winding_radius <= self.geometry.inner_radius:
+            raise Exception(f"inner_radius = {self.geometry.inner_radius} needs to be smaller than outer_radius {self.geometry.winding_radius}")
     ##############################################################################################
 
     #setters
@@ -381,6 +388,6 @@ class StellaratorDesign:
         for key, value in self.__dict__.items():
             if not key.startswith("__"):
                 print(f"{key} = {value}")
-        #self.geometry.draw_coil()
+        self.geometry.draw_coil()
 
     
