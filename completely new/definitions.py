@@ -32,8 +32,8 @@ class StellaratorDesign:
         self.electron_charge = float(1.602176634e-19) #C
         
         # Dimension restrictions
-        self.diam_max = diam_max if diam_max is not None else float(1.8) # meter
-        self.max_height = max_height if max_height is not None else float(0.8) # meter
+        self.diam_max = diam_max if diam_max is not None else float(1.6) # meter
+        self.max_height = max_height if max_height is not None else float(0.7) # meter
         self.max_aspect_ratio = max_aspect_ratio if max_aspect_ratio is not None else float(10.) # no dimension
         self.min_aspect_ratio = min_aspect_ratio if min_aspect_ratio is not None else float(6.) # no dimension
         self.radius_major = radius_major if radius_major is not None else float(0.38) # meter
