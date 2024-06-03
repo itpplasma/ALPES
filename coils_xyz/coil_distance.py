@@ -32,7 +32,13 @@ def dimensions(dim_z_max=0.65, dim_plane_max=1.6):
                 dist = np.sqrt(np.sum((k - m)**2))
                 if dist < min_dist:
                     min_dist = dist
-    return dim_z, dim_plane, min_dist
+    length = np.zeros_like(coils[:, 0, 0])
+    for idx, coil in enumerate(coils[:, :, :]):
+        coil = np.append(coil, coil[0, :]).reshape((len(coil[:, 0]) + 1, len(coil[0, :])))
+        coil_shifted = np.roll(coil, 1, axis=0)
+        dist = np.sqrt(np.sum((coil - coil_shifted) ** 2, axis=1))
+        length[idx] = np.sum(dist)
+    return dim_z, dim_plane, min_dist, length
 
 if __name__ == "__main__":
     files = glob.glob("coil_coordinates?.txt")
@@ -57,12 +63,10 @@ if __name__ == "__main__":
             ax.scatter(new_points[0, i], new_points[1, i], new_points[2, i], marker="o")
         plt.show()
 
-    z, p, m = dimensions(dim_z_max=0.6)
-    print("The dimension in z-direction is: {:.3f} m \nThe max dimension in the torroidal plane is: {:.3f} m\n"
-          "And the min distance between coils is {:.3f} mm".format(z, p, m * 1e+3))
-
-
-
+    z, p, m, l = dimensions()
+    print("\nThe dimension in z-direction is: {:.3f} m \nThe max dimension in the torroidal plane is: {:.3f} m\n"
+          "And the min distance between coils is {:.3f} mm\n\n"
+          "The lengths of the coils are (in meter):\n{}".format(z, p, m * 1e+3, l))
 
 
 
