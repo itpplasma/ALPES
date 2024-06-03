@@ -85,16 +85,17 @@ class StellaratorDesign:
         self.d_pressure = float(0.)
 
         #expenses stuff
-        self.cupper_price = float(0.5) #Euro/m³
         self.cond_volume = float(0.)
 
         self.material = material
         if self.material == 'copper':
             self.specific_resistance = 1.68e-8#Ohm*m @ 77°C
+            self.material_price = float(0.5) #Euro/m³
 		    # heat capacity =
 		    # heat conduction =
         elif self.material == "aluminum" or "aluminium":
             self.specific_resistance = 3.875e-8
+            self.material_price = float(0.5) 
 		    #self.specific_resistance = 3.875*10**(-8)#Ohm*m @ 77°C (source: https://hypertextbook.com/facts/2004/ValPolyakov.shtml)
 		    # heat capacity = 
 		    # heat conduction = 
@@ -245,7 +246,7 @@ class StellaratorDesign:
         return P_tot/(c_spec*delta_T)
 
     def get_d_pressure(self):
-        """ in bar"""
+        """pressure loss in a double pancake in bar"""
         roughness = 0.000005*1000 #convert m to mm
         pipeInnerDiam = 2*self.geometry.inner_radius/0.001
         massFlow = self.get_massflow()
@@ -254,9 +255,9 @@ class StellaratorDesign:
         return(PL.PressureLoss_DW(length, pipeInnerDiam, massFlow, 20, roughness))
 
     def get_cond_volume(self):
-        return self.geometry.area_winding * self.geometry.number_of_windings_total * number_of_coils_per_circuit*number_of_circuits
+        return self.geometry.area_winding * self.geometry.number_of_windings_total * self.number_of_coils_per_circuit*self.number_of_circuits
 
-    def get_cupper_prize(self):
+    def get_cupper_prize_total(self):
         return self.get_cond_volume()*cupper_price
 
     ##############################################################################################

@@ -2,6 +2,7 @@ import math
 import sys
 import numpy as np
 import inspect
+import os
 import seaborn as sns
 import pressure_loss_calculator.PressureLossMod as PL
 
@@ -29,6 +30,7 @@ def calculations(stellarator):
     stellarator.power_per_circuit = stellarator.get_power_per_circuit()
     stellarator.massflow = stellarator.get_massflow()
     stellarator.d_pressure = stellarator.get_d_pressure()
+    stellarator.cond_volume = stellarator.get_cond_volume()
 
 def controll(stellarator):
     stellarator.controll_circumference_within()
@@ -37,8 +39,6 @@ def controll(stellarator):
     stellarator.controll_radius_major()
     stellarator.controll_geometry()
     return True
-
-
 
 def test_major_radius(R_min, R_max, numer_of_testings):
     radii = np.linspace(R_min, R_max, numer_of_testings)
@@ -88,7 +88,6 @@ def test_out(R_min, R_max, number_of_testings, specific_variable_name, radius_ma
     plt.ylabel(specific_variable_name.replace("_", " ").title())
     plt.grid(True)
     plt.show()
-
 
 def test_number_of_coils_y(num_min, num_max):
     for i in range(num_min, num_max):
@@ -144,7 +143,6 @@ def interface():
     else:
         print("Please put in a valid answer [y/n]")
         return interface()
-
 
 def test_parameters_for_different_winding(R_min, R_max, number_of_tests_R, param1_name, output_var_name):
     # Create a grid of values for the two parameters
@@ -207,7 +205,6 @@ def test_parameters_for_different_winding(R_min, R_max, number_of_tests_R, param
     plt.xlabel("layout")
     plt.ylabel(param1_name.replace("_", " ").title())
     plt.show()
-
 
 def test_two_parameters(R_min, R_max, number_of_tests_R, W_min, W_max, number_of_tests_W, param1_name, param2_name, output_var_name):
     # Create a grid of values for the two parameters
@@ -272,4 +269,98 @@ def test_two_parameters(R_min, R_max, number_of_tests_R, W_min, W_max, number_of
     plt.ylabel(param1_name.replace("_", " ").title())
     plt.show()
 
-# Example usage of the function
+def test(R_min, R_max, number_of_tests_R, param1_name, output_var_names):
+
+    # Create a grid of values for the parameter
+    param1_values = np.linspace(R_min, R_max, number_of_tests_R)
+    outer_radius_values = np.array([0.003, 0.004, 0.004])
+    inner_radius_values = np.array([0.002, 0.0025, 0.003])
+    
+    # Initialize matrices to store the output variable values
+    output_values = {output_var_name: np.zeros((number_of_tests_R, len(outer_radius_values))) for output_var_name in output_var_names}
+
+    stellarator_temp = StellaratorDesign(material="copper", diam_max=None, max_height=None,
+                                         max_aspect_ratio=None, min_aspect_ratio=None,
+                                         radius_major=None, radius_minor=None,
+                                         number_of_coils_per_circuit=None, number_of_circuits=None,
+                                         number_of_windings_x=None, number_of_windings_y=None,
+                                         max_current_per_m_2=None, specific_resistance=None,
+                                         major_winding_radius=None, winding_radius=None, inner_radius=None, 
+                                         isolation_width=None, geometry=None)
+
+    # Check if param1_name needs to be integers
+    param1_is_integer = isinstance(getattr(stellarator_temp.geometry if hasattr(stellarator_temp.geometry, param1_name) else stellarator_temp, param1_name), int)
+    
+    # If the parameter needs to be an integer, convert the grid values to integers
+    if param1_is_integer:
+        if not isinstance(R_max, int) or not isinstance(R_min, int):
+            print(param1_name, "needs to be fed integer values and is not")
+            sys.exit()
+        param1_values = np.linspace(R_min, R_max, number_of_tests_R).astype(int)
+    
+    for j, outer_radius_value in enumerate(outer_radius_values):
+        # Create an instance of the StellaratorDesign class with the current parameter values
+        stellarator = StellaratorDesign(material="copper", diam_max=None, max_height=None,
+                                        max_aspect_ratio=None, min_aspect_ratio=None,
+                                        radius_major=None, radius_minor=None,
+                                        number_of_coils_per_circuit=None, number_of_circuits=None,
+                                        number_of_windings_x=None, number_of_windings_y=None,
+                                        max_current_per_m_2=None, specific_resistance=None,
+                                        major_winding_radius=None, winding_radius=None, inner_radius=None, 
+                                        isolation_width=None, geometry=None)
+        
+        # Set the parameters dynamically
+        setattr(stellarator, "outer_radius", outer_radius_value)
+        setattr(stellarator, 'inner_radius', inner_radius_values[j])
+
+        for i, param1_value in enumerate(param1_values):
+            setattr(stellarator, param1_name, param1_value)
+
+            # Perform calculations to update the stellarator's attributes
+            calculations(stellarator)
+            
+            # Access and store the output variables dynamically
+            for output_var_name in output_var_names:
+                output_var_value = getattr(stellarator, output_var_name)
+                output_values[output_var_name][i, j] = output_var_value
+
+    # Print parameters of the last stellarator instance
+    stellarator.print_parameters()
+    
+    # Create directory for heatmaps
+    heatmap_dir = 'heatmaps'
+    os.makedirs(heatmap_dir, exist_ok=True)
+
+    # Create and save a graph for each output variable
+    xticks = [f"r_i = {inner_radius_values[0]}, r_o = {outer_radius_values[0]}",
+              f"r_i = {inner_radius_values[1]}, r_o = {outer_radius_values[1]}",
+              f"r_i = {inner_radius_values[2]}, r_o = {outer_radius_values[2]}"]
+    
+    for output_var_name in output_var_names:
+        plt.figure(figsize=(10, 4))  # Reduced height
+        ax = sns.heatmap(output_values[output_var_name], xticklabels=np.round(outer_radius_values, 2), yticklabels=np.round(param1_values, 2), cmap='viridis')
+        plt.title(f'Heatmap of {output_var_name.replace("_", " ").title()}')
+        plt.xlabel("Layout")
+        plt.ylabel(param1_name.replace("_", " ").title())
+        ax.set_xticklabels(xticks, rotation=45, ha='right')
+        plt.tight_layout()
+        
+        plt.savefig(f'{heatmap_dir}/{output_var_name}.png')
+        plt.close()
+
+    # Create and save a 1D graph for each output variable and layout
+    for j, outer_radius_value in enumerate(outer_radius_values):
+        # Create directory for 1D graphs of the specific inner and outer radius combination
+        graph_dir = f'graphs/r_i_{inner_radius_values[j]}_r_o_{outer_radius_value}'
+        os.makedirs(graph_dir, exist_ok=True)
+        
+        for output_var_name in output_var_names:
+            plt.figure(figsize=(10, 4))  # Reduced height
+            plt.plot(param1_values, output_values[output_var_name][:, j], marker='o')
+            plt.title(f'{output_var_name.replace("_", " ").title()} vs {param1_name.replace("_", " ").title()} for r_i = {inner_radius_values[j]}, r_o = {outer_radius_value}')
+            plt.xlabel(param1_name.replace("_", " ").title())
+            plt.ylabel(output_var_name.replace("_", " ").title())
+            plt.grid(True)
+            
+            plt.savefig(f'{graph_dir}/{output_var_name}.png')
+            plt.close()
