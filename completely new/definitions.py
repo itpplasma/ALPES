@@ -36,8 +36,8 @@ class StellaratorDesign:
         self.max_height = max_height if max_height is not None else float(0.8) # meter
         self.max_aspect_ratio = max_aspect_ratio if max_aspect_ratio is not None else float(10.) # no dimension
         self.min_aspect_ratio = min_aspect_ratio if min_aspect_ratio is not None else float(6.) # no dimension
-        self.radius_major = radius_major if radius_major is not None else float(0.5) # meter
-        self.radius_minor = radius_minor if radius_minor is not None else float(0.08) # meter
+        self.radius_major = radius_major if radius_major is not None else float(0.38) # meter
+        self.radius_minor = radius_minor if radius_minor is not None else float(0.29) # meter
         
         #dimensions parameters
         self.len_of_winding = float(0.) #m
