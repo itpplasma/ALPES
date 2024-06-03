@@ -1,5 +1,6 @@
 import math
 import sys
+import pressure_loss_calculator.PressureLossMod as PL
 from geometric_object import *
 
 def isNr(val):
@@ -70,7 +71,7 @@ class StellaratorDesign:
         self.power_per_winding = float(0.)
         self.power_per_circuit = float(0.)
 
-
+        #geometry of the windings stuff
         isolation_width = isolation_width if isolation_width is not None else float(0.001)
         number_of_windings_x = number_of_windings_x if number_of_windings_x is not None else int(6)
         number_of_windings_y = number_of_windings_y if number_of_windings_y is not None else int(6)
@@ -78,6 +79,14 @@ class StellaratorDesign:
         inner_radius = inner_radius if inner_radius is not None else float(0.004)
         self.geometry = rund("rund", winding_radius, inner_radius, number_of_windings_x, number_of_windings_y, isolation_width)
         #self.geometry = rechteckig("rechteckig", self.winding_radius, self.winding_radius, self.inner_radius, self.inner_radius, number_of_windings_x, num_of_windings_y, 0.002)
+
+        #cooling stuff
+        self.massflow = float(0.)
+        self.d_pressure = float(0.)
+
+        #expenses stuff
+        self.cupper_price = float(0.5) #Euro/m³
+        self.cond_volume = float(0.)
 
         self.material = material
         if self.material == 'copper':
@@ -227,6 +236,28 @@ class StellaratorDesign:
         else:
             print("Please enter 'yes' or 'no'.")
             return self.get_number_of_windings() 
+
+    def get_massflow(self):
+        """calculates mass flow in kg/s"""
+        c_spec = 4184 #J/(kg*K) 
+        delta_T = 20 #°C
+        P_tot = self.get_power_per_winding()*self.geometry.number_of_windings_x*2
+        return P_tot/(c_spec*delta_T)
+
+    def get_d_pressure(self):
+        """ in bar"""
+        roughness = 0.000005*1000 #convert m to mm
+        pipeInnerDiam = 2*self.geometry.inner_radius/0.001
+        massFlow = self.get_massflow()
+        length = self.geometry.number_of_windings_x * 2 * 2 * math.pi * self.major_winding_radius
+        delta_T = 20 #°C
+        return(PL.PressureLoss_DW(length, pipeInnerDiam, massFlow, 20, roughness))
+
+    def get_cond_volume(self):
+        return self.geometry.area_winding * self.geometry.number_of_windings_total * number_of_coils_per_circuit*number_of_circuits
+
+    def get_cupper_prize(self):
+        return self.get_cond_volume()*cupper_price
 
     ##############################################################################################
 

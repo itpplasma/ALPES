@@ -3,6 +3,7 @@ import sys
 import numpy as np
 import inspect
 import seaborn as sns
+import pressure_loss_calculator.PressureLossMod as PL
 
 from definitions import *
 
@@ -26,6 +27,8 @@ def calculations(stellarator):
     stellarator.voltage_per_winding = stellarator.get_voltage_per_winding()
     stellarator.power_per_winding = stellarator.get_power_per_winding()
     stellarator.power_per_circuit = stellarator.get_power_per_circuit()
+    stellarator.massflow = stellarator.get_massflow()
+    stellarator.d_pressure = stellarator.get_d_pressure()
 
 def controll(stellarator):
     stellarator.controll_circumference_within()
@@ -34,6 +37,8 @@ def controll(stellarator):
     stellarator.controll_radius_major()
     stellarator.controll_geometry()
     return True
+
+
 
 def test_major_radius(R_min, R_max, numer_of_testings):
     radii = np.linspace(R_min, R_max, numer_of_testings)
@@ -183,8 +188,6 @@ def test_parameters_for_different_winding(R_min, R_max, number_of_tests_R, param
         # Set the parameters dynamically
         setattr(stellarator, "outer_radius", outer_radius_value)
         setattr(stellarator, 'inner_radius', inner_radius_values[j])
-        stellarator.print_parameters()
-
 
         for i, param1_value in enumerate(param1_values):
             setattr(stellarator, param1_name, param1_value)
@@ -195,7 +198,8 @@ def test_parameters_for_different_winding(R_min, R_max, number_of_tests_R, param
             # Access the output variable dynamically
             output_var_value = getattr(stellarator, output_var_name)/stellarator.max_I_winding
             output_values[i, j] = output_var_value
-    
+            
+    stellarator.print_parameters()
     # Create a heat map of the output variable
     plt.figure(figsize=(10, 8))
     sns.heatmap(output_values, xticklabels=np.round(outer_radius_values, 2), yticklabels=np.round(param1_values, 2), cmap='viridis')
@@ -269,5 +273,3 @@ def test_two_parameters(R_min, R_max, number_of_tests_R, W_min, W_max, number_of
     plt.show()
 
 # Example usage of the function
-test_parameters_for_different_winding(0.5, 0.6, 20, 'radius_major','I_winding')
-test_two_parameters(0.5, 0.6, 20, 5, 7, 3, 'radius_major', 'number_of_windings_x', 'I_winding')
