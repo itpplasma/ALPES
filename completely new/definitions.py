@@ -34,8 +34,8 @@ class StellaratorDesign:
         # Dimension restrictions
         self.diam_max = diam_max if diam_max is not None else float(1.6) # meter
         self.max_height = max_height if max_height is not None else float(0.7) # meter
-        self.max_aspect_ratio = max_aspect_ratio if max_aspect_ratio is not None else float(10.) # no dimension
-        self.min_aspect_ratio = min_aspect_ratio if min_aspect_ratio is not None else float(6.) # no dimension
+        self.max_aspect_ratio = max_aspect_ratio if max_aspect_ratio is not None else float(14.) # no dimension
+        self.min_aspect_ratio = min_aspect_ratio if min_aspect_ratio is not None else float(1.) # no dimension
         self.radius_major = radius_major if radius_major is not None else float(0.38) # meter
         self.radius_minor = radius_minor if radius_minor is not None else float(0.29) # meter
         
@@ -72,7 +72,7 @@ class StellaratorDesign:
         self.power_per_circuit = float(0.)
 
         #geometry of the windings stuff
-        isolation_width = isolation_width if isolation_width is not None else float(0.001)
+        isolation_width = isolation_width if isolation_width is not None else float(0.0005)
         number_of_windings_x = number_of_windings_x if number_of_windings_x is not None else int(6)
         number_of_windings_y = number_of_windings_y if number_of_windings_y is not None else int(6)
         winding_radius = winding_radius if winding_radius is not None else float(0.005)
@@ -182,6 +182,7 @@ class StellaratorDesign:
     def get_I_winding(self):
         '''kA, integrated control, does not exceed max_current'''
         c_p_w = self.get_I_linking() / (self.get_number_of_coils() * self.geometry.number_of_windings_total)
+        #print(self.geometry.number_of_windings_total)
         if (c_p_w > self.max_I_winding):
             print(f'ERROR: too much current per winding; maximal current = ', self.max_I_winding, 'actual current = ', c_p_w)
             sys.exit()
