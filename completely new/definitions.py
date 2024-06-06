@@ -156,7 +156,7 @@ class StellaratorDesign:
         return self.radius_major / self.radius_minor
 
     def get_length_of_circuit(self):
-        return self.geometry.number_of_windings_x * self.geometry.number_of_windings_y * 2 * math.pi * self.major_winding_radius * self.get_number_of_coils()
+        return self.geometry.number_of_windings_x * self.geometry.number_of_windings_y * 2 * math.pi * self.radius_minor * self.number_of_coils_per_circuit
 
     def get_volume_of_coils_within(self):
         '''gives the volume of the inner circuit in m²'''
@@ -190,7 +190,7 @@ class StellaratorDesign:
 
     def get_resistance_per_circuit(self):
         '''ohm, calculated as rho*l/A'''
-        return self.specific_resistance * self.length_of_circuit / self.geometry.area_winding
+        return self.specific_resistance * self.get_length_of_circuit() / self.geometry.area_winding
     
     def get_resistance_per_winding(self):
         '''ohm, calculated as rho*l/A'''
