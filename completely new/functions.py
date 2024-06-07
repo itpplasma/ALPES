@@ -7,11 +7,12 @@ import copy
 import seaborn as sns
 import matplotlib.pyplot as plt
 import pressure_loss_calculator.PressureLossMod as PL
+from matplotlib.colors import LogNorm
 
+from crosssection import *
 from definitions import *
 
 def calculations(stellarator):
-    stellarator.major_winding_radius = stellarator.get_major_winding_radius()
     stellarator.len_of_winding = stellarator.get_len_of_winding()
     stellarator.B_toroidal = stellarator.get_B_toroidal()
     stellarator.max_I_winding = stellarator.get_max_I_winding()
@@ -40,83 +41,7 @@ def controll(stellarator):
     stellarator.controll_number_of_windings_y()
     stellarator.controll_radius_major()
     stellarator.controll_geometry()
-    return True
-
-#def sorting(n_total, out_put_put, output_var_names):
-#    # Sort the data so that N is in order for a nicer plot
-#    sorting_args = np.argsort(n_total)  # Get the sorted indices
-#    sorted_n_total = np.sort(n_total)  # Get the sorted N values
-#    
-#    # Initialize sorted_output_values as a dictionary of lists
-#    sorted_output_values = {output_var_name: [] for output_var_name in output_var_names}
-#    
-#    for output_var_name in output_var_names:
-#        # Debug print
-#        print(f"Sorting {output_var_name}")
-#        
-#        # Create a list to store sorted values for each variable
-#        sorted_list = [None] * len(out_put_put[output_var_name])
-#        
-#        for idx, (x, y, value) in enumerate(out_put_put[output_var_name]):
-#            sorted_index = int(sorting_args[x])  # Ensure sorted_index is an integer
-#            sorted_list[sorted_index] = (sorted_index, y, value)
-#        
-#        # Debug print
-#        print(f"Sorted list for {output_var_name}: {sorted_list}")
-#        
-#        # Assign the sorted list to the corresponding output variable
-#        sorted_output_values[output_var_name] = sorted_list
-#    
-#    # Debug print final sorted output values
-#    print(f"Sorted output values: {sorted_output_values}")
-#    
-#    return sorted_n_total, sorted_output_values
-#
-
-def sortings(n_total, out_put_put, output_var_names):
-    # Sort N and get the list of indices
-    sorting_help = np.zeros(len(n_total))
-    for i in range(len(sorting_help)):
-        sorting_help[i] = n_total[i]
-    sorting_args = np.argsort(sorting_help)
-    sorting_help = np.sort(sorting_help)
-    n_total = sorting_help.tolist()
-    
-    # Sort the data
-    for output_var_name in output_var_names:
-        sorted_out_put_put = copy.deepcopy(out_put_put[output_var_name])
-        print(sorted_out_put_put)
-        for i,idx in enumerate(sorting_args):
-            if idx != out_put_put[output_var_name][i][0]:
-                for j in range(len(sorting_args)):
-                    length = len(sorting_args)
-                    sorted_out_put_put[i+j*length] = (sorted_out_put_put[i+j*length][0],sorted_out_put_put[i][1],out_put_put[output_var_name][idx+j*length][2])
-            print(out_put_put[output_var_name][i], sorted_out_put_put[i])
-        out_put_put[output_var_name] = sorted_out_put_put
-    return n_total, out_put_put
-
-def sortings(n_total, out_put_put, output_var_names):
-    # sort the data so that N is in order for a nicer plot
-    #sort N and get the list of indices
-    sorting_help = np.zeros(len(n_total))
-    for i in range(len(sorting_help)):
-        sorting_help[i] = n_total[i]
-    sorting_args = np.argsort(sorting_help)
-    print(n_total)
-    print(sorting_args)
-    sorting_help = np.sort(sorting_help)
-    n_total = sorting_help.tolist()
-    print(output_var_names)
-
-    #sort the data
-    for output_var_name in output_var_names:
-        sorted_out_put_put = copy.deepcopy(out_put_put[output_var_name]) 
-        for (x, y, value) in out_put_put[output_var_name]:
-            sorted_index = int(sorting_args[x])
-            if x != sorted_index:
-                sorted_out_put_put[x+y*len(n_total)][0] = sorted_index
-        out_put_put[output_var_name] = sorted_out_put_put
-    return n_total, out_put_put
+    return True        
 
 def sorting(n_total, out_put_put, output_var_names):
     # Sort N and get the list of indices
@@ -154,8 +79,7 @@ def test(output_var_names, output_dep_var_names, outer_radius_values, thick_list
                                          radius_major=None, radius_minor=None,
                                          number_of_coils_per_circuit=None, number_of_circuits=None,
                                          number_of_windings_x=None, number_of_windings_y=None,
-                                         max_current_per_m_2=None, specific_resistance=None,
-                                         major_winding_radius=None, winding_radius=None, inner_radius=None, 
+                                         max_current_per_m_2=None, specific_resistance=None, winding_radius=None, inner_radius=None, 
                                          isolation_width=None, geometry=None)
     
     # get the number of windings in toroidal and poloidal direction which should be tested
@@ -173,6 +97,7 @@ def test(output_var_names, output_dep_var_names, outer_radius_values, thick_list
     # Initialize matrices to store the output variable values
     output_values = {output_var_name: [] for output_var_name in output_var_names}
     output_dep_values = np.zeros((len(output_dep_var_names),len(outer_radius_values), len(n_tor),len(n_pol)))
+    
 
     for j, outer_radius_value in enumerate(outer_radius_values):
         # Create an instance of the StellaratorDesign class with the current parameter values
@@ -182,14 +107,15 @@ def test(output_var_names, output_dep_var_names, outer_radius_values, thick_list
                                         radius_major=None, radius_minor=None,
                                         number_of_coils_per_circuit=None, number_of_circuits=None,
                                         number_of_windings_x=None, number_of_windings_y=None,
-                                        max_current_per_m_2=None, specific_resistance=None,
-                                        major_winding_radius=None, winding_radius=None, inner_radius=None, 
+                                        max_current_per_m_2=None, specific_resistance=None, winding_radius=None, inner_radius=None, 
                                         isolation_width=None, geometry=None)
         
         # Set the parameters dynamically
         setattr(stellarator, "outer_radius", outer_radius_value)
         setattr(stellarator, 'inner_radius', inner_radius_values[j])
-
+        a, b, c, d, e, f = crosssection_cPipes(outer_radius_value, thick_list[j], "copper", 
+                iso_thickness = stellarator.geometry.spacing_between_windings, casing_thickness = 0.0001, mass_flow=0,
+                windings_pol=int(6), windings_tor=int(6))
         for i, n_tor_value in enumerate(n_tor):
             for k, n_pol_value in enumerate(n_pol):
                 N = n_tor_value * n_pol_value
@@ -218,12 +144,12 @@ def test(output_var_names, output_dep_var_names, outer_radius_values, thick_list
     os.makedirs(pressure_dir, exist_ok=True)
 
     # Create and save a graph for each output variable
-    xticks = [f"r_i = {inner_radius_values[0]}, r_o = {outer_radius_values[0]}",
-              f"r_i = {inner_radius_values[1]}, r_o = {outer_radius_values[1]}",
-              f"r_i = {inner_radius_values[2]}, r_o = {outer_radius_values[2]}"]
+    xticks = []
+    for i in range(len(outer_radius_values)):
+        xticks.append(f"r_i = {round(inner_radius_values[i]*1000, 2)}, r_o = {round(outer_radius_values[i]*1000, 2)}")
     
     for output_var_name in output_var_names:
-        if output_var_name != "I_winding":
+        if output_var_name != "I_winding" and output_var_name != "voltage_per_circuit":
             data_matrix = np.zeros((len(collect_n_total), len(outer_radius_values)))
             for (x, y, value) in output_values[output_var_name]:
                 data_matrix[x, y] = value
@@ -231,8 +157,21 @@ def test(output_var_names, output_dep_var_names, outer_radius_values, thick_list
             plt.figure(figsize=(10, 4))  
             ax = sns.heatmap(data_matrix, xticklabels=xticks, yticklabels=collect_n_total, cmap='viridis')
             plt.title(f'{output_var_name.replace("_", " ").title()}')
-            plt.xlabel("Layout")
+            plt.xlabel("Layout [mm]")
             plt.ylabel("Number of Windings per coil")
+            plt.tight_layout()
+
+            plt.savefig(f'{heatmap_dir}/{output_var_name}.png')
+            plt.close()
+        elif output_var_name == "voltage_per_circuit":
+            data_matrix = np.zeros((1,len(outer_radius_values)))
+            for (x, y, value) in output_values[output_var_name]:
+                data_matrix[0, y] = value
+
+            plt.figure(figsize=(4, 4))  
+            ax = sns.heatmap(data_matrix, xticklabels=xticks, cmap='viridis')
+            plt.title(f'{output_var_name.replace("_", " ").title()} [V]')
+            plt.xlabel("Layout [mm]")
             plt.tight_layout()
 
             plt.savefig(f'{heatmap_dir}/{output_var_name}.png')
@@ -244,7 +183,7 @@ def test(output_var_names, output_dep_var_names, outer_radius_values, thick_list
 
             plt.figure(figsize=(4, 4))  
             ax = sns.heatmap(data_matrix, yticklabels=collect_n_total, cmap='viridis')
-            plt.title(f'{output_var_name.replace("_", " ").title()}')
+            plt.title(f'{output_var_name.replace("_", " ").title()} [A]')
             plt.ylabel("Number of Windings per coil")
             plt.tight_layout()
 
@@ -254,17 +193,16 @@ def test(output_var_names, output_dep_var_names, outer_radius_values, thick_list
     for h, output_var_name in enumerate(output_dep_var_names):
         for j in range(len(outer_radius_values)):
             data_matrix = np.zeros((len(n_pol), len(n_tor)))
-            for k,n_pol_value in enumerate(n_pol):
+            for k, n_pol_value in enumerate(n_pol):
                 for i, n_tor_value in enumerate(n_tor):
-                    if N_min < n_pol_value * n_tor_value < N_max:
+                    if (N_min < n_pol_value * n_tor_value < N_max) and (coil_tor_max_width > (stellarator_temp.geometry.spacing_between_windings + outer_radius_values[i]) * n_pol[i]):
                         data_matrix[k][i] = output_dep_values[h][j][i][k]
                     else:
                         data_matrix[k][i] = np.nan
-            plt.figure(figsize=(10, 4))  
-            ax = sns.heatmap(data_matrix, xticklabels=n_tor, yticklabels=n_pol, cmap='viridis')
-            plt.title(f'{output_var_name.replace("_", " ").title()}')
+            plt.figure(figsize=(3, 4))
+            ax = sns.heatmap(data_matrix, xticklabels=n_tor, yticklabels=n_pol, cmap='viridis', vmin=np.nanmin(data_matrix), vmax=np.nanmax(data_matrix))
             plt.xlabel("Number of tor Windings per coil")
             plt.ylabel("Number of pol Windings per coil")
             plt.tight_layout()
-            plt.savefig(f'{pressure_dir}/{output_var_name}_outer_{outer_radius_values[j]}_inner_{inner_radius_values[j]}.png')
+            plt.savefig(f'{pressure_dir}/{output_var_name}_outer_{round(outer_radius_values[i]*1000, 2)}_inner_{round(outer_radius_values[i]*1000, 2)}.png')
             plt.close()

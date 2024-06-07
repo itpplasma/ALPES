@@ -43,9 +43,9 @@ def crosssection_cPipes(
     area_water = (diam_water/2)**2 * np.pi
     area_cond = (diam_cond/2)**2 * np.pi - area_water
     if draw:
-        print("dim_pol = {}\ndim_tor = {}".format(dim_pol, dim_tor))
-        print("diam_cond = {}, cond_thickness = {}, iso_thickness = {}\ndiam_tot = {}".format(diam_cond, cond_thickness,
-                                                                                              iso_thickness, diam_tot))
+        #print("dim_pol = {}\ndim_tor = {}".format(dim_pol, dim_tor))
+        #print("diam_cond = {}, cond_thickness = {}, iso_thickness = {}\ndiam_tot = {}".format(diam_cond, cond_thickness,
+                                                                                              #iso_thickness, diam_tot))
         offset = diam_tot
         fig, ax = plt.subplots()
         #fig.set_size_inches(dim_pol, dim_tor)
@@ -83,7 +83,7 @@ def crosssection_cPipes(
         plt.tight_layout()
         plt.grid()
         plt.axis('equal')
-        plt.savefig("{}x{}_copperpipe.png".format(diam_cond/mm, cond_thickness/mm))
+        plt.savefig(f"{diam_cond/mm}x{cond_thickness/mm}_copperpipe_{windings_pol}x{windings_tor}.png")
     return dim_pol, dim_tor, windings_pol, windings_tor, area_cond, area_water
 
 
