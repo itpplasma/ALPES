@@ -10,7 +10,7 @@ def crosssection_cPipes(
         material,
         iso_thickness,
         casing_thickness,
-        mass_flow,
+        mass_flow=0,
         dim_pol=None,
         dim_tor=None,
         windings_pol=None,
@@ -43,9 +43,9 @@ def crosssection_cPipes(
     area_water = (diam_water/2)**2 * np.pi
     area_cond = (diam_cond/2)**2 * np.pi - area_water
     if draw:
-        print("dim_pol = {}\ndim_tor = {}".format(dim_pol, dim_tor))
-        print("diam_cond = {}, cond_thickness = {}, iso_thickness = {}\ndiam_tot = {}".format(diam_cond, cond_thickness,
-                                                                                              iso_thickness, diam_tot))
+        #print("dim_pol = {}\ndim_tor = {}".format(dim_pol, dim_tor))
+        #print("diam_cond = {}, cond_thickness = {}, iso_thickness = {}\ndiam_tot = {}".format(diam_cond, cond_thickness,
+                                                                                              #iso_thickness, diam_tot))
         offset = diam_tot
         fig, ax = plt.subplots()
         #fig.set_size_inches(dim_pol, dim_tor)
@@ -83,8 +83,8 @@ def crosssection_cPipes(
         plt.tight_layout()
         plt.grid()
         plt.axis('equal')
-        plt.savefig("{}x{}_copperpipe.png".format(diam_cond/mm, cond_thickness/mm))
-    return dim_pol, dim_tor, windings_pol, windings_tor, area_cond, area_water, p_drop_pm
+        plt.savefig(f"{diam_cond/mm}x{cond_thickness/mm}_copperpipe_{windings_pol}x{windings_tor}.png")
+    return dim_pol, dim_tor, windings_pol, windings_tor, area_cond, area_water
 
 
 def crosssection_rPipes(
@@ -253,14 +253,14 @@ def crosssection_umspuelt(
         plt.axis('equal')
         # plt.show()
         plt.savefig("{}x{}_umspült.png".format(diam_cond/mm, cond_thickness/mm))
-    return dim_pol, dim_tor, windings_pol, windings_tor, area_cond, area_water, p_drop_pm
+    return dim_pol, dim_tor, windings_pol, windings_tor, area_cond, area_water
 
 # dim_pol, dim_tor, windings_pol, windings_tor, area_water, area_cond = crosssection_rPipes(8 * mm, 8 * mm,
 #             2 * mm, 2 * mm, material="copper", iso_thickness=0.25 * mm, casing_thickness=2 * mm, mass_flow=10,
 #             dim_pol=50 * mm, dim_tor=50 * mm)
 
-if 0:
-    dim_pol, dim_tor, windings_pol, windings_tor, area_cond, area_water, p_drop_pm = crosssection_cPipes(diam_cond=6*mm,
+if 1:
+    dim_pol, dim_tor, windings_pol, windings_tor, area_cond, area_water = crosssection_cPipes(diam_cond=6*mm,
                 cond_thickness=1*mm, material="copper", iso_thickness=0.25 * mm, casing_thickness=2 * mm, mass_flow=10,
                 dim_pol=50 * mm, dim_tor=50 * mm)  # windings_pol=6, windings_tor=6)
 
@@ -273,9 +273,9 @@ cond_list = np.array([4.75, 6, 6.35, 6.35, 8, 8, 8, 10]) * mm
 thick_list = np.array([0.75, 1, 0.79, 1, 1, 1.5, 2, 2]) * mm
 output = ""
 
-if 1:
+if 0:
     for idx, cond in enumerate(cond_list):
-        dim_pol, dim_tor, windings_pol, windings_tor, area_cond, area_water, p_drop_pm = crosssection_cPipes(diam_cond=cond,
+        dim_pol, dim_tor, windings_pol, windings_tor, area_cond, area_water = crosssection_cPipes(diam_cond=cond,
             cond_thickness=thick_list[idx], material="copper", iso_thickness=0.25 * mm, casing_thickness=2 * mm, mass_flow=10,
             dim_pol=50 * mm, dim_tor=50 * mm)  # windings_pol=6, windings_tor=6)
 
@@ -289,6 +289,6 @@ if 1:
     with open("pipe_test/copperpipe.txt", "w") as file:
         file.write(output)
 
-# dim_pol, dim_tor, windings_pol, windings_tor, area_cond, area_water, p_drop_pm = crosssection_umspuelt(diam_cond=4*mm,
+# dim_pol, dim_tor, windings_pol, windings_tor, area_cond, area_water = crosssection_umspuelt(diam_cond=4*mm,
 #             cond_thickness=1*mm, material="copper", iso_thickness=0.25 * mm, casing_thickness=2 * mm, mass_flow=10,
 #             dim_pol=50 * mm, dim_tor=50 * mm)
