@@ -136,6 +136,7 @@ def calcEverything(
 		print('total mass flow: ', massFlow, ' kg/s')
 		print('mass flow per coil: ', massFlowperCoil, ' kg/s')
 
+	p_drop_per_coil = None
 	if isNr(pipeInnerDiam) and isNr(deltaT):
 		p_drop_per_coil = pressureDrop(pipeInnerDiam, massFlowperCoil, len_coil)
 		print('pressure drop per whole coil: ', p_drop_per_coil , ' bar')
