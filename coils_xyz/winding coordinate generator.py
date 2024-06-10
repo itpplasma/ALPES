@@ -107,7 +107,23 @@ def parallelOrientedRails(coilCoordList, railDistance=1):
         CG = CGlist[i]
         CGvector = CGvectorList[i] #vector between next and previous CG as approximation of B direction in this coils CG
         Npoints = len(xyzCoord[:,0])
-        railList.append(xyzCoord + np.tile(CGvector*railDistance, (Npoints,1)))
+        xyzRail = np.zeros_like(xyzCoord) # generate container for a single rail
+        for j_coil in range(Npoints):
+            PtoCG = CG - xyzCoord[j_coil,:] # vector from this coil point to CG
+            radVector = PtoCG - CGvector * (np.sum(PtoCG*CGvector)) #substract the component parrallel to CG vector from PtoCG
+            radVector = radVector/np.sqrt(np.sum(radVector**2)) #normalize radVector
+            # something like vector point to CG - CGvector times dot product of this vector time CGvector and all of that normalized.
+            tangentVector = xyzCoord[np.mod(j_coil+1,Npoints), :] - xyzCoord[np.mod(j_coil-1,Npoints), :]
+            tangentVector /= np.linalg.norm(tangentVector) #tangent vector should be replaced by spline fit derivative!!!
+            #Definition: in the newly spanned coordinate system, x is in B field direction an y points to the middle of the coil
+            #y to inside / outside and x cw or ccw will change according to direction the points are stored in
+            xVector = np.cross(tangentVector, radVector)#generate a vector thet is perpendcular to both radVector and the tangent
+            xVector /= np.linalg.norm(xVector)
+            yVector = np.cross(xVector, tangentVector)
+            yVector /= np.linalg.norm(yVector)
+            xyzRail[j_coil,:] = xyzCoord[j_coil,:] + yVector*railDistance
+        railList.append(xyzRail)
+        #railList.append(xyzCoord + np.tile(CGvector*railDistance, (Npoints,1)))
     return railList
 
 def pancakesParallelOriented(coilCoordList, Nturns, turnThickness, torOffset):
@@ -135,8 +151,18 @@ def pancakesParallelOriented(coilCoordList, Nturns, turnThickness, torOffset):
             PtoCG = CG - xyzCoord[j_coil,:] # vector from this coil point to CG
             radVector = PtoCG - CGvector * (np.sum(PtoCG*CGvector)) #substract the component parrallel to CG vector from PtoCG
             radVector = radVector/np.sqrt(np.sum(radVector**2)) #normalize radVector
-            #something like vector point to CG - CGvector times dot product of this vector time CGvector and all of that normalized.
-            xyzPancake[j, :] = xyzCoord[j_coil,:] + radOffset[j] * radVector + torOffset * CGvector
+            # something like vector point to CG - CGvector times dot product of this vector time CGvector and all of that normalized.
+            tangentVector = xyzCoord[np.mod(j_coil+1,Npoints), :] - xyzCoord[np.mod(j_coil-1,Npoints), :]
+            tangentVector /= np.linalg.norm(tangentVector) #tangent vector should be replaced by spline fit derivative!!!
+            #Definition: in the newly spanned coordinate system, x is in B field direction an y points to the middle of the coil
+            #y to inside / outside and x cw or ccw will change according to direction the points are stored in
+            xVector = np.cross(tangentVector, radVector)#generate a vector thet is perpendcular to both radVector and the tangent
+            xVector /= np.linalg.norm(xVector)
+            yVector = np.cross(xVector, tangentVector)
+            yVector /= np.linalg.norm(yVector)
+
+            #xyzPancake[j, :] = xyzCoord[j_coil,:] + radOffset[j] * radVector + torOffset * CGvector
+            xyzPancake[j, :] = xyzCoord[j_coil, :] + radOffset[j] * yVector + torOffset * xVector
         pancakeList.append(xyzPancake)
     return pancakeList
 
