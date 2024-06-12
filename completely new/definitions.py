@@ -23,7 +23,7 @@ class StellaratorDesign:
                  radius_minor=None, frequency_rotation=None,
                   number_of_coils_per_circuit=None,
                  number_of_circuits=None, number_of_windings_x=None, number_of_windings_y=None,
-                 max_current_per_m_2=None, specific_resistance=None, major_winding_radius=None,
+                 max_current_per_m_2=None, specific_resistance=None,
                  winding_radius=None, inner_radius=None, isolation_width=None, geometry = None):
         
         #constants
@@ -34,8 +34,8 @@ class StellaratorDesign:
         # Dimension restrictions
         self.diam_max = diam_max if diam_max is not None else float(1.6) # meter
         self.max_height = max_height if max_height is not None else float(0.7) # meter
-        self.max_aspect_ratio = max_aspect_ratio if max_aspect_ratio is not None else float(10.) # no dimension
-        self.min_aspect_ratio = min_aspect_ratio if min_aspect_ratio is not None else float(6.) # no dimension
+        self.max_aspect_ratio = max_aspect_ratio if max_aspect_ratio is not None else float(14.) # no dimension
+        self.min_aspect_ratio = min_aspect_ratio if min_aspect_ratio is not None else float(1.) # no dimension
         self.radius_major = radius_major if radius_major is not None else float(0.38) # meter
         self.radius_minor = radius_minor if radius_minor is not None else float(0.29) # meter
         
@@ -47,7 +47,6 @@ class StellaratorDesign:
         self.number_of_coils = int(0) 
         self.volume_within = float(0.) # m^2
         self.aspect_ratio = float(0.) # no dimension
-        self.major_winding_radius = float(0.) # m
 
         # fields and stuff
         self.frequency_rotation = frequency_rotation if frequency_rotation is not None else float(2.45e9)#Hz
@@ -72,7 +71,7 @@ class StellaratorDesign:
         self.power_per_circuit = float(0.)
 
         #geometry of the windings stuff
-        isolation_width = isolation_width if isolation_width is not None else float(0.001)
+        isolation_width = isolation_width if isolation_width is not None else float(0.00025)
         number_of_windings_x = number_of_windings_x if number_of_windings_x is not None else int(6)
         number_of_windings_y = number_of_windings_y if number_of_windings_y is not None else int(6)
         winding_radius = winding_radius if winding_radius is not None else float(0.005)
@@ -129,14 +128,12 @@ class StellaratorDesign:
     ###########################################################################################
 
     #dimension calculations
-    def get_major_winding_radius(self):
-        return self.radius_minor + self.geometry.len_x 
     
     def get_len_of_winding(self):
-        return 2 * math.pi * self.major_winding_radius
+        return 2 * math.pi * self.radius_minor
 
     def get_len_coil(self):
-        return self.geometry.number_of_windings_total * 2 * math.pi * self.major_winding_radius
+        return self.geometry.number_of_windings_total * 2 * math.pi * self.radius_minor
 
     def get_number_of_coils(self):
         '''gives number of coils'''
@@ -156,7 +153,7 @@ class StellaratorDesign:
         return self.radius_major / self.radius_minor
 
     def get_length_of_circuit(self):
-        return self.geometry.number_of_windings_x * self.geometry.number_of_windings_y * 2 * math.pi * self.major_winding_radius * self.get_number_of_coils()
+        return self.geometry.number_of_windings_x * self.geometry.number_of_windings_y * 2 * math.pi * self.radius_minor * self.number_of_coils_per_circuit
 
     def get_volume_of_coils_within(self):
         '''gives the volume of the inner circuit in m²'''
@@ -182,6 +179,7 @@ class StellaratorDesign:
     def get_I_winding(self):
         '''kA, integrated control, does not exceed max_current'''
         c_p_w = self.get_I_linking() / (self.get_number_of_coils() * self.geometry.number_of_windings_total)
+        #print(self.geometry.number_of_windings_total)
         if (c_p_w > self.max_I_winding):
             print(f'ERROR: too much current per winding; maximal current = ', self.max_I_winding, 'actual current = ', c_p_w)
             sys.exit()
@@ -189,7 +187,7 @@ class StellaratorDesign:
 
     def get_resistance_per_circuit(self):
         '''ohm, calculated as rho*l/A'''
-        return self.specific_resistance * self.length_of_circuit / self.geometry.area_winding
+        return self.specific_resistance * self.get_length_of_circuit() / self.geometry.area_winding
     
     def get_resistance_per_winding(self):
         '''ohm, calculated as rho*l/A'''
@@ -250,7 +248,7 @@ class StellaratorDesign:
         roughness = 0.000005*1000 #convert m to mm
         pipeInnerDiam = 2*self.geometry.inner_radius/0.001
         massFlow = self.get_massflow()
-        length = self.geometry.number_of_windings_x * 2 * 2 * math.pi * self.major_winding_radius
+        length = self.geometry.number_of_windings_x * 2 * 2 * math.pi * self.radius_minor
         delta_T = 20 #°C
         return(PL.PressureLoss_DW(length, pipeInnerDiam, massFlow, 20, roughness))
 
@@ -340,9 +338,6 @@ class StellaratorDesign:
 
     def set_specific_resistance(self, value):
         self.specific_resistance = value
-
-    def set_major_winding_radius(self, value):
-        self.major_winding_radius = value
 
     def set_winding_radius(self, value):
         self.winding_radius = value
