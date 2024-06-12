@@ -251,7 +251,7 @@ def crosssection_umspuelt(
         plt.tight_layout()
         plt.grid()
         plt.axis('equal')
-        # plt.show()
+        plt.show()
         plt.savefig("{}x{}_umspült.png".format(diam_cond/mm, cond_thickness/mm))
     return dim_pol, dim_tor, windings_pol, windings_tor, area_cond, area_water
 
@@ -264,9 +264,9 @@ if 1:
                 cond_thickness=1*mm, material="copper", iso_thickness=0.25 * mm, casing_thickness=2 * mm, mass_flow=10,
                 dim_pol=50 * mm, dim_tor=50 * mm)  # windings_pol=6, windings_tor=6)
 
-    p_drop_per_coil, p_drop_per_dPancake, power_coil, I_winding = calcEverything(radius_major=0.5, radius_minor=32 * cm, number_coils=12,
+    p_drop_per_coil, p_drop_per_dPancake, power_coil, I_winding = calcEverything(radius_major=0.5, radius_minor=28 * cm, number_coils=12,
                            conductor_crosssection=area_cond, number_windings=windings_pol * windings_tor, material='copper',
-                           frequency_rotation=2.45 * GHz, deltaT=25, pipeInnerDiam=2 * np.sqrt(area_water / np.pi), dPancake_factor=windings_tor/2)
+                           I_linking=176*kA, deltaT=25, pipeInnerDiam=2 * np.sqrt(area_water / np.pi), dPancake_factor=windings_tor/2)
 
 
 cond_list = np.array([4.75, 6, 6.35, 6.35, 8, 8, 8, 10]) * mm
