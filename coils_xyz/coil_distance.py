@@ -5,7 +5,11 @@ import glob
 from tqdm import tqdm
 from scipy.interpolate import splprep, splev
 
-def dimensions(dim_z_max=0.65, dim_plane_max=1.6):
+def dimensions(dim_z_max=None,
+               dim_plane_max=None,
+               scaling_factor=None):
+    if not (dim_z_max or dim_plane_max or scaling_factor):
+        raise Exception("Either dim_z_max, dim_plane_max or scaling factor ha to be given!")
     files = glob.glob("coil_coordinates?.txt")
     files += glob.glob("coil_coordinates??.txt")
     # (coil, :, xyz)
@@ -14,16 +18,20 @@ def dimensions(dim_z_max=0.65, dim_plane_max=1.6):
         temp = np.loadtxt("coil_coordinates{}.txt".format(i))
         coils.append(temp)
     coils = np.array(coils)
+    # Calc dim z
     max_z = np.max(coils[:, :, 2])
     min_z = np.min(coils[:, :, 2])
     dim_z = abs(max_z - min_z)
-    factor = dim_z_max / dim_z
-    coils *= factor
-    radius = np.sqrt(np.sum(coils[:, :, :-1]**2, axis=2))
+    # Calc dim plane
+    radius = np.sqrt(np.sum(coils[:, :, :-1] ** 2, axis=2))
     dim_plane = 2 * np.max(radius)
-    if dim_plane > dim_plane_max:
-        factor = dim_plane_max / dim_plane
-    dim_z *= factor
+    if dim_z_max:
+        scaling_factor = dim_z_max / dim_z
+    elif dim_plane_max:
+        scaling_factor = dim_plane_max / dim_plane
+    coils *= scaling_factor
+    dim_z *= scaling_factor
+    dim_plane *= scaling_factor
     coils_shifted = np.roll(coils, 1, axis=0)
     min_dist = 100
     for i in tqdm(range(len(coils[:, 0, 0]))):
@@ -38,7 +46,7 @@ def dimensions(dim_z_max=0.65, dim_plane_max=1.6):
         coil_shifted = np.roll(coil, 1, axis=0)
         dist = np.sqrt(np.sum((coil - coil_shifted) ** 2, axis=1))
         length[idx] = np.sum(dist)
-    return dim_z, dim_plane, min_dist, length
+    return dim_z, dim_plane, min_dist, length, scaling_factor
 
 if __name__ == "__main__":
     files = glob.glob("coil_coordinates?.txt")
@@ -63,10 +71,11 @@ if __name__ == "__main__":
             ax.scatter(new_points[0, i], new_points[1, i], new_points[2, i], marker="o")
         plt.show()
 
-    z, p, m, l = dimensions()
+    z, p, m, l, f = dimensions(scaling_factor=0.33)
     print("\nThe dimension in z-direction is: {:.3f} m \nThe max dimension in the torroidal plane is: {:.3f} m\n"
-          "And the min distance between coils is {:.3f} mm\n\n"
-          "The lengths of the coils are (in meter):\n{}".format(z, p, m * 1e+3, l))
+          "And the min distance between coils is {:.3f} mm\n"
+          "The factor for the design data is: {}\n\n"
+          "The lengths of the coils are (in meter):\n{}".format(z, p, m * 1e+3, f, np.round(l, 4)))
 
 
 
