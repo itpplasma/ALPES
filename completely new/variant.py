@@ -52,6 +52,7 @@ def calcEverything(
 		specific_resistance=None,
 		radius_major=None,
 		radius_minor=None,
+		filament_length=None,
 		number_coils=None,
 		number_windings=None,
 		material=None,
@@ -73,6 +74,10 @@ def calcEverything(
 	power_total = None
 
 	# Geometry----------------------------------------------------------------
+	if isNr(radius_minor) and isNr(filament_length):
+		raise Exception('Both radius_minor and filament_length defined. remove one.')
+	elif isNr(filament_length):
+		radius_minor = filament_length/(2*np.pi) #virtual minor radius for further calculations
 	if number_coils == None or radius_major == None or radius_minor == None:
 		raise Exception(
 			'Required geometric argument missing: number_coils or radius_major or radius_minor')
@@ -172,5 +177,5 @@ def pressureDrop(pipeInnerDiam, massFlow, length): #m , kg/s , m
 
 
 if __name__ == "__main__":
-	calcEverything(radius_major=0.5, radius_minor=16 * cm, number_coils=12, conductor_crosssection=20*mm2,
+	calcEverything(radius_major=0.5, filament_length=180 * cm, number_coils=12, conductor_crosssection=20*mm2,
 				   I_winding=500, material='copper', frequency_rotation=2.45 * GHz, deltaT=25, pipeInnerDiam=4*mm)
