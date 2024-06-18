@@ -3,6 +3,10 @@ import matplotlib.pyplot as plt
 '''Code to work with coil coordinates and prepare geometries for import into Fusion 360.
 Fusion 360 uses cm as unit for all geometry definitions, therefore after importing 
 ########  ALL COORDINATES IN THIS CODE USES CM AS UNIT!?!!!!!!!!!##########################################
+
+######## COILS MUST BE ORDERED!!!!###################################################
+that means that the files are numbered in a way that consecutive coils are neighbours, either all in a clockwise 
+or all in a ccw sense.
 '''
 #Fusion units:
 Fcm = 1
@@ -39,6 +43,15 @@ def loadAndScale(filename, coilNumber, scalingfactor=1):
         data = np.asarray(data) * 100 * scalingfactor  # convert to cm and scale
         coilCoordList.append(data)
     return coilCoordList
+
+def coilLenght(xyzCoord):
+    shape = np.shape(xyzCoord)
+    coil = np.zeros((shape[0]+1, shape[1]))
+    coil[:-1, :] = xyzCoord
+    coil[-1, :] = xyzCoord[0]
+    dist = np.diff(coil)
+    lenght = np.sum(np.linalg.norm(dist, axis=1))
+    return lenght
 
 def coilCG(coilCoordList):
     '''
@@ -193,7 +206,7 @@ if __name__ == "__main__":
     coilCoordlist = loadAndScale('coilData\coil_coordinates0.txt', 12, 0.33)
     pancakeCoordList = pancakesParallelOriented(coilCoordlist, 6, 8*Fmm, 2.5*8*Fmm)
     railCoorrdList = parallelOrientedRails(coilCoordlist)
-    if False: #3D Plot
+    if True: #3D Plot
         ax = plt.figure().add_subplot(projection='3d')
         for i in range(12):
             panCk = pancakeCoordList[i]
@@ -208,7 +221,7 @@ if __name__ == "__main__":
             ax.plot(CG[0], CG[1], CG[2],'.', label='CG '+str(i))
         ax.legend()
         plt.show()
-    if True: #save csv
+    if False: #save csv
         np.savetxt('exportData\pancakeTest.csv', pancakeCoordList[0], delimiter=',')
         np.savetxt('exportData\coilTest.csv', coilCoordlist[0], delimiter=',')
         np.savetxt('exportData\RailParallelTest.csv', railCoorrdList[0], delimiter=',')
