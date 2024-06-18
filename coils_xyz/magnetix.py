@@ -86,8 +86,8 @@ if __name__ == "__main__":
         plot_force = 1e-2*force
         force_tot = np.sum(force, axis=0)
         plot_force_tot = force_tot * 1e-3
-        print("total force = {:3f}".format(force_tot))
-        print("total force magnitude = {:3f}".format(np.linalg.norm(force_tot)))
+        print("total force = {} N".format(np.round(force_tot, 3)))
+        print("total force magnitude = {:.3f} N".format(np.linalg.norm(force_tot)))
         ax.plot([CGlist[coil_nr][0], CGlist[coil_nr][0]+plot_force_tot[0]], [CGlist[coil_nr][1], CGlist[coil_nr][1]+plot_force_tot[1]], [CGlist[coil_nr][2], CGlist[coil_nr][2]+plot_force_tot[2]], color="black")
         for idx, point in enumerate(mp):
             ax.plot([point[0], point[0] + plot_force[idx, 0]], [point[1], point[1] + plot_force[idx, 1]], [point[2], point[2] + plot_force[idx, 2]])
