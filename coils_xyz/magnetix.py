@@ -12,6 +12,10 @@ mu_0 = 1.25663706127e-6
 
 
 def wire_vectors(xyzCoord):
+    """
+    :param xyzCoord: coordinates of the coil
+    :return: the vectors between each two consecutive points xyzCoords including last to first, shape like input
+    """
     shape = np.shape(xyzCoord)
     wires = np.zeros((shape[0] + 1, shape[1]))
     wires[:-1, :] = xyzCoord
@@ -21,24 +25,35 @@ def wire_vectors(xyzCoord):
 
 
 def wire_mid_points(xyzCoord):
+    """
+    :param xyzCoord: coordinates of the coil
+    :return: points in between the original xyzCoords, shape like input
+    """
     midpoints = xyzCoord + wire_vectors(xyzCoord) * 0.5
     return midpoints
 
 def get_field(point, xyzCoord, I):
     """
-    point: point in which the B field is calculated
-    xyzCoord: coordinates of the coil
-    I: current of the coil
+    :param point: point in which the B field is calculated
+    :param xyzCoord: coordinates of the coil
+    :param I: current of the coil
+    :return: B field at point, created by given coil (xyzCoord) with current (I), shape: [xyz] numpy array
     """
     B = np.zeros(3)
     rest_mp = wire_mid_points(xyzCoord)
     rest_vectors = wire_vectors(xyzCoord)
     dist = point - rest_mp
     dist_scalar = np.linalg.norm(dist, axis=1)
-    B += mu_0 / (4 * np.pi) * np.sum(I * np.cross(rest_vectors, dist) / dist_scalar[:, np.newaxis] ** 3, axis=0)
+    B += mu_0 / (4 * np.pi) * np.sum(I * np.cross(rest_vectors, dist) / dist_scalar[:, np.newaxis] ** 3, axis=0) #Biot-Savart
     return B
 
 def get_force(coil_nr, coilCoordlist, I_list):
+    """
+    :param coil_nr: The index of the coil, where the forces are calculated
+    :param coilCoordlist: list of numpy arrays containing xyz coil coordinates
+    :param I_list: list of currents through each coil, !signs must be right!
+    :return: return force vectors for every point of the coil in a numpy [n, 3] array
+    """
     cut = coilCoordlist[coil_nr]  #cut = coil under test
     cut_mp = wire_mid_points(cut)
     cut_vectors = wire_vectors(cut)
@@ -47,11 +62,7 @@ def get_force(coil_nr, coilCoordlist, I_list):
         B = np.zeros((1, 3))
         for idx_rest, xyzCoord in enumerate(coilCoordlist):
             if idx_rest != coil_nr:
-                rest_mp = wire_mid_points(xyzCoord)
-                rest_vectors = wire_vectors(xyzCoord)
-                dist = point - rest_mp
-                dist_scalar = np.linalg.norm(dist, axis=1)
-                B += mu_0/(4 * np.pi) * np.sum(I_list[idx_rest] * np.cross(rest_vectors, dist) / dist_scalar[:, np.newaxis]**3, axis=0)
+                B += get_field(point, xyzCoord, I_list[idx_rest])
         force_cut[idx_cut, :] = I_list[coil_nr] * np.cross(cut_vectors[idx_cut], B)
     return force_cut
 
@@ -60,9 +71,9 @@ if __name__ == "__main__":
     print('hi, how are you dooin?')
     coil_nr = int(input("from which coil do you want to know the force?"))
     coilCoordlist = loadAndScale('coilData\coil_coordinates0.txt', 12, 0.33/100) # [12, 160, 3] = [coils, points, xyz] !!!/100 bc: convert to fusion (cm) units!!!
-    I1 = 14.7e+3
-    I2 = 8.17e+3
-    I3 = 9.7e+3
+    I1 = 14.7e+3 #A
+    I2 = 8.17e+3 #A
+    I3 = 9.7e+3 #A
     I_list = np.array([I1, I2, I3, -I3, -I2, -I1, I1, I2, I3, -I3, -I2, -I1])
     force = get_force(coil_nr, coilCoordlist, I_list)
     if True: #3D Plot
