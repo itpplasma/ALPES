@@ -59,7 +59,7 @@ def get_force(coil_nr, coilCoordlist, I_list):
 if __name__ == "__main__":
     print('hi, how are you dooin?')
     coil_nr = int(input("from which coil do you want to know the force?"))
-    coilCoordlist = loadAndScale('coilData\coil_coordinates0.txt', 12, 0.33/100) # [12, 160, 3] = [coils, points, xyz]
+    coilCoordlist = loadAndScale('coilData\coil_coordinates0.txt', 12, 0.33/100) # [12, 160, 3] = [coils, points, xyz] !!!/100 bc: convert to fusion (cm) units!!!
     I1 = 14.7e+3
     I2 = 8.17e+3
     I3 = 9.7e+3
@@ -75,7 +75,7 @@ if __name__ == "__main__":
             ax.plot(cl[:, 0], cl[:, 1], cl[:, 2], label='coil_{}'.format(i))
             CG = CGlist[i]
             vec = get_field(CG, cl, I_list[i])
-            print('Bfield in CG', str(i), ' ', np.linalg.norm(vec))
+            #print('Bfield in CG', str(i), ' ', np.linalg.norm(vec))
             # vecList = CGvectors(CGlist)
             # vec = vecList[i] * 20
             vec *= 1e+0
@@ -86,8 +86,8 @@ if __name__ == "__main__":
         plot_force = 1e-2*force
         force_tot = np.sum(force, axis=0)
         plot_force_tot = force_tot * 1e-3
-        print("total force = {}".format(force_tot))
-        print("total force magnitude = {}".format(np.linalg.norm(force_tot)))
+        print("total force = {:3f}".format(force_tot))
+        print("total force magnitude = {:3f}".format(np.linalg.norm(force_tot)))
         ax.plot([CGlist[coil_nr][0], CGlist[coil_nr][0]+plot_force_tot[0]], [CGlist[coil_nr][1], CGlist[coil_nr][1]+plot_force_tot[1]], [CGlist[coil_nr][2], CGlist[coil_nr][2]+plot_force_tot[2]], color="black")
         for idx, point in enumerate(mp):
             ax.plot([point[0], point[0] + plot_force[idx, 0]], [point[1], point[1] + plot_force[idx, 1]], [point[2], point[2] + plot_force[idx, 2]])
