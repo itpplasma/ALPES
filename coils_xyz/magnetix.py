@@ -44,14 +44,17 @@ def get_field(point, xyzCoord, I):
     rest_vectors = wire_vectors(xyzCoord)
     dist = point - rest_mp
     dist_scalar = np.linalg.norm(dist, axis=1)
+    dist_scalar[np.argwhere(dist_scalar == 0)] = 1 # Avoid division by 0! Magnetix is happy :))
+    # This works since np.cross gives zero for dist = 0!
     B += mu_0 / (4 * np.pi) * np.sum(I * np.cross(rest_vectors, dist) / dist_scalar[:, np.newaxis] ** 3, axis=0) #Biot-Savart
     return B
 
-def get_force(coil_nr, coilCoordlist, I_list):
+def get_force(coil_nr, coilCoordlist, I_list, include_self=True):
     """
     :param coil_nr: The index of the coil, where the forces are calculated
     :param coilCoordlist: list of numpy arrays containing xyz coil coordinates
     :param I_list: list of currents through each coil, !signs must be right!
+    :param include_self: boolean, if True points on the coil under test are also considered.
     :return: return force vectors for every point of the coil in a numpy [n, 3] array
     """
     cut = coilCoordlist[coil_nr]  #cut = coil under test
@@ -61,21 +64,41 @@ def get_force(coil_nr, coilCoordlist, I_list):
     for idx_cut, point in enumerate(cut_mp):
         B = np.zeros((1, 3))
         for idx_rest, xyzCoord in enumerate(coilCoordlist):
-            if idx_rest != coil_nr:
+            if include_self:
                 B += get_field(point, xyzCoord, I_list[idx_rest])
+            else:
+                if coil_nr != idx_rest:
+                    B += get_field(point, xyzCoord, I_list[idx_rest])
         force_cut[idx_cut, :] = I_list[coil_nr] * np.cross(cut_vectors[idx_cut], B)
     return force_cut
+
+def get_moments(coil_nr, coilCoordlist, I_list):
+    """
+    :param coil_nr: The index of the coil, where the forces are calculated
+    :param coilCoordlist: list of numpy arrays containing xyz coil coordinates
+    :param I_list: list of currents through each coil, !signs must be right!
+    :return: return moment vector for the center of gravity as numpy [3] array
+    """
+    CG = np.mean(coilCoordlist[coil_nr], axis=0)
+    force = get_force(coil_nr, coilCoordlist, I_list, include_self=False)
+    mp = wire_mid_points(coilCoordlist[coil_nr])
+    dist = mp - CG
+    moment = np.sum(np.cross(dist, force), axis=0)
+    return moment
 
 
 if __name__ == "__main__":
     print('hi, how are you dooin?')
     coil_nr = int(input("from which coil do you want to know the force?"))
-    coilCoordlist = loadAndScale('coilData\coil_coordinates0.txt', 12, 0.33/100) # [12, 160, 3] = [coils, points, xyz] !!!/100 bc: convert to fusion (cm) units!!!
+    coilCoordlist = loadAndScale('coilData\coil_coordinates0.txt', 12, 0.33/100) # [12, 160, 3] = [coils, points, xyz] !!!/100 bc: convert from fusion (cm) units!!!
     I1 = 14.7e+3 #A
     I2 = 8.17e+3 #A
     I3 = 9.7e+3 #A
     I_list = np.array([I1, I2, I3, -I3, -I2, -I1, I1, I2, I3, -I3, -I2, -I1])
     force = get_force(coil_nr, coilCoordlist, I_list)
+    moment = get_moments(coil_nr, coilCoordlist, I_list)
+    total_moment = np.sqrt(np.sum(moment**2))
+    print("The total moment for coil {} is {:.3f} Nm\nThe components are: \n{} Nm\n".format(coil_nr, total_moment, np.round(moment, 3)))
     if True: #3D Plot
         ax = plt.figure().add_subplot(projection='3d')
         CGlist = coilCG(coilCoordlist)
@@ -99,7 +122,13 @@ if __name__ == "__main__":
         plot_force_tot = force_tot * 1e-3
         print("total force = {} N".format(np.round(force_tot, 3)))
         print("total force magnitude = {:.3f} N".format(np.linalg.norm(force_tot)))
-        ax.plot([CGlist[coil_nr][0], CGlist[coil_nr][0]+plot_force_tot[0]], [CGlist[coil_nr][1], CGlist[coil_nr][1]+plot_force_tot[1]], [CGlist[coil_nr][2], CGlist[coil_nr][2]+plot_force_tot[2]], color="black")
+        ax.plot([CGlist[coil_nr][0], CGlist[coil_nr][0]+plot_force_tot[0]],
+                [CGlist[coil_nr][1], CGlist[coil_nr][1]+plot_force_tot[1]],
+                [CGlist[coil_nr][2], CGlist[coil_nr][2]+plot_force_tot[2]], color="black", label="total force")
+        plot_moment = moment * 1e-2
+        ax.plot([CGlist[coil_nr][0], CGlist[coil_nr][0] + plot_moment[0]],
+                [CGlist[coil_nr][1], CGlist[coil_nr][1] + plot_moment[1]],
+                [CGlist[coil_nr][2], CGlist[coil_nr][2] + plot_moment[2]], color="blue", label="total moment")
         for idx, point in enumerate(mp):
             ax.plot([point[0], point[0] + plot_force[idx, 0]], [point[1], point[1] + plot_force[idx, 1]], [point[2], point[2] + plot_force[idx, 2]])
         ax.legend()
