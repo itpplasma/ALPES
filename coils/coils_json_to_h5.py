@@ -1,5 +1,4 @@
 #%%
-
 from simsopt._core import load
 import numpy as np
 data = load(f'serial0021326.json')
