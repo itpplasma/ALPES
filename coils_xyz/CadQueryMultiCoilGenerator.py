@@ -1,7 +1,7 @@
 import cadquery as cq
 from windingCoordinateGenerator import *
 from tqdm import tqdm
-
+#this is a change
 #All units in cm according to Fusion360 standard
 xOuter = 4 #winding pack outermost dimension in B field direction
 yOuter = 6 #winding pack outermost dimension in radial direction
