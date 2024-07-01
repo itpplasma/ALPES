@@ -1,4 +1,0 @@
-https://github.com/DrTol/pressure_loss_calculator-Python
-
-    Tol, Hİ. pressure_loss_calculator-Python. DOI: 10.5281/zenodo.3268807. GitHub Repository 2018; https://github.com/DrTol/pressure_loss_calculator-Python
-    Tol, Hİ. District heating in areas with low energy houses - Detailed analysis of district heating systems based on low temperature operation and use of renewable energy. PhD Supervisors: Svendsen S. & Nielsen SB. Technical University of Denmark 2015; 204 p. ISBN: 9788778773685.

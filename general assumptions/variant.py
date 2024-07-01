@@ -16,11 +16,6 @@ electron_mass = 9.1093837015e-31  # kg
 electron_charge = 1.602176634e-19  # C
 mu_0 = 1.25663706212e-6  # N*A^-2
 
-from variables import *
-from functions import *
-from controll import *
-
-
 def isNr(val):
 	if isinstance(val, int) or isinstance(val, float):
 		return True

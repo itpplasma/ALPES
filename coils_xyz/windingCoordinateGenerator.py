@@ -18,13 +18,12 @@ def generate_filenames(base_filename, N):
     prefix = base_filename.rstrip('.txt')
     prefix = prefix.rstrip('0123456789')
     suffix = '.txt'
-
     # Generate the list of filenames
     filenames = []
     for i in range(N):
         filenames.append(f"{prefix}{i}{suffix}")
-
     return filenames
+
 def loadAndScale(filename, coilNumber, scalingfactor=1):
     '''
     load and scale coordinates of a set of coils
@@ -33,8 +32,10 @@ def loadAndScale(filename, coilNumber, scalingfactor=1):
     :param scalingfactor: real factor to scale the design by. Scaling from m to cm is done automatically
     :return: list coilNumber numpy arrays with shape of 3 by X, containing the xyz coordinates.
     '''
+    print(filename)
     filenameList = generate_filenames(filename, coilNumber)
     coilCoordList = []
+    
     for thisfilename in filenameList:
         data = np.loadtxt(thisfilename, delimiter=' ')
         datashape = np.shape(data)
