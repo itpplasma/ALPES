@@ -25,7 +25,7 @@ def generate_filenames(base_filename, N):
         filenames.append(f"{prefix}{i}{suffix}")
 
     return filenames
-def loadAndScale(filename, coilNumber, scalingfactor=1):
+def loadAndScale(filename, coilNumber, scalingfactor=1.0):
     '''
     load and scale coordinates of a set of coils
     :param filename: filename of one of the coils, extension must be '.txt', files must be numbered starting at 0 up to coilNumber-1
@@ -138,6 +138,99 @@ def parallelOrientedRails(coilCoordList, railDistance=1):
         railList.append(xyzRail)
         #railList.append(xyzCoord + np.tile(CGvector*railDistance, (Npoints,1)))
     return railList
+
+def parallelOrientePlanes(coilCoordList):
+    '''
+        creates vectors that represent a plane. xDir is roughly radial, yDir is roughly B Field oriented and normal is
+        the tangent of the coil filament. yDir points orthogonal to tangent vector and as orthogonal as possible to assumed B field direction.
+        (B field assumed in the direction between previous and next coil CG)
+
+        :param coilCoordList: list of numpy arrays containing xyz coil coordinates
+        :param railDistance: offset distance in cm
+        :return: list of numpy arrays containing xyz coordinates that represent the xDir vectors. Shaped like coilCoordList
+    '''
+    CGlist = coilCG(coilCoordList)
+    CGvectorList = CGvectors(CGlist)
+    xDirList = []
+    yDirList = []
+    normalList = []
+    for i, xyzCoord in enumerate(coilCoordList):
+        CG = CGlist[i]
+        CGvector = CGvectorList[
+            i]  # vector between next and previous CG as approximation of B direction in this coils CG
+        Npoints = len(xyzCoord[:, 0])
+        xDir = np.zeros_like(xyzCoord)  # generate container for a single coil's xDir vectors
+        yDir = np.zeros_like(xyzCoord)  # generate container for a single coil's yDir vectors
+        normalDir = np.zeros_like(xyzCoord)  # generate container for a single coil's tangent vectors
+        for j_coil in range(Npoints):
+            PtoCG = CG - xyzCoord[j_coil, :]  # vector from this coil point to CG
+            radVector = PtoCG - CGvector * (
+                np.sum(PtoCG * CGvector))  # substract the component parrallel to CG vector from PtoCG
+            radVector = radVector / np.sqrt(np.sum(radVector ** 2))  # normalize radVector
+            # something like vector point to CG - CGvector times dot product of this vector time CGvector and all of that normalized.
+            tangentVector = xyzCoord[np.mod(j_coil + 1, Npoints), :] - xyzCoord[np.mod(j_coil - 1, Npoints), :]
+            tangentVector /= np.linalg.norm(
+                tangentVector)  # tangent vector should be replaced by spline fit derivative!!!
+            # Definition: in the newly spanned coordinate system, x is in B field direction an y points to the middle of the coil
+            # y to inside / outside and x cw or ccw will change according to direction the points are stored in
+            xVector = np.cross(tangentVector,
+                               radVector)  # generate a vector thet is perpendcular to both radVector and the tangent
+            xVector /= np.linalg.norm(xVector)
+            yVector = np.cross(xVector, tangentVector)
+            yVector /= np.linalg.norm(yVector)
+            xDir[j_coil, :] = xVector
+            yDir[j_coil, :] = yVector
+            normalDir[j_coil, :] = tangentVector
+        xDirList.append(xDir)
+        yDirList.append(yDir)
+        normalList.append(normalDir)
+        # railList.append(xyzCoord + np.tile(CGvector*railDistance, (Npoints,1)))
+    return xDirList, yDirList, normalList
+
+def circularOrientePlanes(coilCoordList):
+    '''
+        creates vectors that represent a plane. xDir is roughly radial, yDir is roughly B Field oriented and normal is
+        the tangent of the coil filament. An important vector is the circVec, which is the vector that is orthogonal to
+        both z axis and the connection vector between z axis and the coils CG.
+        yDir points orthogonal to tangent vector and as orthogonal as possible to circVec.
+
+        :param coilCoordList: list of numpy arrays containing xyz coil coordinates
+        :param railDistance: offset distance in cm
+        :return: list of numpy arrays containing xyz coordinates that represent the xDir vectors. Shaped like coilCoordList
+    '''
+    CGlist = coilCG(coilCoordList)
+    xDirList = []
+    yDirList = []
+    normalList = []
+    for i, xyzCoord in enumerate(coilCoordList):
+        CG = CGlist[i]
+        circVec = np.cross([0,0,1],CG)# vector orthogonal to z axis and connection between z axis and CG
+        circVec /= np.linalg.norm(circVec)# normalized
+        Npoints = len(xyzCoord[:, 0])
+        xDir = np.zeros_like(xyzCoord)  # generate container for a single coil's xDir vectors
+        yDir = np.zeros_like(xyzCoord)  # generate container for a single coil's yDir vectors
+        normalDir = np.zeros_like(xyzCoord)  # generate container for a single coil's tangent vectors
+        for j_coil in range(Npoints):
+            PtoCG = CG - xyzCoord[j_coil, :]  # vector from this coil point to CG
+            radVector = PtoCG - circVec * (
+                np.sum(PtoCG * circVec))  # substract the component parrallel to CG vector from PtoCG
+            radVector /= np.linalg.norm(radVector) # normalize radVector
+            # something like vector point to CG - circVec times dot product of this vector time circVec and all of that normalized.
+            tangentVector = xyzCoord[np.mod(j_coil + 1, Npoints), :] - xyzCoord[np.mod(j_coil - 1, Npoints), :]
+            tangentVector /= np.linalg.norm(tangentVector)  # tangent vector should be replaced by spline fit derivative!!!
+            # Definition: in the newly spanned coordinate system, x is in B field direction an y points to the middle of the coil
+            # y to inside / outside and x cw or ccw will change according to direction the points are stored in
+            xVector = np.cross(tangentVector, radVector)  # generate a vector thet is perpendcular to both radVector and the tangent
+            xVector /= np.linalg.norm(xVector)
+            yVector = np.cross(xVector, tangentVector)
+            yVector /= np.linalg.norm(yVector)
+            xDir[j_coil, :] = xVector
+            yDir[j_coil, :] = yVector
+            normalDir[j_coil, :] = tangentVector
+        xDirList.append(xDir)
+        yDirList.append(yDir)
+        normalList.append(normalDir)
+    return xDirList, yDirList, normalList
 
 def pancakesParallelOriented(coilCoordList, Nturns, turnThickness, torOffset):
     '''
