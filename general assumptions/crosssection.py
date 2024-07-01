@@ -274,11 +274,11 @@ def crosssection_umspuelt(
 
 if 1:
     dim_pol, dim_tor, windings_pol, windings_tor, area_cond, area_water = crosssection_cPipes(diam_cond=6*mm,
-                cond_thickness=1*mm, iso_thickness=0.25 * mm, casing_thickness=2 * mm,
-                dim_pol=50 * mm, dim_tor=50 * mm)  # windings_pol=6, windings_tor=6)
-
+                cond_thickness=1*mm, iso_thickness=0.5 * mm, casing_thickness=2 * mm,
+                windings_tor=6, windings_pol=8, draw=True)  # windings_pol=6, windings_tor=6)
+    print("dimension = {:.2f} mm pol, {:.2f} mm tor".format(dim_pol/mm, dim_tor/mm))
     p_drop_per_coil, p_drop_per_dPancake, power_coil, I_winding = calcEverything(radius_major=0.5, radius_minor=28 * cm, number_coils=12,
-                           conductor_crosssection=area_cond, number_windings=windings_pol * windings_tor,
+                           conductor_crosssection=area_cond, number_windings=windings_pol * windings_tor, material="copper",
                            I_linking=176*kA, deltaT=25, pipeInnerDiam=2 * np.sqrt(area_water / np.pi), dPancake_factor=windings_tor/2)
 
 
