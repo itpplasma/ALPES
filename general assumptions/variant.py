@@ -178,11 +178,15 @@ def pipeCondCrossection(outer, thickness):
 		raise Exception('Wall to thick, no hole in pipe :(')
 	return((outer/2)**2-(outer/2 - thickness)**2)*np.pi
 
+def pipeCondCrossection2(outer, inner):
+	return(outer)**2-((inner/2)**2)*np.pi
+
 def pressureDrop(pipeInnerDiam, massFlow, length): #m , kg/s , m
 	import pressure_loss_calculator.PressureLossMod as PL
 	return(PL.PressureLoss_DW(length, pipeInnerDiam/mm, massFlow, 20, 0.005)) #fixed at 20°C and roughness of 5um
 
 
 if __name__ == "__main__":
-	calcEverything(radius_major=0.5, filament_length=176.35 * cm, I_winding_sum=14690*A , number_coils=12, conductor_crosssection=pipeCondCrossection(6*mm,1*mm),
-				  number_windings=32, dPancake_factor=2, material='copper', frequency_rotation=2.45 * GHz, deltaT=25, pipeInnerDiam=4*mm)
+	calcEverything(radius_major=0.5, filament_length=176.35 * cm, I_winding_sum=14690*A , number_coils=12,
+				   conductor_crosssection=pipeCondCrossection2(8*mm,6*mm), number_windings=28, dPancake_factor=2,
+				   material='copper', frequency_rotation=2.45 * GHz, deltaT=25, pipeInnerDiam=6*mm)

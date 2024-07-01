@@ -2,10 +2,10 @@ import cadquery as cq
 from windingCoordinateGenerator import *
 from tqdm import tqdm
 #this is a change
-#All units in cm according to Fusion360 standard
-xOuter = 4.6 #winding pack outermost dimension in B field direction
-yOuter = 6 #winding pack outermost dimension in radial direction
-wallTh = 0.2 #Steel casing wall thickness
+#All units in mm according to Fusion360 STEP import standard
+xOuter = 40 #winding pack outermost dimension in B field direction
+yOuter = 67 #winding pack outermost dimension in radial direction
+wallTh = 2 #Steel casing wall thickness
 
 #--------------Prepare coil coordinates and coordinate system along the filament----------------------------------------
 coilCoordList = loadAndScale('coilData\coil_coordinates0.txt', 12, 0.330*10) #*10 is to adjust scaling for step import (uses mm as basis)
@@ -62,7 +62,7 @@ for j in range(0,3):
         else:
             nextpart = wp1.loft(combine=True)
             result = result.union(nextpart)
-    exportname = r'C:\Users\Daniel\Documents\!Privat\Physik_Master\FusionReactorDesign\CqeditorCode\CustomCoilBig'+str(j)+'.step'
+    exportname = r'C:\Users\Daniel\Documents\!Privat\Physik_Master\FusionReactorDesign\CqeditorCode\CustomCoilFat'+str(j)+'.step'
     cq.exporters.export(result, exportname)
 print('finished!')
 #Show object when using CQ-editor
