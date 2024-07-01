@@ -17,6 +17,7 @@ def crosssection_cPipes(
 ):
     """
     calculates conductor and water area for circular pipes, given either a dimension or number of windings.
+    Also plots the cross sections.
     :param diam_cond: diameter of conductor
     :param cond_thickness: thickness of conductor
     :param iso_thickness: thickness of insulator
@@ -103,6 +104,8 @@ def crosssection_rPipes(
         draw=True,
 ):
     """
+    calculates conductor and water area for rectangular pipes, given either a dimension or number of windings.
+    Also plots the cross sections.
     :param diam_cond_pol: diameter of conductor in poloidal direction
     :param diam_cond_tor: diameter of conductor in toroidal direction
     :param cond_thickness_pol: conductor thickness in poloidal direction
@@ -186,6 +189,8 @@ def crosssection_umspuelt(
         draw=True,
 ):
     """
+    calculates conductor and water area for circular conductors in water, given either a dimension or
+    number of windings. Also plots the cross sections.
     :param diam_cond: diameter of conductor
     :param cond_thickness: thickness of conductor
     :param iso_thickness: thickness of insulator
