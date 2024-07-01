@@ -228,4 +228,3 @@ if __name__ == "__main__":
     if False: #save all txt
         listTotxt('exportData\pancake0.txt', pancakeCoordList)
         listTotxt('exportData\coil0.txt', coilCoordlist)
-

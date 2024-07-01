@@ -1,0 +1,10 @@
+{
+	"autodeskProduct":	"Fusion",
+	"type":	"script",
+	"author":	"",
+	"description":	{
+		"":	"Test to import 3D coil geometries from a file\n@ c:\\\\coordinates.csv"
+	},
+	"supportedOS":	"windows|mac",
+	"editEnabled":	true
+}
