@@ -32,6 +32,7 @@ def wire_mid_points(xyzCoord):
     midpoints = xyzCoord + wire_vectors(xyzCoord) * 0.5
     return midpoints
 
+
 def get_field(point, xyzCoord, I):
     """
     :param point: point in which the B field is calculated
@@ -48,6 +49,7 @@ def get_field(point, xyzCoord, I):
     # This works since np.cross gives zero for dist = 0!
     B += mu_0 / (4 * np.pi) * np.sum(I * np.cross(rest_vectors, dist) / dist_scalar[:, np.newaxis] ** 3, axis=0) #Biot-Savart
     return B
+
 
 def get_force(coil_nr, coilCoordlist, I_list, include_self=True):
     """
@@ -71,6 +73,7 @@ def get_force(coil_nr, coilCoordlist, I_list, include_self=True):
                     B += get_field(point, xyzCoord, I_list[idx_rest])
         force_cut[idx_cut, :] = I_list[coil_nr] * np.cross(cut_vectors[idx_cut], B)
     return force_cut
+
 
 def get_moments(coil_nr, coilCoordlist, I_list):
     """
