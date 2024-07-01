@@ -7,6 +7,7 @@ m = 1
 cm = 0.01
 mm = 0.001
 mm2 = 1e-6
+A = 1
 kA = 1000
 kW = 1000
 GHz = 1e9
@@ -15,6 +16,11 @@ bar = 1e5
 electron_mass = 9.1093837015e-31  # kg
 electron_charge = 1.602176634e-19  # C
 mu_0 = 1.25663706212e-6  # N*A^-2
+
+'''from variables import *
+from functions import *
+from controll import *'''
+
 
 def isNr(val):
 	if isinstance(val, int) or isinstance(val, float):
@@ -27,7 +33,7 @@ def notNr(val):
 		return False
 	return True
 
-def calcGeometry(
+'''def calcGeometry(
 		material,
 		isoThickness,
 		casingThickness,
@@ -40,7 +46,7 @@ def calcGeometry(
 
 ):
 
-	return(windingsPerCoil, resPerMetre, hydrResPerMetre)
+	return(windingsPerCoil, resPerMetre, hydrResPerMetre)'''
 
 def calcEverything(
 		max_current_per_mm_2=float(50.),
@@ -59,7 +65,8 @@ def calcEverything(
 		I_winding=None,
 		deltaT = None,
 		pipeInnerDiam = None,
-		dPancake_factor = None #number of double pancakes in the coil crossection, same as winding nr in plasma direction div by 2
+		dPancake_factor = None, #number of double pancakes in the coil crossection, same as winding nr in plasma direction div by 2
+		I_winding_sum = None #I_winding times nr of windings
 ):
 	'''This function will output all parameters of the stellarator coil design based on a set of keyword arguments that are passed to it.
 	This set has to be complete in a sense that all other parameters can be determined from it.
@@ -73,22 +80,26 @@ def calcEverything(
 		raise Exception('Both radius_minor and filament_length defined. remove one.')
 	elif isNr(filament_length):
 		radius_minor = filament_length/(2*np.pi) #virtual minor radius for further calculations
-	if number_coils == None or radius_major == None or radius_minor == None:
+	if number_coils == None or (notNr(I_winding_sum) and notNr(radius_major)) or radius_minor == None:
 		raise Exception(
-			'Required geometric argument missing: number_coils or radius_major or radius_minor')
+			'Required geometric argument missing: number_coils or radius_major/I_winding_sum or radius_minor')
 
 	# Field strength--------------------------------------------------
-	if isNr(B_toroidal):
-		if I_linking != None or frequency_rotation != None:
-			raise Exception(
-				'To much information on target magnetic field. Pass B_toroidal or frequency_rotation or I_linking')
-		I_linking = 2 * np.pi * radius_major * B_toroidal / mu_0
-	if isNr(frequency_rotation):
-		B_toroidal = 2 * np.pi * frequency_rotation * electron_mass / electron_charge
-		I_linking = 2 * np.pi * radius_major * B_toroidal / mu_0
+	if notNr(I_winding_sum):
+		if isNr(B_toroidal):
+			if I_linking != None or frequency_rotation != None:
+				raise Exception(
+					'To much information on target magnetic field. Pass B_toroidal or frequency_rotation or I_linking')
+			I_linking = 2 * np.pi * radius_major * B_toroidal / mu_0
+		if isNr(frequency_rotation):
+			B_toroidal = 2 * np.pi * frequency_rotation * electron_mass / electron_charge
+			I_linking = 2 * np.pi * radius_major * B_toroidal / mu_0
 
-	if I_linking == None:
-		raise Exception('No information on target magnetic field. Pass B_toroidal or frequency_rotation or I_linking')
+		if I_linking == None:
+			raise Exception('No information on target magnetic field. Pass B_toroidal or frequency_rotation or I_linking or I_winding_sum')
+	else:
+		I_linking = I_winding_sum * number_coils #Patch to get the rest of code to work with I_winding_sum. Only single coil values are valid when using this approach!
+		print('only single coil values are valid because I_winding_sum is used to compute the values for all coils!!!!')
 	# Material------------------------------------------
 	if material == 'copper':
 		specific_resistance = 1.68e-8  # Ohm*m @ 77°C
@@ -149,7 +160,8 @@ def calcEverything(
 	print('I_linking: ', I_linking / kA, ' kA')
 	print('number of coils: ', number_coils)
 	print('number of windings per coil: ', number_windings)
-	print('Outer Diameter: ', radius_major + radius_minor, ' m')
+	if isNr(radius_major):
+		print('Outer Diameter: ', radius_major + radius_minor, ' m')
 	print('Conductor Crosssection: ', conductor_crosssection / (mm ** 2), 'mm^2')
 	print('Coil resistance: ', R_coil, ' Ohm')
 	print('Coil Voltage: ', U_coil, ' V')
@@ -172,5 +184,5 @@ def pressureDrop(pipeInnerDiam, massFlow, length): #m , kg/s , m
 
 
 if __name__ == "__main__":
-	calcEverything(radius_major=0.5, filament_length=180 * cm, number_coils=12, conductor_crosssection=20*mm2,
-				   I_winding=500, material='copper', frequency_rotation=2.45 * GHz, deltaT=25, pipeInnerDiam=4*mm)
+	calcEverything(radius_major=0.5, filament_length=176.35 * cm, I_winding_sum=14690*A , number_coils=12, conductor_crosssection=pipeCondCrossection(6*mm,1*mm),
+				  number_windings=48, dPancake_factor=3, material='copper', frequency_rotation=2.45 * GHz, deltaT=25, pipeInnerDiam=4*mm)
