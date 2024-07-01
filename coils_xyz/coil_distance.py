@@ -8,6 +8,12 @@ from scipy.interpolate import splprep, splev
 def dimensions(dim_z_max=None,
                dim_plane_max=None,
                scaling_factor=None):
+    """
+    :param dim_z_max: maximal length in z direction
+    :param dim_plane_max: maximal length in the toroidal plane
+    :param scaling_factor: scaling factor for the coil data
+    :return: dim_z, dim_plane, min_dist, length, scaling_factor
+    """
     if not (dim_z_max or dim_plane_max or scaling_factor):
         raise Exception("Either dim_z_max, dim_plane_max or scaling factor ha to be given!")
     files = glob.glob("coilData\coil_coordinates?.txt")
@@ -46,7 +52,7 @@ def dimensions(dim_z_max=None,
         coil_shifted = np.roll(coil, 1, axis=0)
         dist = np.sqrt(np.sum((coil - coil_shifted) ** 2, axis=1))
         length[idx] = np.sum(dist)
-    return dim_z, dim_plane, min_dist, length, scaling_factor
+    return v
 
 if __name__ == "__main__":
     files = glob.glob("coilData\coil_coordinates?.txt")
@@ -71,7 +77,7 @@ if __name__ == "__main__":
             ax.scatter(new_points[0, i], new_points[1, i], new_points[2, i], marker="o")
         plt.show()
 
-    z, p, m, l, f = dimensions(dim_z_max=0.63)
+    z, p, m, l, f = dimensions(scaling_factor=0.35)
     print("\nThe dimension in z-direction is: {:.3f} m \nThe max dimension in the torroidal plane is: {:.3f} m\n"
           "And the min distance between coils is {:.3f} mm\n"
           "The factor for the design data is: {}\n\n"

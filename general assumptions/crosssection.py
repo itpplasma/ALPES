@@ -1,27 +1,34 @@
 import numpy as np
 import matplotlib.pyplot as plt
-import pressure_loss_calculator.PressureLossMod as PL
 from variant import *
 
 
 def crosssection_cPipes(
         diam_cond,
         cond_thickness,
-        material,
         iso_thickness,
         casing_thickness,
-        mass_flow=0,
         dim_pol=None,
         dim_tor=None,
         windings_pol=None,
         windings_tor=None,
         optimize_dims=True,
         draw=True,
-        temperature=90,
-        roughness=0.0015
 ):
     """
-    creates the cross section for circular tubes
+    calculates conductor and water area for circular pipes, given either a dimension or number of windings.
+    Also plots the cross sections.
+    :param diam_cond: diameter of conductor
+    :param cond_thickness: thickness of conductor
+    :param iso_thickness: thickness of insulator
+    :param casing_thickness: thickness of casing, surrounding winding pack
+    :param dim_pol: total dimension of coil in poloidal direction
+    :param dim_tor: total dimension of coil in toroidal direction
+    :param windings_pol: number of windings in poloidal direction
+    :param windings_tor: number of windings in toroidal direction
+    :param optimize_dims: If True, dimensions of coil are optimized to exactly fit the windings
+    :param draw: If True, plots are created and saved
+    :return: dim_pol, dim_tor, windings_pol, windings_tor, area_cond, area_water
     """
     walls = 2 * casing_thickness
     diam_tot = diam_cond + (2 * iso_thickness)
@@ -39,16 +46,11 @@ def crosssection_cPipes(
     else:
         raise Exception("system is under defined, you need to give either windings (pol, tor) or dimensions (pol, tor)")
     diam_water = diam_cond - 2 * cond_thickness
-    p_drop_pm = PL.PressureLoss_DW(1, diam_water, mass_flow, temperature, roughness)
     area_water = (diam_water/2)**2 * np.pi
     area_cond = (diam_cond/2)**2 * np.pi - area_water
     if draw:
-        #print("dim_pol = {}\ndim_tor = {}".format(dim_pol, dim_tor))
-        #print("diam_cond = {}, cond_thickness = {}, iso_thickness = {}\ndiam_tot = {}".format(diam_cond, cond_thickness,
-                                                                                              #iso_thickness, diam_tot))
         offset = diam_tot
         fig, ax = plt.subplots()
-        #fig.set_size_inches(dim_pol, dim_tor)
         wall_bottom = plt.Rectangle((0, 0), dim_tor, casing_thickness, linewidth=0, edgecolor='0', facecolor='0')
         wall_top = plt.Rectangle((0, dim_pol - casing_thickness), dim_tor, casing_thickness, linewidth=0, edgecolor='0', facecolor='0')
         wall_left = plt.Rectangle((0, 0), casing_thickness, dim_pol, linewidth=0, edgecolor='0', facecolor='0')
@@ -92,21 +94,31 @@ def crosssection_rPipes(
         diam_cond_tor,
         cond_thickness_pol,
         cond_thickness_tor,
-        material,
         iso_thickness,
         casing_thickness,
-        mass_flow,
         dim_pol=None,
         dim_tor=None,
         windings_pol=None,
         windings_tor=None,
         optimize_dims=True,
         draw=True,
-        temperature=90,
-        roughness=0.0015
 ):
     """
-    creates the cross section for rectangular tubes
+    calculates conductor and water area for rectangular pipes, given either a dimension or number of windings.
+    Also plots the cross sections.
+    :param diam_cond_pol: diameter of conductor in poloidal direction
+    :param diam_cond_tor: diameter of conductor in toroidal direction
+    :param cond_thickness_pol: conductor thickness in poloidal direction
+    :param cond_thickness_tor: conductor thickness in toroidal direction
+    :param iso_thickness: insulator thickness
+    :param casing_thickness: thickness of casing, surrounding winding pack
+    :param dim_pol: total dimension of coil in poloidal direction
+    :param dim_tor: total dimension of coil in poloidal direction
+    :param windings_pol: windings in poloidal direction
+    :param windings_tor: windings in toroidal direction
+    :param optimize_dims: If True, dimensions of coil are optimized to exactly fit the windings
+    :param draw: If True, plots are created and saved
+    :return: dim_pol, dim_tor, windings_pol, windings_tor, area_water, area_cond
     """
     walls = 2 * casing_thickness
     diam_tot_pol = diam_cond_pol + (2 * iso_thickness)
@@ -129,15 +141,9 @@ def crosssection_rPipes(
     area_water = diam_water_tor * diam_water_pol
     area_cond = diam_cond_tor * diam_cond_pol - area_water
     if draw:
-        # print("dim_pol = {}\ndim_tor = {}".format(dim_pol, dim_tor))
-        # print("diam_cond_pol = {}, diam_cond_tor = {}, cond_thickness_pol = {}, cond_thickness_tor = {},"
-        #       " iso_thickness = {}\ndiam_tot_pol = {}, diam_tot_toz = {}".format(diam_cond_pol, diam_cond_tor, cond_thickness_pol,
-        #                                                                          cond_thickness_tor, iso_thickness, diam_tot_pol,
-        #                                                                          diam_tot_tor))
         offset_pol = diam_tot_pol
         offset_tor = diam_tot_tor
         fig, ax = plt.subplots()
-        #fig.set_size_inches(dim_pol, dim_tor)
         wall_bottom = plt.Rectangle((0, 0), dim_tor, casing_thickness, linewidth=0, edgecolor='0', facecolor='0')
         wall_top = plt.Rectangle((0, dim_pol - casing_thickness), dim_tor, casing_thickness, linewidth=0, edgecolor='0', facecolor='0')
         wall_left = plt.Rectangle((0, 0), casing_thickness, dim_pol, linewidth=0, edgecolor='0', facecolor='0')
@@ -160,7 +166,6 @@ def crosssection_rPipes(
                 ax.add_patch(cond)
                 ax.add_patch(water)
         ax.set(xlim=(0, dim_tor), ylim=(0, dim_pol))
-        # ax.set_xticks(np.linspace(0, dim_tor, 10))
         ax.set_yticks(np.linspace(0, dim_pol, 10))
         locs, labels = plt.xticks()
         labels = [float(item) / mm for item in locs]
@@ -172,23 +177,31 @@ def crosssection_rPipes(
     return dim_pol, dim_tor, windings_pol, windings_tor, area_water, area_cond
 
 def crosssection_umspuelt(
-        diam_cond=0,
-        cond_thickness=0,
-        material=0,
-        iso_thickness=0,
-        casing_thickness=0,
-        mass_flow=0,
+        diam_cond,
+        cond_thickness,
+        iso_thickness,
+        casing_thickness,
         dim_pol=None,
         dim_tor=None,
         windings_pol=None,
         windings_tor=None,
         optimize_dims=True,
         draw=True,
-        temperature=90,
-        roughness=0.0015
 ):
     """
-    creates the cross section for circular tubes
+    calculates conductor and water area for circular conductors in water, given either a dimension or
+    number of windings. Also plots the cross sections.
+    :param diam_cond: diameter of conductor
+    :param cond_thickness: thickness of conductor
+    :param iso_thickness: thickness of insulator
+    :param casing_thickness: thickness of casing, surrounding winding pack
+    :param dim_pol: total dimension of coil in poloidal direction
+    :param dim_tor: total dimension of coil in toroidal direction
+    :param windings_pol: number of windings in poloidal direction
+    :param windings_tor: number of windings in toroidal direction
+    :param optimize_dims: If True, dimensions of coil are optimized to exactly fit the windings
+    :param draw: If True, plots are created and saved
+    :return: dim_pol, dim_tor, windings_pol, windings_tor, area_cond, area_water
     """
     walls = 2 * casing_thickness
     diam_tot = diam_cond + (2 * iso_thickness)
@@ -206,7 +219,6 @@ def crosssection_umspuelt(
     else:
         raise Exception("system is under defined, you need to give either windings (pol, tor) or dimensions (pol, tor)")
     diam_water = diam_cond - 2 * cond_thickness
-    p_drop_pm = PL.PressureLoss_DW(1, diam_water, mass_flow, temperature, roughness)
     area_water = (diam_water/2)**2 * np.pi
     area_cond = (diam_cond/2)**2 * np.pi - area_water
     if draw:
@@ -255,17 +267,18 @@ def crosssection_umspuelt(
         plt.savefig("{}x{}_umspült.png".format(diam_cond/mm, cond_thickness/mm))
     return dim_pol, dim_tor, windings_pol, windings_tor, area_cond, area_water
 
+
 # dim_pol, dim_tor, windings_pol, windings_tor, area_water, area_cond = crosssection_rPipes(8 * mm, 8 * mm,
-#             2 * mm, 2 * mm, material="copper", iso_thickness=0.25 * mm, casing_thickness=2 * mm, mass_flow=10,
+#             2 * mm, 2 * mm, iso_thickness=0.25 * mm, casing_thickness=2 * mm,
 #             dim_pol=50 * mm, dim_tor=50 * mm)
 
 if 1:
     dim_pol, dim_tor, windings_pol, windings_tor, area_cond, area_water = crosssection_cPipes(diam_cond=6*mm,
-                cond_thickness=1*mm, material="copper", iso_thickness=0.25 * mm, casing_thickness=2 * mm, mass_flow=10,
+                cond_thickness=1*mm, iso_thickness=0.25 * mm, casing_thickness=2 * mm,
                 dim_pol=50 * mm, dim_tor=50 * mm)  # windings_pol=6, windings_tor=6)
 
     p_drop_per_coil, p_drop_per_dPancake, power_coil, I_winding = calcEverything(radius_major=0.5, radius_minor=28 * cm, number_coils=12,
-                           conductor_crosssection=area_cond, number_windings=windings_pol * windings_tor, material='copper',
+                           conductor_crosssection=area_cond, number_windings=windings_pol * windings_tor,
                            I_linking=176*kA, deltaT=25, pipeInnerDiam=2 * np.sqrt(area_water / np.pi), dPancake_factor=windings_tor/2)
 
 
@@ -276,7 +289,7 @@ output = ""
 if 0:
     for idx, cond in enumerate(cond_list):
         dim_pol, dim_tor, windings_pol, windings_tor, area_cond, area_water = crosssection_cPipes(diam_cond=cond,
-            cond_thickness=thick_list[idx], material="copper", iso_thickness=0.25 * mm, casing_thickness=2 * mm, mass_flow=10,
+            cond_thickness=thick_list[idx], material="copper", iso_thickness=0.25 * mm, casing_thickness=2 * mm,
             dim_pol=50 * mm, dim_tor=50 * mm)  # windings_pol=6, windings_tor=6)
 
         p_drop_per_coil, p_drop_per_dPancake, power_coil, I_winding = calcEverything(radius_major=0.4, radius_minor=32 * cm, number_coils=12,
@@ -290,5 +303,5 @@ if 0:
         file.write(output)
 
 # dim_pol, dim_tor, windings_pol, windings_tor, area_cond, area_water = crosssection_umspuelt(diam_cond=4*mm,
-#             cond_thickness=1*mm, material="copper", iso_thickness=0.25 * mm, casing_thickness=2 * mm, mass_flow=10,
+#             cond_thickness=1*mm, material="copper", iso_thickness=0.25 * mm, casing_thickness=2 * mm,
 #             dim_pol=50 * mm, dim_tor=50 * mm)
