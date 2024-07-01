@@ -415,6 +415,6 @@ class StellaratorDesign:
         for key, value in self.__dict__.items():
             if not key.startswith("__"):
                 print(f"{key} = {value}")
-        self.geometry.draw_coil()
+        #self.geometry.draw_coil()
 
     

@@ -71,7 +71,7 @@ if __name__ == "__main__":
             ax.scatter(new_points[0, i], new_points[1, i], new_points[2, i], marker="o")
         plt.show()
 
-    z, p, m, l, f = dimensions(dim_plane_max=1.6)
+    z, p, m, l, f = dimensions(dim_z_max=0.63)
     print("\nThe dimension in z-direction is: {:.3f} m \nThe max dimension in the torroidal plane is: {:.3f} m\n"
           "And the min distance between coils is {:.3f} mm\n"
           "The factor for the design data is: {}\n\n"

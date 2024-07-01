@@ -46,11 +46,9 @@ def controll(stellarator):
 def sorting(n_total, out_put_put, output_var_names):
     # Sort N and get the list of indices
     sorting_help = np.zeros(len(n_total))
-    #print(n_total)
     for i in range(len(sorting_help)):
         sorting_help[i] = n_total[i]
     sorting_args = np.argsort(sorting_help)
-    #print(sorting_args)
     sorting_help = np.sort(sorting_help)
     n_total = sorting_help.tolist()
 
@@ -60,11 +58,8 @@ def sorting(n_total, out_put_put, output_var_names):
         for j in range(int(len(out_put_put[output_var_name])/len(sorting_args))):
             for i,idx in enumerate(sorting_args):
                 sorted_out_put_put.append((i,out_put_put[output_var_name][i+j*len(sorting_args)][1],out_put_put[output_var_name][idx+j*len(sorting_args)][2]))
-                #print(j)
-            #if idx != i:
-             #   sorted_out_put_put[i] = (i,sorted_out_put_put[i][1],out_put_put[output_var_name][idx][2])
         out_put_put[output_var_name] = sorted_out_put_put
-        #print(sorted_out_put_put)
+
     return n_total, out_put_put
 
 def test(output_var_names, output_dep_var_names, outer_radius_values, thick_list, coil_tor_max_width):
@@ -98,6 +93,11 @@ def test(output_var_names, output_dep_var_names, outer_radius_values, thick_list
     output_values = {output_var_name: [] for output_var_name in output_var_names}
     output_dep_values = np.zeros((len(output_dep_var_names),len(outer_radius_values), len(n_tor),len(n_pol)))
     
+    # Create directory for heatmaps
+    heatmap_dir = 'heatmaps'
+    pressure_dir = 'heatmaps/pressure'
+    os.makedirs(heatmap_dir, exist_ok=True)
+    os.makedirs(pressure_dir, exist_ok=True)
 
     for j, outer_radius_value in enumerate(outer_radius_values):
         # Create an instance of the StellaratorDesign class with the current parameter values
@@ -113,9 +113,9 @@ def test(output_var_names, output_dep_var_names, outer_radius_values, thick_list
         # Set the parameters dynamically
         setattr(stellarator, "outer_radius", outer_radius_value)
         setattr(stellarator, 'inner_radius', inner_radius_values[j])
-        a, b, c, d, e, f = crosssection_cPipes(outer_radius_value, thick_list[j], "copper", 
-                iso_thickness = stellarator.geometry.spacing_between_windings, casing_thickness = 0.0001, mass_flow=0,
-                windings_pol=int(6), windings_tor=int(6))
+        crosssection_cPipes(outer_radius_value*2, thick_list[j], "copper", 
+                iso_thickness = stellarator.geometry.spacing_between_windings, casing_thickness = 0.002, mass_flow=0,
+                windings_pol=int(4), windings_tor=int(4))
         for i, n_tor_value in enumerate(n_tor):
             for k, n_pol_value in enumerate(n_pol):
                 N = n_tor_value * n_pol_value
@@ -133,15 +133,10 @@ def test(output_var_names, output_dep_var_names, outer_radius_values, thick_list
                     for output_var_name in output_var_names:
                         output_var_value = getattr(stellarator, output_var_name)
                         output_values[output_var_name].append((len(collect_n_total)-1, j, output_var_value))
+                #if n_pol_value == n_tor_value == 4:
+                    #stellarator.print_parameters()
 
     collect_n_total, output_values = sorting(collect_n_total, output_values, output_var_names)
-    stellarator.print_parameters()
-
-    # Create directory for heatmaps
-    heatmap_dir = 'heatmaps'
-    pressure_dir = 'heatmaps/pressure'
-    os.makedirs(heatmap_dir, exist_ok=True)
-    os.makedirs(pressure_dir, exist_ok=True)
 
     # Create and save a graph for each output variable
     xticks = []
@@ -154,9 +149,9 @@ def test(output_var_names, output_dep_var_names, outer_radius_values, thick_list
             for (x, y, value) in output_values[output_var_name]:
                 data_matrix[x, y] = value
 
-            plt.figure(figsize=(10, 4))  
+            plt.figure(figsize=(8, 5))  
             ax = sns.heatmap(data_matrix, xticklabels=xticks, yticklabels=collect_n_total, cmap='viridis')
-            plt.title(f'{output_var_name.replace("_", " ").title()}')
+            plt.title(f'{output_var_name.replace("_", " ").title()} [W]')
             plt.xlabel("Layout [mm]")
             plt.ylabel("Number of Windings per coil")
             plt.tight_layout()
@@ -195,14 +190,19 @@ def test(output_var_names, output_dep_var_names, outer_radius_values, thick_list
             data_matrix = np.zeros((len(n_pol), len(n_tor)))
             for k, n_pol_value in enumerate(n_pol):
                 for i, n_tor_value in enumerate(n_tor):
-                    if (N_min < n_pol_value * n_tor_value < N_max) and (coil_tor_max_width > (stellarator_temp.geometry.spacing_between_windings + outer_radius_values[i]) * n_pol[i]):
+                    tor_width = float((stellarator_temp.geometry.spacing_between_windings + outer_radius_values[j]) * n_tor[i] + stellarator_temp.geometry.spacing_between_windings)
+                    pol_width = float((stellarator_temp.geometry.spacing_between_windings + outer_radius_values[j]) * n_pol[k] + stellarator_temp.geometry.spacing_between_windings )
+                    #print(j,output_values["voltage_per_circuit"][j*len(collect_n_total)])
+                    if coil_tor_max_width > tor_width and output_dep_values[h][j][i][k]<4 and coil_tor_max_width > pol_width:# and float(output_values["voltage_per_circuit"][j*len(collect_n_total)][2])<60:
+                        """is the coil too wide/deep? is there too much pressure? is the too much voltage?"""
                         data_matrix[k][i] = output_dep_values[h][j][i][k]
                     else:
                         data_matrix[k][i] = np.nan
             plt.figure(figsize=(3, 4))
             ax = sns.heatmap(data_matrix, xticklabels=n_tor, yticklabels=n_pol, cmap='viridis', vmin=np.nanmin(data_matrix), vmax=np.nanmax(data_matrix))
-            plt.xlabel("Number of tor Windings per coil")
-            plt.ylabel("Number of pol Windings per coil")
+            plt.title("Pressure loss in double pancake [bar]")
+            plt.xlabel("Number of tor Windings")
+            plt.ylabel("Number of pol Windings")
             plt.tight_layout()
-            plt.savefig(f'{pressure_dir}/{output_var_name}_outer_{round(outer_radius_values[i]*1000, 2)}_inner_{round(outer_radius_values[i]*1000, 2)}.png')
+            plt.savefig(f'{pressure_dir}/{output_var_name}_outer_{round(outer_radius_values[j]*1000, 2)}_inner_{round(inner_radius_values[j]*1000, 2)}.png')
             plt.close()
