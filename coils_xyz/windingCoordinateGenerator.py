@@ -146,7 +146,6 @@ def parallelOrientePlanes(coilCoordList):
         (B field assumed in the direction between previous and next coil CG)
 
         :param coilCoordList: list of numpy arrays containing xyz coil coordinates
-        :param railDistance: offset distance in cm
         :return: list of numpy arrays containing xyz coordinates that represent the xDir vectors. Shaped like coilCoordList
     '''
     CGlist = coilCG(coilCoordList)
@@ -195,7 +194,6 @@ def circularOrientePlanes(coilCoordList):
         yDir points orthogonal to tangent vector and as orthogonal as possible to circVec.
 
         :param coilCoordList: list of numpy arrays containing xyz coil coordinates
-        :param railDistance: offset distance in cm
         :return: list of numpy arrays containing xyz coordinates that represent the xDir vectors. Shaped like coilCoordList
     '''
     CGlist = coilCG(coilCoordList)
@@ -250,7 +248,7 @@ def customOrientePlanes(coilCoordList, steerVecList):
     for i, xyzCoord in enumerate(coilCoordList):
         CG = CGlist[i]
         steerVec = steerVecList[i]# vector to match the x direction as closely as possible
-        steerVec /= np.linalg.norm(steerVec)# normalized
+        steerVec = steerVec / np.linalg.norm(steerVec)# normalized
         Npoints = len(xyzCoord[:, 0])
         xDir = np.zeros_like(xyzCoord)  # generate container for a single coil's xDir vectors
         yDir = np.zeros_like(xyzCoord)  # generate container for a single coil's yDir vectors

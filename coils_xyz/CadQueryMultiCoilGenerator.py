@@ -3,12 +3,12 @@ from windingCoordinateGenerator import *
 from tqdm import tqdm
 #this is a change
 #All units in cm according to Fusion360 standard
-xOuter = 4 #winding pack outermost dimension in B field direction
+xOuter = 4.6 #winding pack outermost dimension in B field direction
 yOuter = 6 #winding pack outermost dimension in radial direction
 wallTh = 0.2 #Steel casing wall thickness
 
 #--------------Prepare coil coordinates and coordinate system along the filament----------------------------------------
-coilCoordList = loadAndScale('coilData\coil_coordinates0.txt', 12, 0.330)
+coilCoordList = loadAndScale('coilData\coil_coordinates0.txt', 12, 0.330*10) #*10 is to adjust scaling for step import (uses mm as basis)
 CGlist = coilCG(coilCoordList)
 circVecList=[]
 for i, xyzCoord in enumerate(coilCoordList):
@@ -18,15 +18,19 @@ for i, xyzCoord in enumerate(coilCoordList):
     circVecList.append(circVec)
 
 X = np.asarray([1,0,0])
+Y = np.asarray([0,1,0])
 A = 0
 B = 0
 
+#steerVecList = []
+#for i in range(12):
+#    steerVecList.append(X)
 steerVecList = circVecList
-steerVecList[0] = X
-steerVecList[5] = X
-steerVecList[6] = X
-steerVecList[11] = X
-xDirList, yDirList, normalList = circularOrientePlanes(coilCoordList)#, steerVecList)
+steerVecList[0] = Y
+steerVecList[5] = Y
+steerVecList[6] = Y
+steerVecList[11] = Y
+xDirList, yDirList, normalList = customOrientePlanes(coilCoordList, steerVecList)
 
 #-----generate solids and associated .STEP files for the coils given in range------------------------------------------
 for j in range(0,3):
@@ -58,7 +62,7 @@ for j in range(0,3):
         else:
             nextpart = wp1.loft(combine=True)
             result = result.union(nextpart)
-    exportname = r'C:\Users\Daniel\Documents\!Privat\Physik_Master\FusionReactorDesign\CqeditorCode\CustomCoil'+str(j)+'.step'
+    exportname = r'C:\Users\Daniel\Documents\!Privat\Physik_Master\FusionReactorDesign\CqeditorCode\CustomCoilBig'+str(j)+'.step'
     cq.exporters.export(result, exportname)
 print('finished!')
 #Show object when using CQ-editor
