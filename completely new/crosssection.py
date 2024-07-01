@@ -16,6 +16,7 @@ def crosssection_cPipes(
         draw=True,
 ):
     """
+    calculates conductor and water area for circular pipes, given either a dimension or number of windings.
     :param diam_cond: diameter of conductor
     :param cond_thickness: thickness of conductor
     :param iso_thickness: thickness of insulator
@@ -263,16 +264,16 @@ def crosssection_umspuelt(
 
 
 # dim_pol, dim_tor, windings_pol, windings_tor, area_water, area_cond = crosssection_rPipes(8 * mm, 8 * mm,
-#             2 * mm, 2 * mm, material="copper", iso_thickness=0.25 * mm, casing_thickness=2 * mm, mass_flow=10,
+#             2 * mm, 2 * mm, iso_thickness=0.25 * mm, casing_thickness=2 * mm,
 #             dim_pol=50 * mm, dim_tor=50 * mm)
 
 if 1:
     dim_pol, dim_tor, windings_pol, windings_tor, area_cond, area_water = crosssection_cPipes(diam_cond=6*mm,
-                cond_thickness=1*mm, material="copper", iso_thickness=0.25 * mm, casing_thickness=2 * mm, mass_flow=10,
+                cond_thickness=1*mm, iso_thickness=0.25 * mm, casing_thickness=2 * mm,
                 dim_pol=50 * mm, dim_tor=50 * mm)  # windings_pol=6, windings_tor=6)
 
     p_drop_per_coil, p_drop_per_dPancake, power_coil, I_winding = calcEverything(radius_major=0.5, radius_minor=28 * cm, number_coils=12,
-                           conductor_crosssection=area_cond, number_windings=windings_pol * windings_tor, material='copper',
+                           conductor_crosssection=area_cond, number_windings=windings_pol * windings_tor,
                            I_linking=176*kA, deltaT=25, pipeInnerDiam=2 * np.sqrt(area_water / np.pi), dPancake_factor=windings_tor/2)
 
 
@@ -283,7 +284,7 @@ output = ""
 if 0:
     for idx, cond in enumerate(cond_list):
         dim_pol, dim_tor, windings_pol, windings_tor, area_cond, area_water = crosssection_cPipes(diam_cond=cond,
-            cond_thickness=thick_list[idx], material="copper", iso_thickness=0.25 * mm, casing_thickness=2 * mm, mass_flow=10,
+            cond_thickness=thick_list[idx], material="copper", iso_thickness=0.25 * mm, casing_thickness=2 * mm,
             dim_pol=50 * mm, dim_tor=50 * mm)  # windings_pol=6, windings_tor=6)
 
         p_drop_per_coil, p_drop_per_dPancake, power_coil, I_winding = calcEverything(radius_major=0.4, radius_minor=32 * cm, number_coils=12,
@@ -297,5 +298,5 @@ if 0:
         file.write(output)
 
 # dim_pol, dim_tor, windings_pol, windings_tor, area_cond, area_water = crosssection_umspuelt(diam_cond=4*mm,
-#             cond_thickness=1*mm, material="copper", iso_thickness=0.25 * mm, casing_thickness=2 * mm, mass_flow=10,
+#             cond_thickness=1*mm, material="copper", iso_thickness=0.25 * mm, casing_thickness=2 * mm,
 #             dim_pol=50 * mm, dim_tor=50 * mm)
