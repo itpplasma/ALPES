@@ -1,6 +1,5 @@
 import numpy as np
 import matplotlib.pyplot as plt
-import pressure_loss_calculator.PressureLossMod as PL
 from variant import *
 
 
@@ -214,7 +213,6 @@ def crosssection_umspuelt(
     else:
         raise Exception("system is under defined, you need to give either windings (pol, tor) or dimensions (pol, tor)")
     diam_water = diam_cond - 2 * cond_thickness
-    p_drop_pm = PL.PressureLoss_DW(1, diam_water, mass_flow, temperature, roughness)
     area_water = (diam_water/2)**2 * np.pi
     area_cond = (diam_cond/2)**2 * np.pi - area_water
     if draw:
