@@ -93,7 +93,7 @@ def get_moments(coil_nr, coilCoordlist, I_list):
 if __name__ == "__main__":
     print('hi, how are you dooin?')
     coil_nr = int(input("from which coil do you want to know the force?"))
-    coilCoordlist = loadAndScale('coilData\coil_coordinates0.txt', 12, 0.33/100) # [12, 160, 3] = [coils, points, xyz] !!!/100 bc: convert from fusion (cm) units!!!
+    coilCoordlist = loadAndScale('coilData/coil_coordinates0.txt', 12, 0.33/100) # [12, 160, 3] = [coils, points, xyz] !!!/100 bc: convert from fusion (cm) units!!!
     I1 = 14.7e+3 #A
     I2 = 8.17e+3 #A
     I3 = 9.7e+3 #A
