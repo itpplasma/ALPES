@@ -10,34 +10,35 @@ import matplotlib.pyplot as plt
 # replace "NAME_OF_FILE_YOU_DOWNLOADED" with the name you gave the file
 mpi = MpiPartition(4)
 #coils = load(f'serial0021326.json')
-equil = Vmec('input.0021326_benchmark', mpi=mpi)
+#print(os.getcwd())
+#print(os.chdir('/Users/nicole/Desktop/Fusion_reactor_design_2/code'))
+#print(os.getcwd())
+equil = Vmec('input.0021326', mpi=mpi)
 
 surf = equil.boundary
 
+# %%
 # You can choose which parameters are optimized by setting their 'fixed' attributes.
-#surf.unfix_all()
+surf.fix_all()
 
-for i in ['rc(1,1)', 'zs(1,1)']:
-    surf.unfix(i)
-#print(surf.full_dof_names)
+#for i in ['rc(1,1)', 'zs(1,1)']:
+#    surf.unfix(i)
+surf.unfix('rc(1,1)')
+surf.unfix('zs(1,1)')
 
-# Each Target is then equipped with a shift and weight, to become a
-# term in a least-squares objective function.  A list of terms are
-# combined to form a nonlinear-least-squares problem.
-desired_volume = 1.2337
-volume_weight = 1
-term1 = (equil.volume, desired_volume, volume_weight)
-
-desired_iota = 0.25
+desired_iota_axis = 0.314
 iota_weight = 1
-term2 = (equil.iota_axis, desired_iota, iota_weight)
-print(dir(equil.iota_axis))
+term1 = (equil.iota_axis, desired_iota_axis, iota_weight)
+
+desired_iota_edge = 0.281
+term2 = (equil.iota_edge, desired_iota_edge, iota_weight)
 prob = LeastSquaresProblem.from_tuples([term1, term2])
 
 # Solve the minimization problem:
 least_squares_mpi_solve(prob, mpi, grad=True)
 
 # %%
+'''
 %matplotlib widget
 equil_old = Vmec('input.0021326_profile_1a', mpi=mpi)
 surf_old = equil_old.boundary
@@ -45,16 +46,15 @@ equil_new = Vmec('input.0021326_profile_1a_000_000507', mpi=mpi)
 surf_new = equil_new.boundary
 ax1 = surf_new.plot(close=True, show=True)
 surf_old.plot(ax=ax1, close=True, alpha=1.)
-
+'''
 # %%
-
-
+#equil_new = Vmec('input.0021326_profile_1a_000_000507', mpi=mpi)
 
 #vmec.run()
 
-#print(vmec.iota_axis())
-#print(vmec.iota_edge())
-#print(vmec.iota_profile)
+#print(equil_new.iota_axis())
+#print(equil_new.iota_edge())
+#print(equil_new.iota_profile)
 
 #vmec.run()
 
