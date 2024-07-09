@@ -5,7 +5,7 @@
 
 ## make some basic assumptions and get possible systems
 - the system is testing for different number of coils values
-- you can plug in your basic assumtions on the magnetic field, you wanna have, in definitions.py
+- you can plug in your basic assumtions on the magnetic field, you wanna have, in `definitions.py`
 - basically all you wanna do is in functions and definitions
 - the calculations of all other parameters is done in functions.py in the function calculations
 - the definition of the calculations is done in definitions
