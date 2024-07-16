@@ -1,0 +1,18 @@
+# include latex helper files
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.files
+*.log
+*.out
+*.synctex.gz
+*.toc
+*.fls
+*.synctex(busy)
+*.lof
+*.lot
+*.bcf
+*.run.xml
+main.pdf
+
