@@ -1,0 +1,66 @@
+\documentclass[12pt]{report}
+
+
+\usepackage[english]{babel}
+\usepackage{styles/customstyle}
+\usepackage{styles/titlepage}
+\usepackage{csquotes}
+\usepackage{lmodern,textcomp}
+\usepackage[style=numeric]{biblatex}
+\addbibresource{sources.bib}
+
+
+\definecolor{lightblue}{rgb}{0.00,0.28,0.73}
+\definecolor{Amaranth}{rgb}{0.90, 0.17, 0.31}
+\definecolor{DarkOrchid}{HTML}{A4538A}
+\definecolor{Aquamarine}{HTML}{00B5BE}
+\definecolor{Apricot}{HTML}{FBB982}
+
+% Color commends for each person
+\newcommand{\cmartin}{\colorbox{green}}
+\newcommand{\celena}{\colorbox{Amaranth}}
+\newcommand{\celli}{\colorbox{red}}
+\newcommand{\celisa}{\colorbox{Apricot}}
+\newcommand{\cvici}{\colorbox{Aquamarine}}
+\newcommand{\ctobi}{\colorbox{DarkOrchid}}
+\newcommand{\todo}[1]{\colorbox{orange}{\textbf{TODO:} #1}}
+
+
+% Example usage of custom commands
+\reporttitle{Fusion Reactor Design}
+\reportsubtitle{Vacuum Team}
+\reportauthors{Elisa Buglione-Ceresa, Tobi Gaggl, Viktoria Keusch,\\ Elena Steinwender, Martin Tritthart, Elena Wallner}
+\reportsupervisors{Albert, Christopher, Ass.Prof. Dipl.-Ing. Dr.rer.nat. BSc\\ Schennach, Robert, Ao.Univ.-Prof. Mag. Dr.rer.nat.}
+\reportdate{\today}
+
+\pagestyle{customstyle}
+
+
+\begin{document}
+\setupTitlePage
+\tableofcontents
+
+% Commends color for each person:
+% \begin{itemize}
+%     \item \cmartin{Martin}
+%     \item \celena{Elisa}
+%     \item \celli{Elli}
+%     \item \celisa{Elisa}
+%     \item \cvici{Viki}
+%     \item \ctobi{Tobi}
+% \end{itemize}
+
+\include{sections/introduction}
+\include{sections/chamber_design}
+\include{sections/vacuum_design}
+\include{sections/radiation_protection}
+\include{sections/costs}
+
+% \bibliographystyle{unsrt}
+% \bibliography{sources}
+\printbibliography
+
+\listoffigures
+\listoftables
+
+\end{document}

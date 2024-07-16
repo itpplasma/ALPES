@@ -1,0 +1,50 @@
+\babel@toc {english}{}\relax 
+\contentsline {chapter}{\numberline {1}Design of the vacuum chamber}{5}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Main recipient}{5}{section.1.1}%
+\contentsline {subsection}{\numberline {1.1.1}Flanges}{6}{subsection.1.1.1}%
+\contentsline {subsection}{\numberline {1.1.2}Drill holes - options for installing windows and connections}{6}{subsection.1.1.2}%
+\contentsline {subsection}{\numberline {1.1.3}FEM simulations for different lid designs}{7}{subsection.1.1.3}%
+\contentsline {subsection}{\numberline {1.1.4}Finished design for the time being:}{8}{subsection.1.1.4}%
+\contentsline {section}{\numberline {1.2}Ports and feedthrough}{10}{section.1.2}%
+\contentsline {subsection}{\numberline {1.2.1}(Double) o-ring gasket}{10}{subsection.1.2.1}%
+\contentsline {subsection}{\numberline {1.2.2}Copper gasket}{10}{subsection.1.2.2}%
+\contentsline {subsection}{\numberline {1.2.3}Gas injection ports}{11}{subsection.1.2.3}%
+\contentsline {subsection}{\numberline {1.2.4}Ventilation valves}{12}{subsection.1.2.4}%
+\contentsline {subsection}{\numberline {1.2.5}Windows}{13}{subsection.1.2.5}%
+\contentsline {subsection}{\numberline {1.2.6}Sealings}{13}{subsection.1.2.6}%
+\contentsline {subsection}{\numberline {1.2.7}Current feedthrough}{14}{subsection.1.2.7}%
+\contentsline {subsection}{\numberline {1.2.8}Coaxial feedthrough}{15}{subsection.1.2.8}%
+\contentsline {subsection}{\numberline {1.2.9}Cooling liquid feedthrough}{15}{subsection.1.2.9}%
+\contentsline {section}{\numberline {1.3}Manipulators (Mechanical feedthroughs)}{15}{section.1.3}%
+\contentsline {subsection}{\numberline {1.3.1}Bellows}{16}{subsection.1.3.1}%
+\contentsline {subsection}{\numberline {1.3.2}Manipulator for Langmuir probe}{16}{subsection.1.3.2}%
+\contentsline {subsection}{\numberline {1.3.3}Pieco motor for the interferometer mirror}{16}{subsection.1.3.3}%
+\contentsline {section}{\numberline {1.4}Overview of the ports of each team}{17}{section.1.4}%
+\contentsline {subsection}{\numberline {1.4.1}Vacuum - Team}{17}{subsection.1.4.1}%
+\contentsline {subsection}{\numberline {1.4.2}Coil - Team}{18}{subsection.1.4.2}%
+\contentsline {subsection}{\numberline {1.4.3}Design - Team}{18}{subsection.1.4.3}%
+\contentsline {subsection}{\numberline {1.4.4}Diagnostic - Team}{19}{subsection.1.4.4}%
+\contentsline {subsection}{\numberline {1.4.5}Heating - Team}{21}{subsection.1.4.5}%
+\contentsline {section}{\numberline {1.5}Conclusion}{22}{section.1.5}%
+\contentsline {section}{\numberline {1.6}Outlook}{22}{section.1.6}%
+\contentsline {chapter}{\numberline {2}Vacuum design}{23}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Pressure}{23}{section.2.1}%
+\contentsline {section}{\numberline {2.2}Pumps}{23}{section.2.2}%
+\contentsline {section}{\numberline {2.3}Vacuum analysis}{24}{section.2.3}%
+\contentsline {subsection}{\numberline {2.3.1}Pressure measurement}{24}{subsection.2.3.1}%
+\contentsline {subsection}{\numberline {2.3.2}Residual gas analysis}{25}{subsection.2.3.2}%
+\contentsline {section}{\numberline {2.4}Insulation}{26}{section.2.4}%
+\contentsline {section}{\numberline {2.5}Conclusion}{26}{section.2.5}%
+\contentsline {section}{\numberline {2.6}Outlook}{27}{section.2.6}%
+\contentsline {chapter}{\numberline {3}Radiation protection}{28}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Plasma radiation}{28}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Radiation shielding}{28}{section.3.2}%
+\contentsline {section}{\numberline {3.3}Radiation shielding design}{29}{section.3.3}%
+\contentsline {section}{\numberline {3.4}Material}{29}{section.3.4}%
+\contentsline {section}{\numberline {3.5}X-ray radiation and shielding}{30}{section.3.5}%
+\contentsline {section}{\numberline {3.6}Microwave radiation and shielding}{31}{section.3.6}%
+\contentsline {section}{\numberline {3.7}Windows}{31}{section.3.7}%
+\contentsline {section}{\numberline {3.8}Conclusion}{32}{section.3.8}%
+\contentsline {section}{\numberline {3.9}Outlook}{32}{section.3.9}%
+\contentsline {chapter}{\numberline {4}Cost estimation}{33}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Outlook}{34}{section.4.1}%

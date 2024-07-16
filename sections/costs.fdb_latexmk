@@ -1,0 +1,19 @@
+# Fdb version 4
+["pdflatex"] 1720596388.36543 "/home/martin/tu-cloud/Uni/TechnicalPhysics/General_Elective_Modules/Fusion_Reactor_Design/fusion_vacuum_report/sections/costs.tex" "costs.pdf" "costs" 1720596389.16639 2
+  "/etc/texmf/web2c/texmf.cnf" 1710416981.22232 475 c0e671620eb5563b2130f56340a5fde8 ""
+  "/home/martin/tu-cloud/Uni/TechnicalPhysics/General_Elective_Modules/Fusion_Reactor_Design/fusion_vacuum_report/sections/costs.tex" 1720596386.83819 4713 433f61cf10276cf6972194f95cf13e96 ""
+  "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
+  "/usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/tcbx1000.tfm" 1136768653 1536 30fde759286ded71559881bfa2623939 ""
+  "/usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/tcrm0700.tfm" 1136768653 1536 73da8e8f1d2a4c957d51ca133585586b ""
+  "/usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/tcrm1000.tfm" 1136768653 1536 e07581a4bb3136ece9eeb4c3ffab8233 ""
+  "/usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmbx10.tfm" 1136768653 1328 c834bbb027764024c09d3d2bf908b5f0 ""
+  "/usr/share/texlive/texmf-dist/web2c/texmf.cnf" 1707919699 40399 f2c302f7d2af602abb742093540a5834 ""
+  "/usr/share/texmf/web2c/texmf.cnf" 1707919699 40399 f2c302f7d2af602abb742093540a5834 ""
+  "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1712574734 7307065 3d64775952e0644ace7ace667dc12fac ""
+  "costs.aux" 1720596388.3632 32 3985256e7290058c681f74d7a3565a19 "pdflatex"
+  "costs.tex" 1720596386.83819 4713 433f61cf10276cf6972194f95cf13e96 ""
+  (generated)
+  "costs.aux"
+  "costs.log"
+  "costs.pdf"
+  (rewritten before read)

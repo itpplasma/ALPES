@@ -1,0 +1,945 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.2 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{nty/global//global/global}
+    \entry{pie}{misc}{}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{year}{2024}
+      \verb{urlraw}
+      \verb https://www.newport.com/f/vacuum-picomotor-actuators
+      \endverb
+      \verb{url}
+      \verb https://www.newport.com/f/vacuum-picomotor-actuators
+      \endverb
+    \endentry
+    \entry{piez0}{misc}{}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{year}{2024}
+      \verb{urlraw}
+      \verb https://www.smaract.com/en/UHV-Piezo-Stages
+      \endverb
+      \verb{url}
+      \verb https://www.smaract.com/en/UHV-Piezo-Stages
+      \endverb
+    \endentry
+    \entry{pfeiffervacuum}{misc}{}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{year}{2024}
+      \verb{urlraw}
+      \verb https://www.pfeiffer-vacuum.com/global/de
+      \endverb
+      \verb{url}
+      \verb https://www.pfeiffer-vacuum.com/global/de
+      \endverb
+    \endentry
+    \entry{ACP90}{misc}{}
+      \field{sortinit}{A}
+      \field{sortinithash}{2f401846e2029bad6b3ecc16d50031e2}
+      \field{labeltitlesource}{title}
+      \field{title}{ACP 90, SD version, three- phase (HV), manual gas ballast}
+      \verb{urlraw}
+      \verb https://www.pfeiffer-vacuum.com/api/empolis/resource/environment/project1_p/documents/pfeifferSharepointProd/61856-Datasheet_V9SABSCZMR01_en.pdf
+      \endverb
+      \verb{url}
+      \verb https://www.pfeiffer-vacuum.com/api/empolis/resource/environment/project1_p/documents/pfeifferSharepointProd/61856-Datasheet_V9SABSCZMR01_en.pdf
+      \endverb
+    \endentry
+    \entry{quardrupolmassspec}{article}{}
+      \name{author}{1}{}{%
+        {{hash=0efc4e47af326bd8c0fe860db3fbb053}{%
+           family={Adamo},
+           familyi={A\bibinitperiod},
+           given={T.},
+           giveni={T\bibinitperiod}}}%
+      }
+      \strng{namehash}{0efc4e47af326bd8c0fe860db3fbb053}
+      \strng{fullhash}{0efc4e47af326bd8c0fe860db3fbb053}
+      \strng{bibnamehash}{0efc4e47af326bd8c0fe860db3fbb053}
+      \strng{authorbibnamehash}{0efc4e47af326bd8c0fe860db3fbb053}
+      \strng{authornamehash}{0efc4e47af326bd8c0fe860db3fbb053}
+      \strng{authorfullhash}{0efc4e47af326bd8c0fe860db3fbb053}
+      \field{sortinit}{A}
+      \field{sortinithash}{2f401846e2029bad6b3ecc16d50031e2}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Traces center, University of Toronto}
+      \field{title}{Quadrupoles: How do they work?}
+      \field{year}{2020}
+      \verb{urlraw}
+      \verb https://www.utsc.utoronto.ca/~traceslab/PDFs/MassSpec_QuadsInfo.pdf
+      \endverb
+      \verb{url}
+      \verb https://www.utsc.utoronto.ca/~traceslab/PDFs/MassSpec_QuadsInfo.pdf
+      \endverb
+    \endentry
+    \entry{ATH3204}{misc}{}
+      \field{sortinit}{A}
+      \field{sortinithash}{2f401846e2029bad6b3ecc16d50031e2}
+      \field{labeltitlesource}{title}
+      \field{title}{ATH 3204 MT, DN 320 ISO-F, water-cooled, heated, with integrated drive electronics}
+      \verb{urlraw}
+      \verb https://www.pfeiffer-vacuum.com/global/en/shop/products/TMAAAC681101
+      \endverb
+      \verb{url}
+      \verb https://www.pfeiffer-vacuum.com/global/en/shop/products/TMAAAC681101
+      \endverb
+    \endentry
+    \entry{BCG450}{misc}{}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{labeltitlesource}{title}
+      \field{title}{BCG 450}
+      \verb{urlraw}
+      \verb https://www.inficon.com/de/produkte/vakuummessgeraete-und-controller/bcg450
+      \endverb
+      \verb{url}
+      \verb https://www.inficon.com/de/produkte/vakuummessgeraete-und-controller/bcg450
+      \endverb
+    \endentry
+    \entry{cond}{book}{}
+      \name{author}{1}{}{%
+        {{hash=c38d3a4a10e4f4ebab78e9e04d90d644}{%
+           family={Callister},
+           familyi={C\bibinitperiod},
+           given={W.},
+           giveni={W\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {John Wiley \& Sons}%
+      }
+      \strng{namehash}{c38d3a4a10e4f4ebab78e9e04d90d644}
+      \strng{fullhash}{c38d3a4a10e4f4ebab78e9e04d90d644}
+      \strng{bibnamehash}{c38d3a4a10e4f4ebab78e9e04d90d644}
+      \strng{authorbibnamehash}{c38d3a4a10e4f4ebab78e9e04d90d644}
+      \strng{authornamehash}{c38d3a4a10e4f4ebab78e9e04d90d644}
+      \strng{authorfullhash}{c38d3a4a10e4f4ebab78e9e04d90d644}
+      \field{sortinit}{C}
+      \field{sortinithash}{4d103a86280481745c9c897c925753c0}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Materials Science and Engineering. An Introduction}
+      \field{year}{2000}
+    \endentry
+    \entry{skin}{article}{}
+      \name{author}{2}{}{%
+        {{hash=e28f7924ff1e5f00b7083718f32d7df6}{%
+           family={Chung},
+           familyi={C\bibinitperiod},
+           given={D.\bibnamedelimi D.\bibnamedelimi L.},
+           giveni={D\bibinitperiod\bibinitdelim D\bibinitperiod\bibinitdelim L\bibinitperiod}}}%
+        {{hash=0abf81af55ad8821d49007eff14dfd3f}{%
+           family={Ozturk},
+           familyi={O\bibinitperiod},
+           given={Murat},
+           giveni={M\bibinitperiod}}}%
+      }
+      \strng{namehash}{d0e01d777a0e17fc59839cc7f15f5572}
+      \strng{fullhash}{d0e01d777a0e17fc59839cc7f15f5572}
+      \strng{bibnamehash}{d0e01d777a0e17fc59839cc7f15f5572}
+      \strng{authorbibnamehash}{d0e01d777a0e17fc59839cc7f15f5572}
+      \strng{authornamehash}{d0e01d777a0e17fc59839cc7f15f5572}
+      \strng{authorfullhash}{d0e01d777a0e17fc59839cc7f15f5572}
+      \field{sortinit}{C}
+      \field{sortinithash}{4d103a86280481745c9c897c925753c0}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Journal of Building Engineering}
+      \field{title}{Electromagnetic skin depth of cement paste and its thickness dependence}
+      \field{year}{2022}
+    \endentry
+    \entry{RadPhd}{thesis}{}
+      \name{author}{1}{}{%
+        {{hash=c9f148c26a670b830c49368854f4b561}{%
+           family={Davis},
+           familyi={D\bibinitperiod},
+           given={Andrew},
+           giveni={A\bibinitperiod}}}%
+      }
+      \list{institution}{2}{%
+        {School of Physics}%
+        {Astronomy, University of Birmingham}%
+      }
+      \strng{namehash}{c9f148c26a670b830c49368854f4b561}
+      \strng{fullhash}{c9f148c26a670b830c49368854f4b561}
+      \strng{bibnamehash}{c9f148c26a670b830c49368854f4b561}
+      \strng{authorbibnamehash}{c9f148c26a670b830c49368854f4b561}
+      \strng{authornamehash}{c9f148c26a670b830c49368854f4b561}
+      \strng{authorfullhash}{c9f148c26a670b830c49368854f4b561}
+      \field{sortinit}{D}
+      \field{sortinithash}{6f385f66841fb5e82009dc833c761848}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Radiation Shielding of Fusion Systems}
+      \field{type}{phdthesis}
+      \field{year}{2010}
+    \endentry
+    \entry{ALPS}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=3c4c44990c50a647c68b9863f1b00e53}{%
+           family={Harrer},
+           familyi={H\bibinitperiod},
+           given={G.F.},
+           giveni={G\bibinitperiod}}}%
+      }
+      \list{institution}{1}{%
+        {ÖAW: TU Graz / TU Wien, KIPT}%
+      }
+      \list{location}{1}{%
+        {Technology \& Systems}%
+      }
+      \strng{namehash}{3c4c44990c50a647c68b9863f1b00e53}
+      \strng{fullhash}{3c4c44990c50a647c68b9863f1b00e53}
+      \strng{bibnamehash}{3c4c44990c50a647c68b9863f1b00e53}
+      \strng{authorbibnamehash}{3c4c44990c50a647c68b9863f1b00e53}
+      \strng{authornamehash}{3c4c44990c50a647c68b9863f1b00e53}
+      \strng{authorfullhash}{3c4c44990c50a647c68b9863f1b00e53}
+      \field{sortinit}{H}
+      \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{Project duration: 01.01.2024 – 31.12.2025}
+      \field{month}{1}
+      \field{note}{Scientific Proposal for Enabling Research Project}
+      \field{title}{Rapid Prototyping Platform for Stellarator Reactor Configurations}
+      \field{year}{2024}
+    \endentry
+    \entry{HVL}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=04ff1109b80d1d40494878f8e8159af5}{%
+           family={Iowa\bibnamedelimb State\bibnamedelima University},
+           familyi={I\bibinitperiod\bibinitdelim S\bibinitperiod\bibinitdelim U\bibinitperiod},
+           given={Center\bibnamedelimb for\bibnamedelimb Nondestructive\bibnamedelima Evaluation},
+           giveni={C\bibinitperiod\bibinitdelim f\bibinitperiod\bibinitdelim N\bibinitperiod\bibinitdelim E\bibinitperiod}}}%
+      }
+      \strng{namehash}{04ff1109b80d1d40494878f8e8159af5}
+      \strng{fullhash}{04ff1109b80d1d40494878f8e8159af5}
+      \strng{bibnamehash}{04ff1109b80d1d40494878f8e8159af5}
+      \strng{authorbibnamehash}{04ff1109b80d1d40494878f8e8159af5}
+      \strng{authornamehash}{04ff1109b80d1d40494878f8e8159af5}
+      \strng{authorfullhash}{04ff1109b80d1d40494878f8e8159af5}
+      \field{sortinit}{I}
+      \field{sortinithash}{8d291c51ee89b6cd86bf5379f0b151d8}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Half-Value Layer and Attenuation Coefficient}
+      \verb{urlraw}
+      \verb https://www.nde-ed.org/Physics/X-Ray/attenuationCoef.xhtml
+      \endverb
+      \verb{url}
+      \verb https://www.nde-ed.org/Physics/X-Ray/attenuationCoef.xhtml
+      \endverb
+    \endentry
+    \entry{pfeifferdruck}{misc}{}
+      \field{sortinit}{I}
+      \field{sortinithash}{8d291c51ee89b6cd86bf5379f0b151d8}
+      \field{labeltitlesource}{title}
+      \field{title}{ITR90}
+      \verb{urlraw}
+      \verb https://www.pfeiffer-vacuum.com/global/de/shop/products/PT_T12_366_300
+      \endverb
+      \verb{url}
+      \verb https://www.pfeiffer-vacuum.com/global/de/shop/products/PT_T12_366_300
+      \endverb
+    \endentry
+    \entry{jousten_handbuch_2018}{book}{}
+      \name{editor}{1}{}{%
+        {{hash=2681b09959852cfa852c9adfcc505c0b}{%
+           family={Jousten},
+           familyi={J\bibinitperiod},
+           given={Karl},
+           giveni={K\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Springer Vieweg Wiesbaden}%
+      }
+      \strng{namehash}{2681b09959852cfa852c9adfcc505c0b}
+      \strng{fullhash}{2681b09959852cfa852c9adfcc505c0b}
+      \strng{bibnamehash}{2681b09959852cfa852c9adfcc505c0b}
+      \strng{editorbibnamehash}{2681b09959852cfa852c9adfcc505c0b}
+      \strng{editornamehash}{2681b09959852cfa852c9adfcc505c0b}
+      \strng{editorfullhash}{2681b09959852cfa852c9adfcc505c0b}
+      \field{sortinit}{J}
+      \field{sortinithash}{b2f54a9081ace9966a7cb9413811edb4}
+      \field{labelnamesource}{editor}
+      \field{labeltitlesource}{title}
+      \field{series}{Springer Reference Technik}
+      \field{title}{Handbuch Vakuumtechnik}
+      \field{year}{2018}
+      \verb{doi}
+      \verb 10.1007/978-3-658-13386-3
+      \endverb
+    \endentry
+    \entry{TJK2}{thesis}{}
+      \name{author}{1}{}{%
+        {{hash=d68614881d6b392c70b1de355b871927}{%
+           family={Kohn},
+           familyi={K\bibinitperiod},
+           given={Alf},
+           giveni={A\bibinitperiod}}}%
+      }
+      \list{institution}{1}{%
+        {Institut f¨ur Plasmaforschung der Universit¨at Stuttgart}%
+      }
+      \strng{namehash}{d68614881d6b392c70b1de355b871927}
+      \strng{fullhash}{d68614881d6b392c70b1de355b871927}
+      \strng{bibnamehash}{d68614881d6b392c70b1de355b871927}
+      \strng{authorbibnamehash}{d68614881d6b392c70b1de355b871927}
+      \strng{authornamehash}{d68614881d6b392c70b1de355b871927}
+      \strng{authorfullhash}{d68614881d6b392c70b1de355b871927}
+      \field{sortinit}{K}
+      \field{sortinithash}{c02bf6bff1c488450c352b40f5d853ab}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Investigation of microwave heating scenarios in the magnetically confined low-temperature plasma of the stellarator TJ-K}
+      \field{type}{phdthesis}
+      \field{year}{2010}
+    \endentry
+    \entry{emrad}{book}{}
+      \name{author}{1}{}{%
+        {{hash=1e4401694d58d9c917fe6035e20ba5d6}{%
+           family={Kunkel},
+           familyi={K\bibinitperiod},
+           given={George\bibnamedelima M.},
+           giveni={G\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Springer}%
+      }
+      \strng{namehash}{1e4401694d58d9c917fe6035e20ba5d6}
+      \strng{fullhash}{1e4401694d58d9c917fe6035e20ba5d6}
+      \strng{bibnamehash}{1e4401694d58d9c917fe6035e20ba5d6}
+      \strng{authorbibnamehash}{1e4401694d58d9c917fe6035e20ba5d6}
+      \strng{authornamehash}{1e4401694d58d9c917fe6035e20ba5d6}
+      \strng{authorfullhash}{1e4401694d58d9c917fe6035e20ba5d6}
+      \field{sortinit}{K}
+      \field{sortinithash}{c02bf6bff1c488450c352b40f5d853ab}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Shielding of Electromagnetic Waves, Theory and Practice}
+      \field{year}{2020}
+    \endentry
+    \entry{elast}{book}{}
+      \name{author}{2}{}{%
+        {{hash=ab77fc1405f1025268c1fed8c4fe3104}{%
+           family={Landau},
+           familyi={L\bibinitperiod},
+           given={L.D.},
+           giveni={L\bibinitperiod}}}%
+        {{hash=1e5737ddc6200d0118261e7bc577ab25}{%
+           family={Lifshitz},
+           familyi={L\bibinitperiod},
+           given={E.M.},
+           giveni={E\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Butterworth-Heinemann}%
+      }
+      \strng{namehash}{0c0920d244a4ef518dc023815875721c}
+      \strng{fullhash}{0c0920d244a4ef518dc023815875721c}
+      \strng{bibnamehash}{0c0920d244a4ef518dc023815875721c}
+      \strng{authorbibnamehash}{0c0920d244a4ef518dc023815875721c}
+      \strng{authornamehash}{0c0920d244a4ef518dc023815875721c}
+      \strng{authorfullhash}{0c0920d244a4ef518dc023815875721c}
+      \field{sortinit}{L}
+      \field{sortinithash}{7c47d417cecb1f4bd38d1825c427a61a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Theory of Elasticity}
+      \field{year}{1986}
+    \endentry
+    \entry{quartz}{misc}{}
+      \field{sortinit}{M}
+      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{labeltitlesource}{title}
+      \field{title}{Machinable Quartz}
+      \verb{urlraw}
+      \verb https://www.final-materials.com/gb/43-machinable-quartz
+      \endverb
+      \verb{url}
+      \verb https://www.final-materials.com/gb/43-machinable-quartz
+      \endverb
+    \endentry
+    \entry{glass}{article}{}
+      \name{author}{3}{}{%
+        {{hash=0f12cb535459e6641dc9bdc3d8881d61}{%
+           family={Molnár1},
+           familyi={M\bibinitperiod},
+           given={Z.},
+           giveni={Z\bibinitperiod}}}%
+        {{hash=0c8a13e3d3ca19bfe7a59d44132d08d4}{%
+           family={Égert1},
+           familyi={É\bibinitperiod},
+           given={J.},
+           giveni={J\bibinitperiod}}}%
+        {{hash=5b0ced8ded934d56e4bd4c04c2b46c31}{%
+           family={Bert},
+           familyi={B\bibinitperiod},
+           given={M.},
+           giveni={M\bibinitperiod}}}%
+      }
+      \strng{namehash}{17b64ccc6a78fb9ff1682231aefc26c2}
+      \strng{fullhash}{17b64ccc6a78fb9ff1682231aefc26c2}
+      \strng{bibnamehash}{17b64ccc6a78fb9ff1682231aefc26c2}
+      \strng{authorbibnamehash}{17b64ccc6a78fb9ff1682231aefc26c2}
+      \strng{authornamehash}{17b64ccc6a78fb9ff1682231aefc26c2}
+      \strng{authorfullhash}{17b64ccc6a78fb9ff1682231aefc26c2}
+      \field{sortinit}{M}
+      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Acta Technica Jaurinensis}
+      \field{title}{Finite Element Analysis of Glass Vacuum Windows of the “COMPASS” Tokamak in Prague}
+      \field{year}{2015}
+    \endentry
+    \entry{NucFus}{book}{}
+      \name{author}{1}{}{%
+        {{hash=9a64d967aaf10df6ca11e2c38238c35f}{%
+           family={Morse},
+           familyi={M\bibinitperiod},
+           given={Edward},
+           giveni={E\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Springer}%
+      }
+      \strng{namehash}{9a64d967aaf10df6ca11e2c38238c35f}
+      \strng{fullhash}{9a64d967aaf10df6ca11e2c38238c35f}
+      \strng{bibnamehash}{9a64d967aaf10df6ca11e2c38238c35f}
+      \strng{authorbibnamehash}{9a64d967aaf10df6ca11e2c38238c35f}
+      \strng{authornamehash}{9a64d967aaf10df6ca11e2c38238c35f}
+      \strng{authorfullhash}{9a64d967aaf10df6ca11e2c38238c35f}
+      \field{sortinit}{M}
+      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Nuclear Fusion}
+      \field{year}{2018}
+    \endentry
+    \entry{outgassing}{article}{}
+      \name{author}{6}{}{%
+        {{hash=cabef8d27fa1dbb460e827611c602bc2}{%
+           family={Mukherjee},
+           familyi={M\bibinitperiod},
+           given={Samiran},
+           giveni={S\bibinitperiod}}}%
+        {{hash=a71c958619fb5ffa04811be3bcb7a64c}{%
+           family={Panchal},
+           familyi={P\bibinitperiod},
+           given={Paresh},
+           giveni={P\bibinitperiod}}}%
+        {{hash=0039d6e4b9d4a7ae55bc13d563f6d6e9}{%
+           family={Mishra},
+           familyi={M\bibinitperiod},
+           given={Jyoti\bibnamedelima Shankar},
+           giveni={J\bibinitperiod\bibinitdelim S\bibinitperiod}}}%
+        {{hash=d75f171fe45d36ed4fef3a258be643e4}{%
+           family={Gangradey},
+           familyi={G\bibinitperiod},
+           given={Ranjana},
+           giveni={R\bibinitperiod}}}%
+        {{hash=b547936d0e22d9879fc48aebed47f31e}{%
+           family={Nayak},
+           familyi={N\bibinitperiod},
+           given={Pratik},
+           giveni={P\bibinitperiod}}}%
+        {{hash=91e105fa60887e252869bd6fd2cdd66c}{%
+           family={Gupta},
+           familyi={G\bibinitperiod},
+           given={Vishal},
+           giveni={V\bibinitperiod}}}%
+      }
+      \strng{namehash}{f46023cf4ea20191fb1e8ce2a1d5de33}
+      \strng{fullhash}{c876e7e7ffe7ba5f35ec63ee1f6c2787}
+      \strng{bibnamehash}{f46023cf4ea20191fb1e8ce2a1d5de33}
+      \strng{authorbibnamehash}{f46023cf4ea20191fb1e8ce2a1d5de33}
+      \strng{authornamehash}{f46023cf4ea20191fb1e8ce2a1d5de33}
+      \strng{authorfullhash}{c876e7e7ffe7ba5f35ec63ee1f6c2787}
+      \field{sortinit}{M}
+      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{2214-7853}
+      \field{journaltitle}{Materials Today: Proceedings}
+      \field{note}{International Conference on Materials, Processing \& Characterization}
+      \field{title}{Hydrogen outgassing and permeation in stainless steel and its reduction for UHV applications}
+      \field{volume}{44}
+      \field{year}{2021}
+      \field{pages}{968\bibrangedash 974}
+      \range{pages}{7}
+      \verb{doi}
+      \verb https://doi.org/10.1016/j.matpr.2020.11.007
+      \endverb
+      \verb{urlraw}
+      \verb https://www.sciencedirect.com/science/article/pii/S2214785320385795
+      \endverb
+      \verb{url}
+      \verb https://www.sciencedirect.com/science/article/pii/S2214785320385795
+      \endverb
+    \endentry
+    \entry{pfeiffer_venting_valve}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=6ca57cf021df4b36d813e51e726413d1}{%
+           family={{Pfeiffer Vacuum}},
+           familyi={P\bibinitperiod}}}%
+      }
+      \strng{namehash}{6ca57cf021df4b36d813e51e726413d1}
+      \strng{fullhash}{6ca57cf021df4b36d813e51e726413d1}
+      \strng{bibnamehash}{6ca57cf021df4b36d813e51e726413d1}
+      \strng{authorbibnamehash}{6ca57cf021df4b36d813e51e726413d1}
+      \strng{authornamehash}{6ca57cf021df4b36d813e51e726413d1}
+      \strng{authorfullhash}{6ca57cf021df4b36d813e51e726413d1}
+      \field{extraname}{1}
+      \field{sortinit}{P}
+      \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{Accessed: 2024-06-27}
+      \field{title}{Pfeiffer Vacuum Products - Shop Products}
+      \field{year}{2024}
+      \verb{urlraw}
+      \verb https://www.pfeiffer-vacuum.com/global/en/shop/products/d75b9798-4ae8-408d-b1fb-970fa22fa890
+      \endverb
+      \verb{url}
+      \verb https://www.pfeiffer-vacuum.com/global/en/shop/products/d75b9798-4ae8-408d-b1fb-970fa22fa890
+      \endverb
+    \endentry
+    \entry{pfeiffer_window}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=6ca57cf021df4b36d813e51e726413d1}{%
+           family={{Pfeiffer Vacuum}},
+           familyi={P\bibinitperiod}}}%
+      }
+      \strng{namehash}{6ca57cf021df4b36d813e51e726413d1}
+      \strng{fullhash}{6ca57cf021df4b36d813e51e726413d1}
+      \strng{bibnamehash}{6ca57cf021df4b36d813e51e726413d1}
+      \strng{authorbibnamehash}{6ca57cf021df4b36d813e51e726413d1}
+      \strng{authornamehash}{6ca57cf021df4b36d813e51e726413d1}
+      \strng{authorfullhash}{6ca57cf021df4b36d813e51e726413d1}
+      \field{extraname}{2}
+      \field{sortinit}{P}
+      \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{Accessed: 2024-06-27}
+      \field{title}{Pfeiffer Vacuum Products - Shop Products}
+      \field{year}{2024}
+      \verb{urlraw}
+      \verb https://www.pfeiffer-vacuum.com/global/en/shop/products/420GSG100_SILICA_UV
+      \endverb
+      \verb{url}
+      \verb https://www.pfeiffer-vacuum.com/global/en/shop/products/420GSG100_SILICA_UV
+      \endverb
+    \endentry
+    \entry{pfeiffer_coaxial}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=6ca57cf021df4b36d813e51e726413d1}{%
+           family={{Pfeiffer Vacuum}},
+           familyi={P\bibinitperiod}}}%
+      }
+      \strng{namehash}{6ca57cf021df4b36d813e51e726413d1}
+      \strng{fullhash}{6ca57cf021df4b36d813e51e726413d1}
+      \strng{bibnamehash}{6ca57cf021df4b36d813e51e726413d1}
+      \strng{authorbibnamehash}{6ca57cf021df4b36d813e51e726413d1}
+      \strng{authornamehash}{6ca57cf021df4b36d813e51e726413d1}
+      \strng{authorfullhash}{6ca57cf021df4b36d813e51e726413d1}
+      \field{extraname}{3}
+      \field{sortinit}{P}
+      \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{Accessed: 2024-07-01}
+      \field{title}{Pfeiffer Vacuum Products - Shop Products}
+      \field{year}{2024}
+      \verb{urlraw}
+      \verb https://www.pfeiffer-vacuum.com/global/de/shop/products/420XBG040_4
+      \endverb
+      \verb{url}
+      \verb https://www.pfeiffer-vacuum.com/global/de/shop/products/420XBG040_4
+      \endverb
+    \endentry
+    \entry{pfeiffer_bellows}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=6ca57cf021df4b36d813e51e726413d1}{%
+           family={{Pfeiffer Vacuum}},
+           familyi={P\bibinitperiod}}}%
+      }
+      \strng{namehash}{6ca57cf021df4b36d813e51e726413d1}
+      \strng{fullhash}{6ca57cf021df4b36d813e51e726413d1}
+      \strng{bibnamehash}{6ca57cf021df4b36d813e51e726413d1}
+      \strng{authorbibnamehash}{6ca57cf021df4b36d813e51e726413d1}
+      \strng{authornamehash}{6ca57cf021df4b36d813e51e726413d1}
+      \strng{authorfullhash}{6ca57cf021df4b36d813e51e726413d1}
+      \field{extraname}{4}
+      \field{sortinit}{P}
+      \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{Accessed: 2024-07-01}
+      \field{title}{Pfeiffer Vacuum Products - Shop Products}
+      \field{year}{2024}
+      \verb{urlraw}
+      \verb https://www.pfeiffer-vacuum.com/global/en/shop/products/420SFK040_160
+      \endverb
+      \verb{url}
+      \verb https://www.pfeiffer-vacuum.com/global/en/shop/products/420SFK040_160
+      \endverb
+    \endentry
+    \entry{HPT200}{misc}{}
+      \field{sortinit}{P}
+      \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
+      \field{labeltitlesource}{title}
+      \field{title}{Pirani/Bayard-Alpert Kombination HPT 200}
+      \verb{urlraw}
+      \verb https://vacuum-shop.com/shop/de_DE/category/2073476/pirani-bayard-alpert-kombination-hpt-200-5101000hpa.html#hpt-200-piranibayard-alpert
+      \endverb
+      \verb{url}
+      \verb https://vacuum-shop.com/shop/de_DE/category/2073476/pirani-bayard-alpert-kombination-hpt-200-5101000hpa.html#hpt-200-piranibayard-alpert
+      \endverb
+    \endentry
+    \entry{RadShi}{book}{}
+      \name{author}{1}{}{%
+        {{hash=45543205e8155d306bbf580282fa9cd1}{%
+           family={Price},
+           familyi={P\bibinitperiod},
+           given={B.T.},
+           giveni={B\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Pergamon Press}%
+      }
+      \strng{namehash}{45543205e8155d306bbf580282fa9cd1}
+      \strng{fullhash}{45543205e8155d306bbf580282fa9cd1}
+      \strng{bibnamehash}{45543205e8155d306bbf580282fa9cd1}
+      \strng{authorbibnamehash}{45543205e8155d306bbf580282fa9cd1}
+      \strng{authornamehash}{45543205e8155d306bbf580282fa9cd1}
+      \strng{authorfullhash}{45543205e8155d306bbf580282fa9cd1}
+      \field{sortinit}{P}
+      \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Radiation Shielding}
+      \field{year}{1959}
+    \endentry
+    \entry{pfeiffer}{misc}{}
+      \field{sortinit}{P}
+      \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
+      \field{labeltitlesource}{title}
+      \field{title}{PrismaPro}
+      \verb{urlraw}
+      \verb https://www.pfeiffer-vacuum.com/global/de/shop/products/6d0f7cd8-a157-453a-802a-48eac86b4c85
+      \endverb
+      \verb{url}
+      \verb https://www.pfeiffer-vacuum.com/global/de/shop/products/6d0f7cd8-a157-453a-802a-48eac86b4c85
+      \endverb
+    \endentry
+    \entry{PhyscPlasma}{book}{}
+      \name{author}{1}{}{%
+        {{hash=9f330e0a21ccec88b5ea8053d9e0fb0e}{%
+           family={T.J.M.\bibnamedelimi Boyd},
+           familyi={T\bibinitperiod\bibinitdelim B\bibinitperiod},
+           given={J.J.\bibnamedelimi Sanderson},
+           giveni={J\bibinitperiod\bibinitdelim S\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Cambridge University Press}%
+      }
+      \strng{namehash}{9f330e0a21ccec88b5ea8053d9e0fb0e}
+      \strng{fullhash}{9f330e0a21ccec88b5ea8053d9e0fb0e}
+      \strng{bibnamehash}{9f330e0a21ccec88b5ea8053d9e0fb0e}
+      \strng{authorbibnamehash}{9f330e0a21ccec88b5ea8053d9e0fb0e}
+      \strng{authornamehash}{9f330e0a21ccec88b5ea8053d9e0fb0e}
+      \strng{authorfullhash}{9f330e0a21ccec88b5ea8053d9e0fb0e}
+      \field{sortinit}{T}
+      \field{sortinithash}{9af77f0292593c26bde9a56e688eaee9}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{The Physics of Plasmas}
+      \field{year}{2003}
+    \endentry
+    \entry{vacsystj2}{article}{}
+      \name{author}{3}{}{%
+        {{hash=8e382b880eed6dcddaf12345d28680cd}{%
+           family={Tabarés},
+           familyi={T\bibinitperiod},
+           given={FL},
+           giveni={F\bibinitperiod}}}%
+        {{hash=c777efe59506b808505f27645c99eda8}{%
+           family={García},
+           familyi={G\bibinitperiod},
+           given={A},
+           giveni={A\bibinitperiod}}}%
+        {{hash=cc5f586d22dd7d1831c8f66933640275}{%
+           family={Botija},
+           familyi={B\bibinitperiod},
+           given={J},
+           giveni={J\bibinitperiod}}}%
+      }
+      \strng{namehash}{8e087ae0a82e8a2474b7327a5fabe097}
+      \strng{fullhash}{8e087ae0a82e8a2474b7327a5fabe097}
+      \strng{bibnamehash}{8e087ae0a82e8a2474b7327a5fabe097}
+      \strng{authorbibnamehash}{8e087ae0a82e8a2474b7327a5fabe097}
+      \strng{authornamehash}{8e087ae0a82e8a2474b7327a5fabe097}
+      \strng{authorfullhash}{8e087ae0a82e8a2474b7327a5fabe097}
+      \field{sortinit}{T}
+      \field{sortinithash}{9af77f0292593c26bde9a56e688eaee9}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{In this paper, the conceptual design of the vacuum system (pumping and measurement) of the TJ-II stellarator is presented. A detailed description of the specific problems associated with the peculiarities of the machine and the proposed solutions are given. Examples of these peculiarities are: the outgassing behaviour of the plasma-facing components during and after the plasma shots, the coupling of the pumping system to the vacuum vessel, and the suitability of the proposed system for the different modes of operation.}
+      \field{issn}{0042-207X}
+      \field{journaltitle}{Vacuum}
+      \field{note}{Special Issue Proceedings of the 1st European Topical Conference On Hard Coatings and the II Iberian Vacuum Meeting 12-15 July 1993, Alicante, Spain}
+      \field{number}{10}
+      \field{title}{The vacuum system of the TJ-II stellarator}
+      \field{volume}{45}
+      \field{year}{1994}
+      \field{pages}{1059\bibrangedash 1061}
+      \range{pages}{3}
+      \verb{doi}
+      \verb https://doi.org/10.1016/0042-207X(94)90022-1
+      \endverb
+      \verb{urlraw}
+      \verb https://www.sciencedirect.com/science/article/pii/0042207X94900221
+      \endverb
+      \verb{url}
+      \verb https://www.sciencedirect.com/science/article/pii/0042207X94900221
+      \endverb
+    \endentry
+    \entry{codata22}{misc}{}
+      \name{author}{4}{}{%
+        {{hash=c78972b7154db12858f8b2a43cbddc26}{%
+           family={Tiesinga},
+           familyi={T\bibinitperiod},
+           given={Eite},
+           giveni={E\bibinitperiod}}}%
+        {{hash=70ffad8a9850472813ebca8d8d1f2f69}{%
+           family={Mohr},
+           familyi={M\bibinitperiod},
+           given={Peter\bibnamedelima J.},
+           giveni={P\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+        {{hash=2f44e26ac0465165a8ac1a25c397cced}{%
+           family={Newell},
+           familyi={N\bibinitperiod},
+           given={David\bibnamedelima B.},
+           giveni={D\bibinitperiod\bibinitdelim B\bibinitperiod}}}%
+        {{hash=77904d9affa7a41f527d077427b5e034}{%
+           family={Taylor},
+           familyi={T\bibinitperiod},
+           given={Barry\bibnamedelima N.},
+           giveni={B\bibinitperiod\bibinitdelim N\bibinitperiod}}}%
+      }
+      \strng{namehash}{7577d9576de4d3d566fddee3a945c978}
+      \strng{fullhash}{f0214bd871e5f4b88b29378050b779e8}
+      \strng{bibnamehash}{7577d9576de4d3d566fddee3a945c978}
+      \strng{authorbibnamehash}{7577d9576de4d3d566fddee3a945c978}
+      \strng{authornamehash}{7577d9576de4d3d566fddee3a945c978}
+      \strng{authorfullhash}{f0214bd871e5f4b88b29378050b779e8}
+      \field{sortinit}{T}
+      \field{sortinithash}{9af77f0292593c26bde9a56e688eaee9}
+      \field{labelnamesource}{author}
+      \field{year}{2022}
+      \verb{urlraw}
+      \verb The 2022 CODATA Recommended Values of the Fundamental Physical Constants. Database developed by J. Baker, M. Douma, and S. Kotochigova. Available at \url{https://physics.nist.gov/constants}, National Institute of Standards and Technology, Gaithersburg
+      \endverb
+      \verb{url}
+      \verb The%202022%20CODATA%20Recommended%20Values%20of%20the%20Fundamental%20Physical%20Constants.%20Database%20developed%20by%20J.%20Baker,%20M.%20Douma,%20and%20S.%20Kotochigova.%20Available%20at%20%5Curl%7Bhttps://physics.nist.gov/constants%7D,%20National%20Institute%20of%20Standards%20and%20Technology,%20Gaithersburg
+      \endverb
+    \endentry
+    \entry{stress}{book}{}
+      \name{author}{2}{}{%
+        {{hash=2c0d10498a8f10bf3d7aa1ca95af50bc}{%
+           family={Timoshenko},
+           familyi={T\bibinitperiod},
+           given={S.},
+           giveni={S\bibinitperiod}}}%
+        {{hash=7fe424cc8fab076676a5673fdbf77862}{%
+           family={Woinowsky-Krieger},
+           familyi={W\bibinithyphendelim K\bibinitperiod},
+           given={S.},
+           giveni={S\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {McGraw-Hill}%
+      }
+      \strng{namehash}{7d7c888312b01c85291f3a6fbedb2bc0}
+      \strng{fullhash}{7d7c888312b01c85291f3a6fbedb2bc0}
+      \strng{bibnamehash}{7d7c888312b01c85291f3a6fbedb2bc0}
+      \strng{authorbibnamehash}{7d7c888312b01c85291f3a6fbedb2bc0}
+      \strng{authornamehash}{7d7c888312b01c85291f3a6fbedb2bc0}
+      \strng{authorfullhash}{7d7c888312b01c85291f3a6fbedb2bc0}
+      \field{sortinit}{T}
+      \field{sortinithash}{9af77f0292593c26bde9a56e688eaee9}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Theory of plates and shells}
+      \field{year}{1959}
+    \endentry
+    \entry{TJK}{misc}{}
+      \name{author}{2}{}{%
+        {{hash=20c614e0e332a12921363d1d6a242e01}{%
+           family={University\bibnamedelimb of\bibnamedelima Stuttgart},
+           familyi={U\bibinitperiod\bibinitdelim o\bibinitperiod\bibinitdelim S\bibinitperiod},
+           given={Institute\bibnamedelimb of\bibnamedelimb Interfacial\bibnamedelimb Process\bibnamedelima Engineering},
+           giveni={I\bibinitperiod\bibinitdelim o\bibinitperiod\bibinitdelim I\bibinitperiod\bibinitdelim P\bibinitperiod\bibinitdelim E\bibinitperiod}}}%
+        {{hash=96d642db5068daa6c9ac3fe9c92d60cc}{%
+           family={Technology},
+           familyi={T\bibinitperiod},
+           given={Plasma},
+           giveni={P\bibinitperiod}}}%
+      }
+      \strng{namehash}{fa6924bacfd63a00a8d737c311bad3c5}
+      \strng{fullhash}{fa6924bacfd63a00a8d737c311bad3c5}
+      \strng{bibnamehash}{fa6924bacfd63a00a8d737c311bad3c5}
+      \strng{authorbibnamehash}{fa6924bacfd63a00a8d737c311bad3c5}
+      \strng{authornamehash}{fa6924bacfd63a00a8d737c311bad3c5}
+      \strng{authorfullhash}{fa6924bacfd63a00a8d737c311bad3c5}
+      \field{sortinit}{U}
+      \field{sortinithash}{6901a00e45705986ee5e7ca9fd39adca}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{The stellarator TJ-K}
+      \verb{urlraw}
+      \verb https://www.igvp.uni-stuttgart.de/en/research/plasma-dynamics-and-diagnostics/experiments/TJ-K/
+      \endverb
+      \verb{url}
+      \verb https://www.igvp.uni-stuttgart.de/en/research/plasma-dynamics-and-diagnostics/experiments/TJ-K/
+      \endverb
+    \endentry
+    \entry{SCR}{article}{}
+      \name{author}{4}{}{%
+        {{hash=f66664da6e4b417d821e6bbe7471dfb5}{%
+           family={Vargas},
+           familyi={V\bibinitperiod},
+           given={V.I.},
+           giveni={V\bibinitperiod}}}%
+        {{hash=8cc38fa20acb6bad0b66e40d1a8f3905}{%
+           family={Mora},
+           familyi={M\bibinitperiod},
+           given={J.},
+           giveni={J\bibinitperiod}}}%
+        {{hash=fcce1c26cb0993b98469ccf9c036118f}{%
+           family={Otárola},
+           familyi={O\bibinitperiod},
+           given={C.},
+           giveni={C\bibinitperiod}}}%
+        {{hash=38026ba4ee6b102b47bf3ffb41325c8f}{%
+           family={al.},
+           familyi={a\bibinitperiod},
+           prefix={et},
+           prefixi={e\bibinitperiod}}}%
+      }
+      \strng{namehash}{42286cfab36d28e16cebf8238f50f84d}
+      \strng{fullhash}{e26ce0f83531ba6faeeadd03b8d7b293}
+      \strng{bibnamehash}{42286cfab36d28e16cebf8238f50f84d}
+      \strng{authorbibnamehash}{42286cfab36d28e16cebf8238f50f84d}
+      \strng{authornamehash}{42286cfab36d28e16cebf8238f50f84d}
+      \strng{authorfullhash}{e26ce0f83531ba6faeeadd03b8d7b293}
+      \field{sortinit}{V}
+      \field{sortinithash}{afb52128e5b4dc4b843768c0113d673b}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{42nd EPS Conference on Plasma Physics}
+      \field{title}{Progress on small modular stellarator SCR-1}
+      \field{year}{2015}
+    \endentry
+    \entry{MEP}{article}{}
+      \name{author}{4}{}{%
+        {{hash=8141ea1f83a813e5105b9cad0902c54a}{%
+           family={Vorobyova},
+           familyi={V\bibinitperiod},
+           given={G.\bibnamedelimi M.},
+           giveni={G\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
+        {{hash=57873205d0c64e7e1c74e31426eb316a}{%
+           family={Krata},
+           familyi={K\bibinitperiod},
+           given={S.\bibnamedelimi A.},
+           giveni={S\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+        {{hash=43fb7eb297063fccdf32d186ea232e5e}{%
+           family={Mironova},
+           familyi={M\bibinitperiod},
+           given={V.\bibnamedelimi D.},
+           giveni={V\bibinitperiod\bibinitdelim D\bibinitperiod}}}%
+        {{hash=813b234f91c08bbefe00db613ac87498}{%
+           family={Kurnaev},
+           familyi={K\bibinitperiod},
+           given={V.\bibnamedelimi A.},
+           giveni={V\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+      }
+      \strng{namehash}{0e901dc7e2c27b88f291e2bd0566ab5a}
+      \strng{fullhash}{a7f4693236af2a3c13050c1868ee13d9}
+      \strng{bibnamehash}{0e901dc7e2c27b88f291e2bd0566ab5a}
+      \strng{authorbibnamehash}{0e901dc7e2c27b88f291e2bd0566ab5a}
+      \strng{authornamehash}{0e901dc7e2c27b88f291e2bd0566ab5a}
+      \strng{authorfullhash}{a7f4693236af2a3c13050c1868ee13d9}
+      \field{sortinit}{V}
+      \field{sortinithash}{afb52128e5b4dc4b843768c0113d673b}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Physics of Atomic Nuclei, Vol. 83}
+      \field{title}{Vacuum Chamber of the MEPhIST-1 Tokamak}
+      \field{year}{2020}
+    \endentry
+    \entry{Wutz2000}{book}{}
+      \name{author}{4}{}{%
+        {{hash=46c7916eaab4b935cab31aaec3e1b5a7}{%
+           family={Wutz},
+           familyi={W\bibinitperiod},
+           given={Max},
+           giveni={M\bibinitperiod}}}%
+        {{hash=cfe62b22c3352362588626a0dd93d612}{%
+           family={Adam},
+           familyi={A\bibinitperiod},
+           given={Hermann},
+           giveni={H\bibinitperiod}}}%
+        {{hash=cb0f22f8b7d1efb0fad3273e9738f3bb}{%
+           family={Walcher},
+           familyi={W\bibinitperiod},
+           given={Wilhelm},
+           giveni={W\bibinitperiod}}}%
+        {{hash=2681b09959852cfa852c9adfcc505c0b}{%
+           family={Jousten},
+           familyi={J\bibinitperiod},
+           given={Karl},
+           giveni={K\bibinitperiod}}}%
+      }
+      \strng{namehash}{85ddf33150826d0ea4ad0049c3ecdc51}
+      \strng{fullhash}{7ec976c7d390442e5002cf14868c2916}
+      \strng{bibnamehash}{85ddf33150826d0ea4ad0049c3ecdc51}
+      \strng{authorbibnamehash}{85ddf33150826d0ea4ad0049c3ecdc51}
+      \strng{authornamehash}{85ddf33150826d0ea4ad0049c3ecdc51}
+      \strng{authorfullhash}{7ec976c7d390442e5002cf14868c2916}
+      \field{sortinit}{W}
+      \field{sortinithash}{4315d78024d0cea9b57a0c6f0e35ed0d}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Die Geschichte der Vakuumtechnik beginnt mit Evangelista Torricelli und Otto von Guericke im 17. Jahrhundert. Sie entkräfteten die philosophischen Überlegungen, dass es ein Vakuum nicht geben könne, indem sie es einfach herstellten. Im späten 19. Jahrhundert begann die industrielle Anwendung der Vakuumtechnik, die sich daraufhin selbst zu einem Industriezweig entwickelte. Mit der Entwicklung der Halbleiterindustrie in der zweiten Hälfte des 20. Jahrhunderts stieg die Vakuumtechnik zu einer der Schlüsseltechnologien unserer heutigen Hochtechnologie auf.}
+      \field{journaltitle}{Handbuch Vakuumtechnik}
+      \field{title}{Handbuch Vakuumtechnik}
+      \field{year}{2000}
+      \verb{doi}
+      \verb 10.1007/978-3-322-99947-4
+      \endverb
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+
