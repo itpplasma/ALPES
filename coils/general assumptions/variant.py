@@ -188,5 +188,5 @@ def pressureDrop(pipeInnerDiam, massFlow, length): #m , kg/s , m
 
 if __name__ == "__main__":
 	calcEverything(radius_major=0.5, filament_length=176.35 * cm, I_winding_sum=14690*A , number_coils=12,
-				   conductor_crosssection=pipeCondCrossection2(8*mm,6*mm), number_windings=28, dPancake_factor=2,
-				   material='copper', frequency_rotation=2.45 * GHz, deltaT=25, pipeInnerDiam=6*mm)
+				   conductor_crosssection=pipeCondCrossection2(6*mm,4*mm), number_windings=42, dPancake_factor=3,
+				   material='copper', frequency_rotation=2.45 * GHz, deltaT=25, pipeInnerDiam=4*mm)
