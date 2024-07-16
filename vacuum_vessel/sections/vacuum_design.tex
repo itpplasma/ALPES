@@ -25,28 +25,21 @@ With an estimated surface area of $\SI{15}{\square\meter}$ and an outgassing rat
 This value represents just an ideal value and does not consider safety margins.
 The calculations correlate with the parameters of the stellarator TJ-II \cite{vacsystj2}.
 
-The vacuum pump of choice to achieve these conditions is a turbomolecular pump (TMP). A TMP consists of multiple stages of pairs of rotor and stator blades. The working principle is that free molecules are given a momentum in a desired direction by collisions with the blades. Gas captured in the upper stages is directed to the lower stages and compressed to the level of the fore-vacuum at the outlet side. A suitable model would be the Pfeiffer Vacuum ATH3204 MT with a DN320 ISO-F inlet flange \cite{ATH3204}, which can be seen in \ref{fig:ATH}.
+The vacuum pump of choice to achieve these conditions is a turbomolecular pump (TMP).
+A TMP consists of multiple stages of pairs of rotor and stator blades.
+The working principle is that free molecules are given a momentum in a desired direction by collisions with the blades.
+Gas captured in the upper stages is directed to the lower stages and compressed to the level of the fore-vacuum at the outlet side.
+A suitable model would be the Pfeiffer Vacuum ATH3204 MT with a DN320 ISO-F inlet flange \cite{ATH3204}, which can be seen in \ref{fig:ATH}.
 The TMP is magnetically levitated, thus oil-free, and reaches a pumping speed of $\SI{3050}{\liter\per\second}$ for Nitrogen ($N_{2}$).
-The maximum fore vacuum of this TMP is $\SI{3}{\milli\bar}$, therefore an adequate backing pump has to be considered, which can transport the throughput (total gas load). The maximum gas ($N_{2}$) throughput of the ATH3204 MT is $\SI{47.5}{\milli\bar\liter\per\second}$. As the total gas load at $\SI{e-8}{\milli\bar}$ is estimated at around $\SI{5e-5}{\milli\bar\liter\per\second}$ it is assumed that a backing pump with a pumping speed $S_{V}$ of about $\SI{20}{\liter\per\second}$ is sufficient. The pumping speed of the backing pump is derived from the continuity equation $Q=p_{a}\cdot S_{TMP}=p_{b}\cdot S_{V}$, where $p_{a}$ and $p_{b}$ are the respective pressures at the inlet of the TMP and backing pump. A suitable model would be the ACP 90 from Pfeiffer vacuum, an oil-free multi-stage roots pump connected via a DN 40 hose to the TMP \cite{ACP90}. At the maximum possible throughput of the TMP the chosen backing pump is not capable of transporting the gas load, therefore the use case of the two pumps has to be coordinated accordingly. During operation the TMP has to be operated according to the maximum troughput of the backing pump.
+The maximum fore vacuum of this TMP is $\SI{3}{\milli\bar}$, therefore an adequate backing pump has to be considered, which can transport the throughput (total gas load).
+The maximum gas ($N_{2}$) throughput of the ATH3204 MT is $\SI{47.5}{\milli\bar\liter\per\second}$.
+As the total gas load at $\SI{e-8}{\milli\bar}$ is estimated at around $\SI{5e-5}{\milli\bar\liter\per\second}$ it is assumed that a backing pump with a pumping speed $S_{V}$ of about $\SI{20}{\liter\per\second}$ is sufficient.
+The pumping speed of the backing pump is derived from the continuity equation $Q = p_{a}\cdot S_{TMP} = p_{b}\cdot S_{V}$, where $p_{a}$ and $p_{b}$ are the respective pressures at the inlet of the TMP and backing pump.
+A suitable model would be the ACP 90 from Pfeiffer vacuum, an oil-free multi-stage roots pump connected via a DN 40 hose to the TMP \cite{ACP90}.
+At the maximum possible throughput of the TMP the chosen backing pump is not capable of transporting the gas load, therefore the use case of the two pumps has to be coordinated accordingly.
+During operation the TMP has to be operated according to the maximum troughput of the backing pump.
 
-\begin{figure}[H]
-    \centering
-    \begin{subfigure}[b]{0.45\textwidth}
-        \centering
-        \includegraphics[width=1\textwidth]{sections/imges/vacuum_vessel/ath3204.PNG}
-        \caption{Turbomolecular pump: ATH3204 MT \cite{ATH3204}.}
-        \label{fig:ATH}
-    \end{subfigure}
-    \hfill
-    \begin{subfigure}[b]{0.45\textwidth}
-        \centering
-        \includegraphics[width=1\textwidth]{sections/imges/vacuum_vessel/acp.PNG}
-        \caption{Backing (Roughing) pump, multi-stage roots pump: ACP90 \cite{ACP90}.}
-        \label{fig:ACP}
-    \end{subfigure}
-    \caption{Vacuum system components: (a) Turbomolecular pump and (b) Backing pump.}
-    \label{fig:vacuum_system}
-\end{figure}
+Example pumps can be seen on the website of Pfeiffer (\href{https://www.pfeiffer-vacuum.com/global/en/shop/products/TMAAAC681101}{TMP} \cite{ATH3204} and \href{https://www.pfeiffer-vacuum.com/api/empolis/resource/environment/project1_p/documents/pfeifferSharepointProd/61856-Datasheet_V9SABSCZMR01_en.pdf}{roughing pump} \cite{ACP90})
 
 \section{Vacuum analysis}
 
@@ -64,44 +57,21 @@ The ions are attracted by the central collector and form an ion current.
 The ion current is proportional to the molecular gas pressure.
 Measurement solutions like the Pfeiffer Vacuum HPT200 \cite{HPT200} and the Inficon Trigon models \cite{BCG450} are able to measure from ATM to $\SI{5e-10}{\milli\bar}$ using just one flange.
 
-In the Fusion360 3D model, a flange was drawn for the following combination gauge, which includes both the Pirani and the Bayard-Alpert gauge \autoref{fig:Pirani_Bayard_alpert_ALL}.
-All information worth knowing that guarantees the suitability of the device for the requirements at hand can be found in \autoref{fig:Pirani_technical_data}.
+In the Fusion360 3D model, a flange was drawn for the following combination gauge, which includes both the Pirani and the Bayard-Alpert gauge \href{https://www.pfeiffer-vacuum.com/global/de/shop/products/PT_T12_366_300}{Pirani and Bayard-Alpert guage}.
+All information worth knowing that guarantees the suitability of the device for the requirements at hand can be found on the \href{https://www.pfeiffer-vacuum.com/global/de/shop/products/PT_T12_366_300}{datasheet} \cite{pfeifferdruck}.
 
-\begin{figure}[H]
-    \centering
-    \begin{subfigure}[b]{0.2\textwidth}
-        \centering
-        \includegraphics[width=1\textwidth]{sections/imges/vacuum_vessel/Pirani_Bayard_Alpert.PNG}
-        \subcaption{}
-        \label{fig:Pirani}
-    \end{subfigure}
-    \hfil
-    \begin{subfigure}[b]{0.7\textwidth}
-        \centering
-        \includegraphics[width=1\textwidth]{sections/imges/vacuum_vessel/Pirani_Bayard_Alpert_technical_data.PNG}
-        \subcaption{}
-        \label{fig:Pirani_technical_data}
-    \end{subfigure}
-    \caption{Measurement device including Pirani- and Bayard-Alpert-gauge \cite{pfeifferdruck}.}
-    \label{fig:Pirani_Bayard_alpert_ALL}
-\end{figure}
+
 
 
 \subsection{Residual gas analysis}
 
 For future purposes, a mass spectrometer can be used to analyze the residual gas for the molecules it contains.
-A quadrupole spectrometer was considered for this purpose \autoref{fig:Quadrupol}.
+A quadrupole spectrometer was considered for this purpose from Pfeiffer can be seen \href{https://www.pfeiffer-vacuum.com/global/de/shop/products/6d0f7cd8-a157-453a-802a-48eac86b4c85}{here} \cite{pfeiffer}.
 It consists of an ionizer (bombardment of molecules with electrons), an ion accelerator and a mass filter consisting of four metal rods \cite{quardrupolmassspec}.
 The opposing rods are applied with the same potential consisting of an RF and a DC voltage.
 The applied voltage affects the trajectory of the accelerated ions, only ions with a certain mass-to-charge ratio, which resonate, travel through the quadrupole filter to the ion detector.
 A mass spectrum can be obtained by varying the applied voltage and its frequency.
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.6\textwidth]{sections/imges/vacuum_vessel/Quadrupol_Massenspektrometer.PNG}
-    \caption{Quadrupole spectrometer: QMG 250 F1, 1-100 u, open ionsource, tungsten, I/O-option, extended \cite{pfeiffer}.}
-    \label{fig:Quadrupol}
-\end{figure}
 
 There are several variants of the PrismaPro series \cite{pfeiffer}, more precisely 108 different detector designs of the quadrupole spectrometer, depending on the decision criteria pressure range, the associated necessary design, as well as the analytical performance (masses to be detected, resolution, detection limit and measuring speed).
 The device features a DN40 CF-F flange and has a quadrupole length of $\SI{14.3}{\centi\meter}$.
