@@ -14,5 +14,5 @@
 *.lot
 *.bcf
 *.run.xml
-main.pdf
+**/main.pdf
 
