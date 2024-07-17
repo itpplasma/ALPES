@@ -65,7 +65,7 @@ def main():
         bs = BiotSavart(bs[2])
         # reads vmec surface input file: surfaceRZ
         surface = SurfaceRZFourier.from_vmec_input(target_surface_filename, range="full torus", nphi=nphi, ntheta=ntheta)
-        nfp = surface.nfp  # number of field periods
+        nfp = 1  # number of field periods, when perturbing you cant use any symmetry anymore
 
         # pertupate coils N1
         coils = bs.coils
