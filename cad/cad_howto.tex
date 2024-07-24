@@ -1,0 +1,123 @@
+\documentclass{article}
+\usepackage{float}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{caption}
+\usepackage{siunitx}
+
+\title{How to draw the CAD-model for the Grazerator}
+\author{Elena Steinwender}
+
+\begin{document}
+\maketitle
+\newpage
+
+\section{General situation}
+
+Each participating group draw parts of the vacuum vessel, which represented their responsibilities of the project.
+All these different CAD-files should be connected at the end, but due to the different background and knowledge in drawing 3D-models of the constructors, it was not possible to put all the parts togehther correctly and smoothly.
+This document is a recipy for someone in the future, who has time,nerves and muse to draw the whole chamber including all parts necessary for the vacuum chamber, the coils, the diagnostics and the heating including all design restrictions in the correct way from a constructors view (building parts, building groups, ...).
+Whoever will do this (I hope it is not me): I wish you good luck and nerves of steel.
+
+Lovely Greetings,
+
+Elli
+
+\newpage
+
+\section{The current results}
+
+The current 3D model (which is provided) shows the principle of the vacuum chamber with the current status of knowledge.
+The problems and points, that need to be changed are, that all individual parts should be drawn as single building parts and connected as building groups.
+Additional the flange situation can be fixed if possible, since some of them are just placeholders and have no use currently.
+
+The following tables summerize the planned flange connections:
+
+\begin{table}[H]
+    \centering
+    \caption{Overview of the ports from the \textbf{vacuum team}.}
+    \begin{tabular}{>{\raggedright\arraybackslash}p{2cm} >{\raggedright\arraybackslash}p{3cm} >{\raggedright\arraybackslash}p{3.5cm} >{\raggedright\arraybackslash}p{2cm} >{\raggedright\arraybackslash}p{3.5cm}}
+        \toprule
+        \textbf{Port}   & \textbf{Propose}               & \textbf{Location}  & \textbf{Type} & \textbf{Flange/Size}          \\
+        \midrule
+        Port 1          & Pirani/Bayard-Alpert manometer & outside of chamber &               & DN 40 CF-R                    \\
+        Port 2          & Quadrupole mass spectrometer   & outside of chamber &               & DN 40 CF-F                    \\
+        \midrule
+        Port 3          & Turbo molecular pump (TMP)     & bottom             &               & DN 320 ISO-F                  \\
+        Port 4          & Routing pump                   &                    &               & DN 40|50 ISO KF               \\
+        \midrule
+        Port 5          & Domed lid                      & top                &               & $d = 1600\ \si{\milli\meter}$ \\
+        Port 6          & Domed bottom                   & bottom             &               & $d = 1600\ \si{\milli\meter}$ \\
+        \midrule
+        All other ports & any use                        & side and bottom    &               & DN 320 ISO-F                  \\
+        \bottomrule
+    \end{tabular}
+    \label{tab:vacuum_ports}
+\end{table}
+
+
+\begin{table}[H]
+    \centering
+    \caption{Overview of the ports from the \textbf{coil team}.}
+    \begin{tabular}{>{\raggedright\arraybackslash}p{2cm} >{\raggedright\arraybackslash}p{3cm} >{\raggedright\arraybackslash}p{3.5cm} >{\raggedright\arraybackslash}p{3.5cm} >{\raggedright\arraybackslash}p{2cm}}
+        \toprule
+        \textbf{Port} & \textbf{Purpose} & \textbf{Location}                              & \textbf{Type}       & \textbf{Flange/Size} \\
+        \midrule
+        Port         &    coil connection         & in vicinity of actual coil position (12 coils) &  - &  DN 63 ISO KF  \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+
+\begin{table}[H]
+    \centering
+    \caption{Overview of the ports from the \textbf{design team}.}
+    \begin{tabular}{>{\raggedright\arraybackslash}p{2cm} >{\raggedright\arraybackslash}p{3cm} >{\raggedright\arraybackslash}p{3.5cm} >{\raggedright\arraybackslash}p{3.5cm} >{\raggedright\arraybackslash}p{2cm}}
+        \toprule
+        \textbf{Port} & \textbf{Purpose} & \textbf{Location} & \textbf{Type} & \textbf{Flange/Size} \\
+        \midrule
+        Port 1        & Waveguide        & ?                 &               & UDR26                \\
+        Port 2        & Window           & ?                 & round         &                      \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+
+\begin{table}[H]
+    \centering
+    \caption{Overview of the ports from the \textbf{heating team}.}
+    \begin{tabular}{>{\raggedright\arraybackslash}p{2cm} >{\raggedright\arraybackslash}p{3cm} >{\raggedright\arraybackslash}p{3.5cm} >{\raggedright\arraybackslash}p{3.5cm} >{\raggedright\arraybackslash}p{2cm}}
+        \toprule
+        \textbf{Port} & \textbf{Purpose} & \textbf{Location} & \textbf{Type} & \textbf{Flange/Size} \\
+        \midrule
+        Port 1        &                  &                   &               &                      \\
+        Port 2        &                  &                   &               &                      \\
+        Port 3        &                  &                   &               &                      \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+
+
+\begin{table}[H]
+    \centering
+    \caption{Overview of the ports from the \textbf{diagnostic team}.}
+    \begin{tabular}{>{\raggedright\arraybackslash}p{2cm} >{\raggedright\arraybackslash}p{3cm} >{\raggedright\arraybackslash}p{3.5cm} >{\raggedright\arraybackslash}p{3.5cm} >{\raggedright\arraybackslash}p{2cm}}
+        \toprule
+        \textbf{Port} & \textbf{Purpose}  & \textbf{Location}                 & \textbf{Type} & \textbf{Flange/Size}                                              \\
+        \midrule
+        Port 1        & electron gun   & Side (between two coils)                    &               & DN100 CF                                                                  \\
+        Port 2        & Window            & Side ($75\si{\degree}$ to Port 1) &               & DN400 ISO-F                                              \\
+        \midrule
+        Port 3        & Langmuir probe / fluorescence rod    & Side (between two coils)                     &               & DN400 ISO-F \\
+        Port 4 - 6    & Interferometer    & bottom next to the vacuum pump flange                                 &              & DN320 ISO-K                                                                 \\
+        Port 7        & Rogowski coil     &$120~\si{\degree}$ to each component(two diamagnetic loops and one Rogowski coil)                                   &     & DN25-KF                                                                  \\
+        Port 8 - 9    & Diamagnetic loops &$120~\si{\degree}$ to each component(two diamagnetic loops and one Rogowski coil)                                   &     &    DN25-KF                                                               \\
+
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+
+\end{document}
+
