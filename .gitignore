@@ -1,3 +1,4 @@
+__pycache__
 *.nc
 *.nc4
 *.h5
@@ -19,4 +20,3 @@
 *.bcf
 *.run.xml
 **/main.pdf
-
