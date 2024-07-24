@@ -6,6 +6,25 @@ Giuliani, A. (2024). QUASR: the QUAsisymmetric Stellarator Repository [Data set]
 
 https://quasr.flatironinstitute.org/model/0021326
 
+## Used Codes
+
+The following codes have been used in the provided scripts based on
+examples in their respective documentation.
+
+### simsopt
+Github: https://github.com/hiddenSymmetries/simsopt
+Authors: Simsopt contributors
+License: MIT
+
+Landreman, M., Medasani, B., Wechsung, F., Giuliani, A., Jorge, R., and Zhu, C. (2021). "SIMSOPT: A flexible framework for stellarator optimization", J. Open Source Software 6, 3525. https://doi.org/10.21105/joss.03525
+
+### STELLOPT
+Github: https://github.com/PrincetonUniversity/STELLOPT
+Authors: Princeton Plasma Physics Laboratory and STELLOPT developers
+License: MIT
+
+Lazerson, S., Schmitt, J., Zhu, C., Breslau, J., & STELLOPT Developers, A. (2020). STELLOPT. Princeton Plasma Physics Laboratory (PPPL), Princeton, NJ (United States).
+
 
 ## Poincare Plot and Coil Scaling Scripts Documentation
 

@@ -17,7 +17,7 @@ import jax.numpy as jnp
 # Converting the json file to h5 file
 '''
 The converted h5 file can be used to visualise a coil set in the SBGeom module. This module is an external program
-that is yet to be released. For further information, please contact: albert@tugraz.at
+that is yet to be released. For further information, please contact the authors.
 
 It is important that the data is named 'Dataset1' in the h5 file, otherwise SBGeom will not be able to read the data.
 '''
@@ -38,14 +38,14 @@ cs = SBGeom.Discrete_Coil_Set_From_HDF5("coils.h5")
 
 # Creating the vtk file for the coil set
 '''
-cs.Mesh_Triangles(width_phi, width_R, number_of_vertices, 'type').write('RMFd.vtk')   
+cs.Mesh_Triangles(width_phi, width_R, number_of_vertices, 'type').write('RMFd.vtk')
     Inputs:
         width_phi = coil_width / R_0        with R_0 = 1.0 m
         width_R   = thickness of the coil
         type      = type of coil (string)
 '''
 # Example for QUASR coils:
-cs.Mesh_Triangles(0.1/5,0.1/5,300, "RMF").write('RMFd.vtk')   
+cs.Mesh_Triangles(0.1/5,0.1/5,300, "RMF").write('RMFd.vtk')
 
 
 #----------------------------------------------------------------------------------------------------------------------
@@ -77,8 +77,8 @@ To visualise the magnetic field, SBGeom needs a vmec file. The vmec file can be 
 
 In the Terminal:
     1. write: "xvmec input.---"                             # with --- being the name of the .input file
-    2. write: "nccopy -k 4 wout_---.nc vmec_file.nc4"       
-    
+    2. write: "nccopy -k 4 wout_---.nc vmec_file.nc4"
+
 NB: You will be getting a few other files, but we only need the wout_---.nc file for the nc4 file.
 '''
 
@@ -99,5 +99,3 @@ s1.Mesh_Surface(num_surface, zeta_1, num_radial, num_poloidal, zeta_2, radius).w
 '''
 # Example for QUASR flux surfaces:
 s1.Mesh_Surface(0.5,0.0,300,500,0.0,2*np.pi).write("surface.vtk")
-
-
