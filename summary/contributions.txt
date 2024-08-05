@@ -1,0 +1,496 @@
+commit 36dfe2146c912f9517f68ecfd407c7f0cceb017e
+Author: chr.albert <albert@tugraz.at>
+Date:   Thu Aug 1 15:42:21 2024 +0000
+
+    Update on Overleaf.
+
+commit 9607bd986c785a620d7ef615599b5dcfffd3aaef
+Author: MartinTritthart <martin.tritthart@student.tugraz.at>
+Date:   Tue Jul 16 16:59:38 2024 +0200
+
+    adding commend in coil
+
+commit c0e07cabc7b81e673403ea0022f9161bccb21124
+Author: nicole.oberth01 <nicole.oberth01@gmail.com>
+Date:   Tue Jul 16 14:55:29 2024 +0000
+
+    Update on Overleaf.
+
+commit acd2005c88342a327736a8c32b20653a28fb1923
+Author: nicole.oberth01 <nicole.oberth01@gmail.com>
+Date:   Tue Jul 16 14:51:35 2024 +0000
+
+    Update on Overleaf.
+
+commit 04a11959ac27c605f3806dbe098685fef4a637ae
+Author: nicole.oberth01 <nicole.oberth01@gmail.com>
+Date:   Tue Jul 16 14:50:00 2024 +0000
+
+    Update on Overleaf.
+
+commit 2254173c861618562926d9ef5722bb6d4c65a907
+Author: nicole.oberth01 <nicole.oberth01@gmail.com>
+Date:   Tue Jul 16 14:48:49 2024 +0000
+
+    Update on Overleaf.
+
+commit 8231ee49d3ac8999f3956a1b6beee0e13925533a
+Author: nicole.oberth01 <nicole.oberth01@gmail.com>
+Date:   Tue Jul 16 14:44:59 2024 +0000
+
+    Update on Overleaf.
+
+commit 21ec704b2068df5e361a425fe078169e86980252
+Author: nicole.oberth01 <nicole.oberth01@gmail.com>
+Date:   Tue Jul 16 14:43:14 2024 +0000
+
+    Update on Overleaf.
+
+commit 38bdb1b903298c38b66b9d5f8cef844b79e1f8f1
+Author: nicole.oberth01 <nicole.oberth01@gmail.com>
+Date:   Tue Jul 16 14:40:15 2024 +0000
+
+    Update on Overleaf.
+
+commit f64c5a3b92aff1e08b755f1ae47e10968e646e27
+Author: nicole.oberth01 <nicole.oberth01@gmail.com>
+Date:   Tue Jul 16 14:40:09 2024 +0000
+
+    Update on Overleaf.
+
+commit 97c63bee93d1c681055424086b89f6b3be807142
+Author: nicole.oberth01 <nicole.oberth01@gmail.com>
+Date:   Tue Jul 16 14:38:41 2024 +0000
+
+    Update on Overleaf.
+
+commit a269192c0a11e014a4d0643bb4ec05d611211be4
+Author: nicole.oberth01 <nicole.oberth01@gmail.com>
+Date:   Tue Jul 16 14:38:37 2024 +0000
+
+    Update on Overleaf.
+
+commit 25865d6e37c29204b7bb8c85920f425137f67084
+Author: nicole.oberth01 <nicole.oberth01@gmail.com>
+Date:   Tue Jul 16 14:36:58 2024 +0000
+
+    Update on Overleaf.
+
+commit 6369cb8e9716ff435b065aea679ac1cc08c49518
+Author: nicole.oberth01 <nicole.oberth01@gmail.com>
+Date:   Tue Jul 16 14:33:38 2024 +0000
+
+    Update on Overleaf.
+
+commit 3ebceacade19bdbc708f98fd34b51a6a9ebc27c0
+Author: nicole.oberth01 <nicole.oberth01@gmail.com>
+Date:   Tue Jul 16 14:31:23 2024 +0000
+
+    Update on Overleaf.
+
+commit 49fd82740439895783d6c611e1a0d19818133e8b
+Author: nicole.oberth01 <nicole.oberth01@gmail.com>
+Date:   Tue Jul 16 14:29:26 2024 +0000
+
+    Update on Overleaf.
+
+commit 98748768869a8a502e98f9deacc24070688deca1
+Author: nicole.oberth01 <nicole.oberth01@gmail.com>
+Date:   Tue Jul 16 14:29:05 2024 +0000
+
+    Update on Overleaf.
+
+commit f5d3b595342423ced99a1ac6edfa021ed4229b4b
+Author: nicole.oberth01 <nicole.oberth01@gmail.com>
+Date:   Tue Jul 16 14:28:00 2024 +0000
+
+    Update on Overleaf.
+
+commit 2c85754d940177592d5a20d1fcfdae6a6288244d
+Author: nicole.oberth01 <nicole.oberth01@gmail.com>
+Date:   Tue Jul 16 14:05:10 2024 +0000
+
+    Update on Overleaf.
+
+commit 436f0cb6bb7eb13e64666f60d5ce30c9024b8798
+Author: nicole.oberth01 <nicole.oberth01@gmail.com>
+Date:   Tue Jul 16 12:24:34 2024 +0000
+
+    Update on Overleaf.
+
+commit 1ce9a657cccac619ac242da17345b97f3bcf0c23
+Author: nicole.oberth01 <nicole.oberth01@gmail.com>
+Date:   Tue Jul 16 12:09:26 2024 +0000
+
+    Update on Overleaf.
+
+commit aa6d5beda45585b745550c6c0f3448712d436eaa
+Author: nicole.oberth01 <nicole.oberth01@gmail.com>
+Date:   Tue Jul 16 12:08:53 2024 +0000
+
+    Update on Overleaf.
+
+commit 0f49208cbb1b57acf14877494951213e702b626e
+Author: angermann.leo <angermann.leo@gmail.com>
+Date:   Tue Jul 16 11:56:38 2024 +0000
+
+    Update on Overleaf.
+
+commit 5bcd719456f8c0201c68531e09900369d39213d4
+Author: angermann.leo <angermann.leo@gmail.com>
+Date:   Tue Jul 16 11:51:41 2024 +0000
+
+    Update on Overleaf.
+
+commit a8eab3857891ebd1323bcc8777916adc45cadd78
+Author: angermann.leo <angermann.leo@gmail.com>
+Date:   Tue Jul 16 11:45:44 2024 +0000
+
+    Update on Overleaf.
+
+commit ae9541390838139067b7998a4d7b3d2a595218f1
+Author: angermann.leo <angermann.leo@gmail.com>
+Date:   Tue Jul 16 11:45:03 2024 +0000
+
+    Update on Overleaf.
+
+commit 4e14fcd4fbd98b82a11153c870009aa61e665dcf
+Author: diogomendonca01 <diogomendonca01@gmail.com>
+Date:   Tue Jul 16 05:32:30 2024 +0000
+
+    Update on Overleaf.
+
+commit c17d86716266625a5ed42fd24cbab2d831838915
+Author: angermann.leo <angermann.leo@gmail.com>
+Date:   Sun Jul 14 09:53:14 2024 +0000
+
+    Update on Overleaf.
+
+commit 0300157bbc7b106219b0477e2a8b2a85307ca1be
+Author: MartinTritthart <martin.tritthart@student.tugraz.at>
+Date:   Thu Jul 11 18:37:31 2024 +0200
+
+    adding commends
+
+commit 70979ac0990a92d9aaf095155d36ad5cb92df058
+Author: MartinTritthart <martin.tritthart@student.tugraz.at>
+Date:   Thu Jul 11 18:12:45 2024 +0200
+
+    adding foot mounts
+
+commit d5aebd562b2c40fb453984e00f5300a75579348e
+Author: elenawallner99.ew <elenawallner99.ew@gmail.com>
+Date:   Thu Jul 11 14:42:37 2024 +0000
+
+    Update on Overleaf.
+
+commit dd0d6adcd478ed95d38b3368378208c644a89eda
+Author: MartinTritthart <martin.tritthart@student.tugraz.at>
+Date:   Wed Jul 10 15:50:29 2024 +0200
+
+    adding commend
+
+commit 74f722ea7af76c94bacaba39a16ab02e920bbbb3
+Merge: f02324f 228cac2
+Author: MartinTritthart <martin.tritthart@student.tugraz.at>
+Date:   Wed Jul 10 15:45:33 2024 +0200
+
+    Merge branch 'master' of https://git.overleaf.com/6672d07f46cc62a90332fb9a
+
+commit 228cac264885e0cfe4cfb5afabc01320a3c89cbb
+Author: corrias <corrias@student.tugraz.at>
+Date:   Wed Jul 10 13:45:30 2024 +0000
+
+    Update on Overleaf.
+
+commit f02324fda5d1026ff369f182a8dfbeabc991fa3f
+Author: MartinTritthart <martin.tritthart@student.tugraz.at>
+Date:   Wed Jul 10 15:45:21 2024 +0200
+
+    adding proxima logo
+
+commit 32bcb175904cedf56fb8db512ecfe8b547e9ea4e
+Author: corrias <corrias@student.tugraz.at>
+Date:   Wed Jul 10 13:44:30 2024 +0000
+
+    Update on Overleaf.
+
+commit e7fdc3bd88bbe79b928a2a150640cb7451176ba8
+Author: corrias <corrias@student.tugraz.at>
+Date:   Wed Jul 10 13:41:55 2024 +0000
+
+    Update on Overleaf.
+
+commit 27daca2422047db456378f4b8e49687c98199613
+Author: corrias <corrias@student.tugraz.at>
+Date:   Wed Jul 10 13:38:24 2024 +0000
+
+    Update on Overleaf.
+
+commit d433b32c83b3ac14d9a050c49983373cd5eb33c1
+Author: diogomendonca01 <diogomendonca01@gmail.com>
+Date:   Wed Jul 10 13:34:49 2024 +0000
+
+    Update on Overleaf.
+
+commit 29e292c79f7baafbee1fcc78c1a2b1ff2cc16262
+Author: diogomendonca01 <diogomendonca01@gmail.com>
+Date:   Wed Jul 10 13:32:39 2024 +0000
+
+    Update on Overleaf.
+
+commit ff7e41149ac5e76f510579a7ac81f92f34bc408e
+Merge: b605e81 03e3a60
+Author: MartinTritthart <martin.tritthart@student.tugraz.at>
+Date:   Wed Jul 10 15:25:21 2024 +0200
+
+    Merge branch 'master' of https://git.overleaf.com/6672d07f46cc62a90332fb9a
+
+commit 03e3a60e3c794fe257afccf0539c680f4b6e363e
+Author: diogomendonca01 <diogomendonca01@gmail.com>
+Date:   Wed Jul 10 13:25:12 2024 +0000
+
+    Update on Overleaf.
+
+commit b605e81b2806741e4312372c1c72d7cbbeca7219
+Merge: a97dfd4 83f595e
+Author: MartinTritthart <martin.tritthart@student.tugraz.at>
+Date:   Wed Jul 10 15:25:05 2024 +0200
+
+    Merge branch 'master' of https://git.overleaf.com/6672d07f46cc62a90332fb9a
+
+commit 83f595e5ab6202a6612e4944f10e74108eafff95
+Author: diogomendonca01 <diogomendonca01@gmail.com>
+Date:   Wed Jul 10 13:25:01 2024 +0000
+
+    Update on Overleaf.
+
+commit a97dfd447a498b0314e55cccec6293a2e1f67f22
+Merge: 6782ec7 d7b1ff3
+Author: MartinTritthart <martin.tritthart@student.tugraz.at>
+Date:   Wed Jul 10 15:24:51 2024 +0200
+
+    Merge branch 'master' of https://git.overleaf.com/6672d07f46cc62a90332fb9a
+
+commit d7b1ff3825dfd2cd1f3f99119e1d20e153de35a1
+Author: diogomendonca01 <diogomendonca01@gmail.com>
+Date:   Wed Jul 10 13:24:47 2024 +0000
+
+    Update on Overleaf.
+
+commit 6782ec76b77a320b4e0b069f5e0d5b2b8232a1d8
+Author: MartinTritthart <martin.tritthart@student.tugraz.at>
+Date:   Wed Jul 10 15:24:37 2024 +0200
+
+    one sent on line
+
+commit 0e1238685efb036fd84121c2f7bd933dbcdd33c8
+Author: diogomendonca01 <diogomendonca01@gmail.com>
+Date:   Wed Jul 10 13:21:46 2024 +0000
+
+    Update on Overleaf.
+
+commit 9b840808766b202ec5463d28a35f649e742be055
+Author: MartinTritthart <martin.tritthart@student.tugraz.at>
+Date:   Wed Jul 10 09:13:32 2024 +0200
+
+    fixing disign table
+
+commit 722a94093af609357fb6cce6485282bc0c9c63a6
+Author: corrias <corrias@student.tugraz.at>
+Date:   Wed Jul 10 05:50:56 2024 +0000
+
+    Update on Overleaf.
+
+commit e6df5eb092906975cf58ac20720c0044349acb6e
+Merge: 38517b2 03a8e8c
+Author: MartinTritthart <martin.tritthart@student.tugraz.at>
+Date:   Mon Jul 8 09:54:59 2024 +0200
+
+    Merge branch 'master' of https://git.overleaf.com/6672d07f46cc62a90332fb9a
+
+commit 38517b2718b441016e4d2ebf34b833e39f8d11c9
+Author: MartinTritthart <martin.tritthart@student.tugraz.at>
+Date:   Mon Jul 8 09:54:30 2024 +0200
+
+    adding image of vacuum vessel
+
+commit 03a8e8ce8fa87ab0d2c2ad7ede2c43ac062c609f
+Author: mtritthart66 <mtritthart66@gmail.com>
+Date:   Mon Jul 8 06:44:36 2024 +0000
+
+    Update on Overleaf.
+
+commit e0bd5583ac012b999cc7dcf789be745cf58e434e
+Author: MartinTritthart <martin.tritthart@student.tugraz.at>
+Date:   Mon Jul 8 08:42:06 2024 +0200
+
+    modifying \SI
+
+commit 785716e567cce47a33541eb32212f5ab6418cf6e
+Author: Michael Oblak <michael-oblak@gmx.at>
+Date:   Sun Jul 7 17:06:44 2024 +0000
+
+    Update on Overleaf.
+
+commit bfe1f4aee43d07938e976363093117ab5429120e
+Author: MartinTritthart <martin.tritthart@student.tugraz.at>
+Date:   Sun Jul 7 15:33:38 2024 +0200
+
+    adding requirements and overview
+
+commit e82536bd653a1fea05307cb6f1a17e2899b5d320
+Author: Michael Oblak <michael-oblak@gmx.at>
+Date:   Sat Jul 6 23:55:33 2024 +0000
+
+    Update on Overleaf.
+
+commit 806361b38a9d498d2724631712219fc1519adc53
+Author: halbwedl.felix <halbwedl.felix@gmail.com>
+Date:   Wed Jul 3 13:57:21 2024 +0000
+
+    Update on Overleaf.
+
+commit 716d9be9c79242973f788402fb8db1789baf63e9
+Author: Michael Oblak <michael-oblak@gmx.at>
+Date:   Wed Jul 3 13:54:46 2024 +0000
+
+    Update on Overleaf.
+
+commit 00fd2ac98c710091b346202a5248acd0963cacfe
+Author: Michael Oblak <michael-oblak@gmx.at>
+Date:   Wed Jul 3 13:54:44 2024 +0000
+
+    Update on Overleaf.
+
+commit 1cba7e2b479a260ffe8e94dfc1e1a94c9318aa79
+Author: Michael Oblak <michael-oblak@gmx.at>
+Date:   Wed Jul 3 13:49:55 2024 +0000
+
+    Update on Overleaf.
+
+commit b65eaf12f29dfb5cad3dd3c309b0578340f5272b
+Author: halbwedl.felix <halbwedl.felix@gmail.com>
+Date:   Wed Jul 3 13:46:21 2024 +0000
+
+    Update on Overleaf.
+
+commit ad937606ece79dd02559fb206e21d8e3da26433b
+Author: Michael Oblak <michael-oblak@gmx.at>
+Date:   Wed Jul 3 13:43:18 2024 +0000
+
+    Update on Overleaf.
+
+commit f4cf18250ae4172c639a7b27cda2cb55261e796b
+Author: Michael Oblak <michael-oblak@gmx.at>
+Date:   Wed Jul 3 13:42:17 2024 +0000
+
+    Update on Overleaf.
+
+commit c05afcf958723957158f2aae80b8b801300f65cb
+Author: Michael Oblak <michael-oblak@gmx.at>
+Date:   Wed Jul 3 13:42:00 2024 +0000
+
+    Update on Overleaf.
+
+commit 43924579a445eb0c8a7e0ea79d21a53e4bec1803
+Author: Michael Oblak <michael-oblak@gmx.at>
+Date:   Wed Jul 3 13:39:04 2024 +0000
+
+    Update on Overleaf.
+
+commit 41254f54cd54577281304a72159744e91276df92
+Author: Michael Oblak <michael-oblak@gmx.at>
+Date:   Wed Jul 3 13:37:14 2024 +0000
+
+    Update on Overleaf.
+
+commit 099b123cd1f789227b226ff8ba9a336ed0e0eeb8
+Author: Michael Oblak <michael-oblak@gmx.at>
+Date:   Wed Jul 3 13:34:24 2024 +0000
+
+    Update on Overleaf.
+
+commit 36fd9ff4d72a105da09a85bf3b2f0361e538447d
+Author: MartinTritthart <martin.tritthart@student.tugraz.at>
+Date:   Mon Jul 1 14:33:50 2024 +0200
+
+    typo
+
+commit 8d283055851f043b1356cd81581991f3534504ae
+Author: MartinTritthart <martin.tritthart@student.tugraz.at>
+Date:   Mon Jul 1 14:31:39 2024 +0200
+
+    move caption in table
+
+commit 5b887ebfb62b2bfc603f9625eed74e326aad5080
+Author: MartinTritthart <martin.tritthart@student.tugraz.at>
+Date:   Mon Jul 1 14:23:24 2024 +0200
+
+    adding commend
+
+commit 71b0aa7323085b902fd0f8603f0d19bffeb61ce4
+Author: mtritthart66 <mtritthart66@gmail.com>
+Date:   Mon Jul 1 12:21:34 2024 +0000
+
+    Update on Overleaf.
+
+commit b2d96cedabdfc0f67de254f9f6614c334e9c74fc
+Author: MartinTritthart <martin.tritthart@student.tugraz.at>
+Date:   Mon Jul 1 14:20:48 2024 +0200
+
+    rm unused packages
+
+commit cf27c028bab77147f36b2f1998ac0c0a2a35cfe4
+Author: MartinTritthart <martin.tritthart@student.tugraz.at>
+Date:   Mon Jul 1 14:19:59 2024 +0200
+
+    typo
+
+commit 2317ea946d3723a6e09b18614bed43e6b98e444b
+Author: MartinTritthart <martin.tritthart@student.tugraz.at>
+Date:   Mon Jul 1 12:32:42 2024 +0200
+
+    clean up
+
+commit e5f98bcace0beb50895cef0d1e8c5063d8344fd5
+Author: MartinTritthart <martin.tritthart@student.tugraz.at>
+Date:   Mon Jul 1 12:28:03 2024 +0200
+
+    fixing joe's table
+
+commit cb48951dc20f0dd6c3cde4a628470b3f42f850f8
+Author: MartinTritthart <martin.tritthart@student.tugraz.at>
+Date:   Mon Jul 1 12:21:15 2024 +0200
+
+    adding textcolor commends
+
+commit e57fb5fcba16b5559c810c233bc6660279b321a4
+Author: MartinTritthart <martin.tritthart@student.tugraz.at>
+Date:   Mon Jul 1 12:12:44 2024 +0200
+
+    try to fix renewcommend \sectionmark
+
+commit d79050957f63aa5ebd93264e4f76c352c98d73a4
+Author: MartinTritthart <martin.tritthart@student.tugraz.at>
+Date:   Mon Jul 1 11:48:47 2024 +0200
+
+    adding plain pagestyle
+
+commit e2d130c89d3a72d1913c0706d13f04103d5df1da
+Author: MartinTritthart <martin.tritthart@student.tugraz.at>
+Date:   Mon Jul 1 11:40:34 2024 +0200
+
+    improve style
+
+commit 394666f97b0ccc5d199a2ad54601623dc5427ff1
+Author: diogomendonca01 <diogomendonca01@gmail.com>
+Date:   Sun Jun 30 17:12:46 2024 +0000
+
+    Update on Overleaf.
+
+commit fb95270b5319083fcf76ba7f2422f6dc862318cb
+Author: v.keusch <v.keusch@astg.at>
+Date:   Wed Jun 19 13:55:43 2024 +0000
+
+    Update on Overleaf.

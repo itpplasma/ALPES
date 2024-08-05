@@ -1,0 +1,56 @@
+\documentclass[12pt]{article}
+
+% Language setting
+% Replace `english' with e.g. `spanish' to change the document language
+\usepackage[english]{babel}
+\usepackage{styles/customstyle}
+\usepackage{styles/titlepage}
+
+\usepackage{csquotes}
+\usepackage[style=numeric,sorting=none]{biblatex}
+\addbibresource{Lit.bib}
+
+
+\definecolor{orange}{rgb}{1,0.5,0}
+\newcommand{\todo}[1]{\colorbox{orange}{\textbf{TODO:} #1}}
+
+\definecolor{pastel_rosa}{rgb}{1.0, 0.41, 0.71}
+\newcommand{\chris}[1]{\colorbox{pastel_rosa}{\textbf{Chris:} #1}}
+
+\definecolor{violet}{rgb}{0.56, 0.0, 1.0}
+\newcommand{\vici}[1]{\colorbox{violet}{\textbf{Vici:} #1}}
+
+
+% Example usage of custom commands
+\reporttitle{Fusion Reactor Design}
+\reportsubtitle{Summary Report}
+\reportauthors{Angermann Leo, Bancalari Jakob, Buglione-Ceresa, Corrias Daniele, Drescher Lukas, Francis Joe, Gaggl Tobi, Halbwedl Felix, Hipp Daniel, Keusch Viktoria, Mendonça Diogo, Narnhofer Matthias, Oberth Nicole, Oblak Michael, Prayer Mirjam, Predigkeit Jan, Steiner Michael, Steinwender Elena, Strobl Stefanie, Tritthart Martin, Unterkofler Florian, Wallner Elena}
+\reportsupervisors{Albert Christopher, Birkenmeier Gregor, Schennach Robert, Schilling Jonathan, Stroth Ulrich}
+\reportdate{\today}
+
+\pagestyle{customstyle}
+
+
+\begin{document}
+\setupTitlePage
+\tableofcontents
+
+%\include{Sections/00_Vorlage}
+\include{Sections/01_Introduction}
+\include{Sections/02_Coils}
+\include{Sections/03_Design}
+\include{Sections/04_Diagnostics}
+\include{Sections/05_Heating}
+\include{Sections/06_Vacuum}
+\include{Sections/07_Conclusion}
+
+% \bibliographystyle{unsrt}
+% \bibliography{sources}
+\printbibliography
+\pagebreak
+
+\listoffigures
+\pagebreak
+\listoftables
+
+\end{document}
