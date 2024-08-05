@@ -18,11 +18,12 @@ jobs:
       run: |
         sudo apt-get update
         sudo apt-get install -y texlive-base texlive-latex-base texlive-latex-extra
+        sudo apt-get install -y texlive-fonts-recommended texlive-science
 
-    - name: Install dependencies
+    - name: Build
       run: make
 
-    - name: Exort PDF
+    - name: Export PDF
       uses: actions/upload-artifact@v3
       with:
         name: summary.pdf
