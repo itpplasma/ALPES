@@ -14,14 +14,16 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-    - name: configure
-      run: ./configure
+    - name: Install TeX Live
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y texlive-base texlive-latex-base texlive-latex-extra
 
     - name: Install dependencies
       run: make
 
-    - name: Run check
-      run: make check
-
-    - name: Run distcheck
-      run: make distcheck
+    - name: Exort PDF
+      uses: actions/upload-artifact@v3
+      with:
+        name: summary.pdf
+        path: summary/summary.pdf
