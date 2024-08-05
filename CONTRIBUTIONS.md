@@ -1,0 +1,63 @@
+# 2024
+
+- Angermann Leo 
+  - Look into powder 3D print
+  - Copper conductors, conductor geometries
+- Bancalari Jakob 
+  - Poincare plots
+  - Coils optimization
+- Buglione Elisa 
+  - Radiation protection vacuum vessel
+  - Shielding and windows
+- Corrias Daniele 
+  - Coordination of design team
+- Drescher Lukas 
+  - Calculate dimensions and geometry of waveguides, horn antennae, and mirror
+  - Design phase shift measuring circuit
+- Francis Joes 
+  - RF waveguide components
+  - Horn antenna dimensions, waveguide dimensions
+- Gaggl Tobi 
+  - Vacuum design, pressure and residual gas analysis
+  - Vacuum pumps
+- Halbwedl Felix 
+  - Rogowski ad diamagnetic coils
+  - lock-in amplifier
+- Hipp Daniel 
+  - Coil coordinates and splines, 3D model
+  - Ports for coils, investigation cooling
+- Keusch Viktoria 
+  - Coordination of project
+- Mendonca Diogo 
+  - Electron cyclotron resonance profile, UHR profile
+  - Cut-off profiles for overdense and non-overdense plasma
+- Narnhofer Matthias 
+  - Coordination of coil team
+- Oberth Nicole 
+  - Survay of QUASR models
+  - Optimize model 21326
+- Oblak Michael 
+  - CAD Diagnostics
+  - Langmuir probe
+- Prayer Mirjam 
+  - Design of tubes
+- Predigkeit Jan 
+  - Plot winding pack cross section
+  - Simulation magnetic field, forces, and torque on coils
+- Rosenthal Matthias 
+  - Plasma 0D model
+  - 1D simulations with and without crank-nicelson scheme
+- Steiner Michael 
+  - Coils placing
+- Steinwender Elena 
+  - Vacuum chamber
+  - Ports and feedthroughs
+- Strobl Stefanie 
+  - HELIAS5 coils plot
+  - VTK files and gitlab repository, convert files to fusion 360
+- Tritthart Martin 
+  - Coordination of vacuum team
+- Unterkofler Florian 
+  - Benchmarking the effect of disturbances / manufacturing errors in the coil geometry with Poincaré plots
+- Wallner Elena 
+  - CAD Design of Vacuum chamber
