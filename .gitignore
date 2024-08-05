@@ -20,3 +20,5 @@ __pycache__
 *.bcf
 *.run.xml
 **/main.pdf
+**/summary.pdf
+paper/
