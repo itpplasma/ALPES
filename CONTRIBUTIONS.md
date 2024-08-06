@@ -46,7 +46,7 @@
   - Simulation magnetic field, forces, and torque on coils
 - Rosenthal Matthias 
   - Plasma 0D model
-  - 1D simulations with and without crank-nicelson scheme
+  - Plasma 1D model for power balance
 - Steiner Michael 
   - Coils placing
 - Steinwender Elena 
