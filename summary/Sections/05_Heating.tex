@@ -34,8 +34,8 @@ Those profiles, alongside the temperature profiles, were also of interest to get
 
 %It becomes clear that the lower the neutral density $n_\mathrm{neu}$, the lower the achievable electron densities. Another outcome is that the higher the heating power, the higher the input density.
 
-From a preliminary 0D simulation implemented as described in \cite{plasmaParameterLimitsLechte2002}, it became clear, that the lower the neutral density $n_\mathrm{neu}$, the lower the achievable electron densities.
-Another outcome was, that the higher the heating power, the higher the input density.
+\noindent From a preliminary 0D simulation implemented as described in \cite{plasmaParameterLimitsLechte2002}, it became clear that the lower the neutral density $n_\mathrm{neu}$, the lower the achievable electron densities.
+Another outcome was that the higher the heating power, the higher the input density. \\
 
 A 1D simulation, using the approach described in \cite{birkenmaierModeling2008}, was then performed.
 Here, the major difference was, that the the plasma parameters were a function of the minor radius $r$.
@@ -44,14 +44,17 @@ Although the results presented here are at equilibrium, the 1D simulation also a
 For the diffusivities and neutral densities, the parameters from the TJ-K experiment in Stuttgart were used, as shown in \autoref{tab:parameters}.
 
 \begin{table}[H]
-  \caption{1D simulation parameters}
+  \caption{1D simulation parameters. \\
+  $D$ ... particle diffusivity \\
+  $\chi$ ... heat diffusivity \\
+  $n_new$ ... neutral density}
   \centering
   \begin{tabular}{lSS}
                                               & {Helium}               & {Argon}                 \\
     \hline
     $D$ / $\si{\meter\squared\per\second}$    & 8.5                   & 6                     \\
     $\chi$ / $\si{\meter\squared\per\second}$ & 200                   & 8                     \\
-    $n_\mathrm{neu}$                          & 2.30 $\times 10^{18}$ & 2.32 $\times 10^{17}$ \\
+    $n_\mathrm{new}$                          & 2.30 $\times 10^{18}$ & 2.32 $\times 10^{17}$ \\
   \end{tabular}
   \label{tab:parameters}
 \end{table}
@@ -67,7 +70,7 @@ For the diffusivities and neutral densities, the parameters from the TJ-K experi
 % \end{figure}
 
 \begin{figure}[H]
-  \center{\includegraphics[width=12cm]{Images/05_Heating/1d_volume04435_argon.png}}
+  \center{\includegraphics[width=14cm]{Images/05_Heating/1d_volume04435_argon.png}}
   \captionof{figure}{1D equilibrium radial profiles for Argon.}
   \label{fig:1d_volume04435_argon}
 \end{figure}
@@ -85,9 +88,9 @@ Only below 100\,W, the temperature begins to sink when reducing the heating powe
 In order to recreate how the heating would occur, a series of theoretical approximations were made.
 To start with, even though this is a design of a stellarator, a toroidal symmetry was assumed.
 Then, the density profile was assumed to be parabolic and poloidally centred and the magnetic field to decay with $1/r$.
-It was also assumed that the frequency of the wave sent into the plasma was much higher than the ion cyclotron (IC) frequency ($\omega >> \omega_{ci}$), so the dynamics of the ions, which are much slower than the electrons, was overall neglected.
+It was also assumed that the frequency of the wave sent into the plasma was much higher than the ion cyclotron (IC) frequency ($\omega >> \omega_{ci}$), so the dynamics of the ions, which are much slower than the electrons, was overall neglected. \\
 
-Given that the interest is to have an overdense plasma, $\omega_{pe} > \omega_{ce}$ everywhere, making it impossible to heat up the plasma only by exciting the electron cyclotron resonance (ECR).
+The interest is to have an overdense plasma, $\omega_{pe} > \omega_{ce}$ everywhere, making it impossible to heat up the plasma only by exciting the electron cyclotron resonance (ECR).
 This is because the incoming wave will be reflected at the critical density, where the wave reaches $\omega_{pe}$.
 There will also have to be excitation of the upper-hybrid resonance (UHR), but, when plasmas are overdense, the R-wave that permits this heating method is also reflected back at the $\omega_R$ cut-off before reaching this mode.
 These frequency profiles can be seen in \autoref{fig:freq_profiles}.
@@ -99,7 +102,7 @@ In practice, however, we expect the heating radiation to disperse throughout the
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.6\textwidth]{Images/05_Heating/freq_profiles.png}
+  \includegraphics[width=0.8\textwidth]{Images/05_Heating/freq_profiles.png}
   \caption{Frequency profiles for ECRH and UHRH for non overdense (top) and overdense (bottom) plasma. The resonant frequencies $\omega_{ce}$ and $\omega_{UH}$ and the cut-off frequencies $\omega_{pe}$ and $\omega_R$ are displayed.}
   \label{fig:freq_profiles}
 \end{figure}
@@ -109,13 +112,13 @@ In practice, however, we expect the heating radiation to disperse throughout the
 
 \subsubsection{Hardware}    % Joe
 
-The 2.45GHz microwaves will be generated by a magnetron, and transported to the plasma by WR340 waveguides (86.36mm x 43.18mm). This size was chosen to maintain polarization by only allowing the TE1 mode to propagate. Upon reaching the vacuum chamber, the microwaves will be focused using an optimum horn antenna. It is important for effective heating, that the wider H-plane flare is oriented along the vertical axis perpendicular to the containment B-field.
+The 2.45\,GHz microwaves will be generated by a magnetron, and transported to the plasma by WR340 waveguides (86.36 x 43.18)\,mm. This size was chosen to maintain polarization by only allowing the TE1 mode to propagate. Upon reaching the vacuum chamber, the microwaves will be focused using an optimum horn antenna. It is important for effective heating, that the wider H-plane flare is oriented along the vertical axis perpendicular to the containment B-field.
 Further RF components must be added along the waveguides to minimize feedback into the magnetron. A circulator and a directional coupler are added to remove any returning waves. A 3-stub tuner is added before the horn antenna to maximize the heating system's efficiency.
 \subsection{Outlook}
 In the end, further developments can still be made.
 In regard to the cross-sectional wave resonance and cut off profiles, only the example of a tokamak was studied.
 This was enough to understand what will qualitatively happen, upon heating of the plasma, but the quantitative study is not applicable to a stellarator design.
-Further work on this could then consist in figuring out which cross section of the stellarator is most ideal to perform heating on, depending on its shape.
+Further work on this could then consist of figuring out which cross section of the stellarator is most ideal to perform heating on, depending on its shape.
 
 % Still missing: Joe & Matthias
 
@@ -123,7 +126,7 @@ Further work on this could then consist in figuring out which cross section of t
 \subsection{Learnings}
 
 % Matthias
-One of the main learnings from the simulations were that the major two parameters to achieve are higher densities are heating power, but also the neutral density $n_\mathrm{neu}$.
+One of the main learnings from the simulations were that the major two parameters to achieve are higher densities are heating power, but also the neutral density $n_\mathrm{new}$.
 A more technical learning was, that while \cite{birkenmaierModeling2008} employed the Crank-Nicelson scheme for numerical implementation, a naïve fully-explicit scheme works as well.
 The only downside was, that around 500 times more steps were needed.
 But the python/numpy-based implementation still took less than 5 minutes per case (depending on number of radial points).

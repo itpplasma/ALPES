@@ -19,10 +19,9 @@ At last the design must also ensure that the system is collision free, to itself
 It follows from these requirements that the coils have to be manufactured very precisely, stiff and robust as well as mounted very precisely within the vacuum chamber.
 
 
-
 \subsection{Outcome}
 \subsubsection{Structure}
-In order to meet the design requirements the overarching structure of a coil is made up of a multitude of water cooled double pancake coils separated by a thin insulator material.
+In order to meet the design requirements, the overarching structure of a coil is made up of a multitude of water cooled double pancake coils separated by a thin insulator material.
 The whole coil structure is then embedded into a steel casing in order to avoid contamination of the vacuum from the used adhesives and material combinations.
 %\todo{Sketch of the coil structure - we need to make clear how the product looks like before we describe it in more detail}
 
@@ -38,24 +37,24 @@ Two options to manufacture such a hollow conductor were investigated:
 \end{itemize}
 While 3D printers can achieve high purity prints, with effective conductivities being close to 99\% of pure copper, current manufacturing methods do not allow us to print the geometries in the necessary dimensions and with a suitable internal surface smoothness.
 The internal roughness is of special concern, since water has to flow through the windings without too much pressure loss.
-Additionally the powder used during manufacturing remains in the channels and can be difficult do remove from the manufactured coils.
+Additionally the powder used during manufacturing remains in the channels and can be difficult to remove from the manufactured coils.
 Due to this it was decided to use conventional manufacturing methods.
-While the manufacturing of the complex geometries might prove challenging for future teams the advantages of off the shelf copper conductors, especially high performance conductors, cannot be overstated.
+While the manufacturing of the complex geometries might prove challenging for future teams, the advantages of off the shelf copper conductors, especially high performance conductors, cannot be overstated.
 As mentioned above the coils are designed to be inside a casing, which addresses both outgassing concerns, a well as the feedthroughs for water and current.
 For the casing of the coils, electron beam sintering could be considered in addition to 5-axis milling in order to achieve the necessary accuracy.
 The casings are flanged to the walls of the vacuum chamber, such that the inside of the casings are not under vacuum, which makes the design of the winding pack easier.\\
-(for more: \href{https://cloud.tugraz.at/index.php/apps/onlyoffice/s/XBeMB6XiRDt3L2p?fileId=1032740140}{"Isolation and 3D Printing" Powerpoint presentation}).
+(for more: \href{https://cloud.tugraz.at/index.php/apps/onlyoffice/s/XBeMB6XiRDt3L2p?fileId=1032740140}{"Isolation and 3D Printing" PowerPoint presentation}).
 
 \subsubsection{Insulation}
 The windings within a coil have to be insulated from each other.
-The best option seems to be fibre glass reinforced epoxy, as it be bought in pre-impregnated rolls and further improves stability.
+The best option seems to be fibre glass reinforced epoxy, as it can be bought in pre-impregnated rolls and further improves stability.
 The epoxy has to be hardened for which the coil might have to cooled, using the already in place water-cooling.
-However, then the epoxy can withstand the applied temperature and forces and it should be around \SI{0.5}{mm} to \SI{1.0}{mm} thick.
+Then the epoxy can withstand the applied temperature and forces and it should be around \SI{0.5}{mm} to \SI{1.0}{mm} thick.
 In order to prevent outgassing of the coils into the vacuum chamber, they are to be enclosed with a stainless steel casing of \SI{2.0}{mm} thickness, which could either be 3D printed or manufactured by arc welding sheet metal.\\
 
 \subsubsection{Optimization}
 A python script was developed in order to explore the space of possible configurations.
-In the beginning rough estimates for the magnetic field and size were used, they were later replaced by the actual currents supplied by the optimization team and the size of the vacuum chamber.
+In the beginning rough estimates for the magnetic field and size were used, later they were replaced by the actual currents supplied by the optimization team and the size of the vacuum chamber.
 The overall goal was to reduce both power loss and pressure loss, while staying within some reasonable bounds for voltage and current.
 This was done for different winding configurations and pipe diameters.
 Figure \ref{fig:both} shows an example output. The simulation is based on double pancakes, meaning, that two neighbouring coils are paired and supplied with water separately.
@@ -70,20 +69,20 @@ Figure \ref{fig:both} shows an example output. The simulation is based on double
     \begin{subfigure}[b]{0.3\textwidth}
         \centering
         \includegraphics[width=0.9\textwidth]{Images/02_Coils/pressure.png}
-        \caption{pressure drop}
+        \caption{Pressure drop}
         \label{fig:pressure}
     \end{subfigure}
-    \caption{6x1mm pipe configuration and 6x1mm pipe pressure drop calculation for different configurations}
+    \caption{(6x1)~mm pipe configuration and (6x1)~mm pipe pressure drop calculation for different configurations}
     \label{fig:both}
 \end{figure}
 
-A design with rectangular pipes and circular holes for water, greatly improves the power loss and pressure loss characteristics. %\todo{Where is an image of it?@Mimo please run the simulation for conductors with the square outer cross section that we can display it}
-While these pipes exist and a re-used for high current applications, it is unclear if there are suppliers which could be contacted. %\todo{Cite Luvato and the sketchy supplier}\\
+A design with rectangular pipes and circular holes for water greatly improves the power loss and pressure loss characteristics. %\todo{Where is an image of it?@Mimo please run the simulation for conductors with the square outer cross section that we can display it}
+While these pipes exist and are used for high current applications, it is unclear if there are suppliers which could be contacted. %\todo{Cite Luvato and the sketchy supplier}\\
 (for more see \href{https://github.com/LiigaSoolane/coil}{Github})\\
 In order to validate these results an experiment was designed.
 However, due to problems with the delivery of equipment, the test has not yet been conducted.\\
 \subsubsection{3D Modeling}
-The filaments, created by the optimization team have been imported into fusion 360, however the program was not able to process the actual extrusion process, as especially constructed coordinate systems had to be used in order to ensure the coils not touching.
+The filaments, created by the optimization team, have been imported into Autodesk Fusion 360. However, the program was not able to process the actual extrusion process, as especially constructed coordinate systems had to be used in order to ensure the coils are not touching.
 For this purpose Python and CadQuery were used. %\todo{citation of CadQuery}
 Furthermore, Python scripts for the determination of the maximum dimension as well as the minimum distance between coil filaments were created.
 This was then also used to determine the scaling factor for the optimization teams data (it was set to be 0.33).
@@ -92,7 +91,7 @@ Due to collisions of the coil, the final coil cross-section was set to (40x67)~m
 %\textcolor{red}{Daniel: Add pictures of the coils model}
 
 A mount for the coils was conceptually drawn and constructed in Autodesk Fusion as can be seen in figure \ref{fig:mount}.
-It enables the coils to be mounted to the vacuum chamber and to be adjusted and aligned them from outside the chamber.
+It enables the coils to be mounted to the vacuum chamber and for them to be adjusted and aligned from outside the chamber.
 Additionally it serves as port for the electrical cables and the water hoses.
 In order to allow for movement through the walls of the vacuum chamber a bellow has to be used.
 %\todo{The drawing should use the same colors as the crosssection on the left}

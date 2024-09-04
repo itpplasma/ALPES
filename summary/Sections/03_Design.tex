@@ -8,7 +8,7 @@ The design must be scalable in a way such that the minimum inter-coil distance f
 
 
 \subsection{Outcome}
-After searching the \href{https://quasr.flatironinstitute.org/}{QUASR} data base it was decided that \cite{QUASR} a design with 3 distinct coil types and an aspect ratio of about 4 shall serve as the base, with the possibility of further optimizations being performed on it using \href{https://github.com/hiddenSymmetries/simsopt}{SIMSOPT}, \href{https://github.com/PrincetonUniversity/STELLOPT}{STELLOPT}, and \href{https://github.com/itpplasma/SIMPLE}{SIMPLE} (for alpha particle tracing).
+After searching the \href{https://quasr.flatironinstitute.org/}{QUASR} data base it was decided that \cite{QUASR}, a design with 3 distinct coil types and an aspect ratio of about 4 shall serve as the base, with the possibility of further optimizations being performed on it using \href{https://github.com/hiddenSymmetries/simsopt}{SIMSOPT}, \href{https://github.com/PrincetonUniversity/STELLOPT}{STELLOPT}, and \href{https://github.com/itpplasma/SIMPLE}{SIMPLE} (for alpha particle tracing).
 \autoref{tab:conffrac} shows the calculated alpha particle losses for certain magnetic flux surfaces, both for the small model and a scale-up.
 
 \begin{table}[H]
@@ -81,7 +81,7 @@ An exemplary plot of Poincaré slices for the (not further optimized) vacuum fie
 \label{fig:poincare_shifted_coils}
 \end{figure}
 
-Further results on the influence of manufacturing and positioning errors of the coils can be found at \href{https://github.com/itpplasma/reactor24}{this Github repository}\cite{design_repo}.
+Further results on the influence of manufacturing and positioning errors of the coils can be found at \href{https://github.com/itpplasma/reactor24}{this Github repository} \cite{design_repo}.
 
 \subsection{Outlook}
 Further optimization could yield an even lower aspect ratio.
@@ -89,5 +89,5 @@ One must take note of the coil shape however, as the inter-coil distance of the 
 Continuing to optimize the $\iota$ parameter towards a steeper profile (similar to LHC) or flatter (similar to W7X) profile may also be of interest to improve stability against errors.
 
 \subsection{Learnings}
-Even if small disturbances seem to have disastrous consequences for the vacuum field, the real world application will not be affected as much due to plasma fields. Theory results in much more pessimistic outcomes than the actual experiment.\\
+Even if small disturbances seem to have disastrous consequences for the vacuum field, the real world application will not be affected as much due to plasma fields. Theory results have much more pessimistic outcomes than the actual experiment.\\
 Additionally, if scaled to "proper" reactor sizes, the model performs much better than the small version with a major radius of about $0.33~\unit{m}$. For example, the confined alpha particle fraction after $0.1~\unit{s}$ calculated via \href{https://github.com/itpplasma/SIMPLE}{SIMPLE} goes from around $40\%$ for the small reactor to around $70\%$. See \autoref{tab:conffrac}.
