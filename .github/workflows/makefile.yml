@@ -23,7 +23,7 @@ jobs:
       run: make
 
     - name: Export PDF
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: summary.pdf
         path: summary/summary.pdf
