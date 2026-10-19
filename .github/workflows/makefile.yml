@@ -1,9 +1,8 @@
 name: Makefile CI
 
 on:
-  push:
-    branches: [ "main" ]
   pull_request:
+  merge_group:
 
 jobs:
   build:
