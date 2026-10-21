@@ -2,11 +2,16 @@ name: Makefile CI
 
 on:
   pull_request:
+    types:
+      - opened
+      - synchronize
+      - reopened
+      - labeled
   merge_group:
   push:
     branches:
       - main
-
+  workflow_dispatch:
 jobs:
   build:
 
