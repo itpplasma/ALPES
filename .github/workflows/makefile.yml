@@ -3,26 +3,38 @@ name: Makefile CI
 on:
   pull_request:
   merge_group:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
 
 jobs:
   build:
 
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, itp-ubuntu24]
 
     steps:
-    - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-    - name: Install TeX Live
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y texlive-base texlive-latex-base texlive-latex-extra
-        sudo apt-get install -y texlive-fonts-recommended texlive-science biber
+      - name: Install TeX Live
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y texlive-base texlive-latex-base texlive-latex-extra
+          sudo apt-get install -y texlive-fonts-recommended texlive-science biber
 
-    - name: Build
-      run: make
+      - name: Build
+        run: make
 
-    - name: Export PDF
-      uses: actions/upload-artifact@v4
-      with:
-        name: summary.pdf
-        path: summary/summary.pdf
+      - name: Export PDF
+        uses: actions/upload-artifact@v4
+        with:
+          name: summary.pdf
+          path: summary/summary.pdf
+    if: >-
+      github.event_name == 'merge_group' || github.event_name == 'workflow_dispatch' || (github.event_name == 'push' && github.ref == format('refs/heads/{0}', github.event.repository.default_branch) && github.actor != 'github-merge-queue[bot]')
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || format('{0}-{1}', github.ref, github.run_id) }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
