@@ -1,19 +1,22 @@
 # ALPES - Adaptable Lab for Plasma Experiments in Stellarators
 
-This project contains contributions towards a university-scale stellarator experiments. Results are provided as open source / open data / open educational resources and re-use is encouraged. The initial release is built on the outcome of the joint course "Fusion Reactor Design" in summer 2024 by TU Graz, TU Munich and Proxima Fusion.
+This project contains contributions towards a university-scale stellarator experiment. Results are provided as open source / open data / open educational resources and re-use is encouraged. The initial release is built on the outcome of the joint course "Fusion Reactor Design" in summer 2024 by TU Graz, TU Munich and Proxima Fusion.
 
 ![ALPES 2024](figures/Stellarator_2024_open_small.jpg)
 
-## Merging
+## Contents
 
-- Pull requests, including every layer of a stacked PR, run CI.
-- Review a stack layer by layer. When it is ready, collapse it into one PR into
-  `main` (retarget the top layer to `main`); the lower PRs then show as merged.
-- Click "Merge when ready" (or `gh pr merge --merge --auto`). The PR enters the
-  merge queue, CI runs on the exact merge result, and on success it lands on
-  `main` as a merge commit. `main` itself is not re-tested on push.
-- A branch need not be up to date with `main`. Merge `main` into a PR only
-  when it conflicts.
+- `design/`: stellarator configuration (QUASR model 0021326) and optimisation
+  scripts for simsopt, SPEC and STELLOPT
+- `coils/`: coil coordinates, force calculations and coil design assumptions
+- `heating/`: plasma power balance
+- `vessel/`: LaTeX notes on the vacuum vessel and CAD
+- `summary/`: LaTeX source of the course summary report (`summary.pdf`)
+- [CONTRIBUTIONS.md](CONTRIBUTIONS.md): who worked on what
+
+The summary report is built with `make` (runs `pdflatex` in `summary/`).
+
+Contribution and merge guidance: [docs/contributing.md](docs/contributing.md).
 
 ## License
 
