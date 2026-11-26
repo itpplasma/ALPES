@@ -18,6 +18,15 @@ The summary report is built with `make` (runs `pdflatex` in `summary/`).
 
 Contribution and merge guidance: [docs/contributing.md](docs/contributing.md).
 
+## Publications
+
+E. M. Steinwender, C. G. Albert, G. Birkenmeier, D. Mendonça, M. Narnhofer,
+N. Oberth, M. Oblak, M. Rosenthal, R. Schennach, J. Schilling, U. Stroth,
+M. Tritthart and the ALPES Team, *Designing ALPES: an Adaptable Lab for Plasma
+Experiments in Stellarators at university scale*, 51st EPS Conference on Plasma
+Physics, Vilnius, 2025, P4.225.
+[PDF](https://pure.mpg.de/rest/items/item_3675694/component/file_3675695/content)
+
 ## License
 
 Source code and directly related documentation are licensed under the MIT license according to the [LICENSE](LICENSE) file.
